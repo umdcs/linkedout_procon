@@ -23,14 +23,21 @@ app.get('/quizData', function(req, res){
 
 app.post('/quizData', function (req, res) {
   if(!req.body) return res.sendStatus(400);
-
   var temp = JSON_Object;
 
+  var question = req.body.quiz.question;
+  var answer = req.body.quiz.answer;
+
+  JSON_String = '{"quiz":{}}';
+
+  JSON_Object = JSON.parse(JSON_String);
+  JSON_Object["quiz"]["question"] = question;
+  JSON_Object["quiz"]["answer"] = answer;
 
   if(JSON.stringify(temp)!=='{}'){
-
+    //TODO
   }
-  res.send('helloes');
+  res.send(JSON.stringify(JSON_Object));
 });
 
 app.delete('/', function (req, res){
