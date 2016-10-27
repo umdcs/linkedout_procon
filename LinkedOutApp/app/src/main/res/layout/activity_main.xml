@@ -34,7 +34,8 @@
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:background="#42B0D1"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:onClick="onClickLogin" />
 
     <Button
         android:text="@string/sign"
