@@ -27,6 +27,7 @@ app.post('/quizData', function (req, res) {
 
   var question = req.body.quiz.question;
   var answer = req.body.quiz.answer;
+  var quizName;
 
   JSON_String = '{"quiz":{}}';
 
