@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-var JSON_String = '{}';
+var JSON_String = '{"math":{"question":"What is 2 + 2?", "answer":"4"}}';
 var JSON_Object = JSON.parse(JSON_String);
 
 app.set("port", 4321);
@@ -18,6 +18,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/quizData', function(req, res){
+  console.log(JSON.stringify(JSON_Object));
   res.send(JSON.stringify(JSON_Object));
 });
 

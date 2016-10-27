@@ -71,7 +71,8 @@
                 android:background="#42B0D1"
                 android:padding="15dp"
                 android:text="Submit"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:onClick="onClickQuiz" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
