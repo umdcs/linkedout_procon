@@ -113,7 +113,7 @@ public class Quiz extends AppCompatActivity {
                     if(i!=answer){
                         resID = getResources().getIdentifier("radioButton"+i, "id", getPackageName());
                         int response = 1+j.nextInt(10);
-                        while(response == answer){
+                        while(giraffe.getString("answer").equals(""+response)){
                             response = 1+j.nextInt(10);
                         }
                         b = ((RadioButton)findViewById(resID));
