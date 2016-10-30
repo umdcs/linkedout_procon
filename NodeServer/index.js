@@ -3,6 +3,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+
+//Hardcoded question
 var JSON_String = '{"math":{"question":"What is 2 + 2?", "answer":"4"}}';
 var JSON_Object = JSON.parse(JSON_String);
 
@@ -17,14 +19,18 @@ app.get('/', function (req, res) {
   res.send('<HTML><HEAD></HEAD><BODY><H1>This is a basic Node.js server for the LinkedOut Application</H1></BODY></HTML>');
 });
 
+
+//REST API Get, Gets the hardcoded string that is declared above
 app.get('/quizData', function(req, res){
   console.log(JSON.stringify(JSON_Object));
   res.send(JSON.stringify(JSON_Object));
 });
 
+
+//REST API Post, not completed, nor is it functional, ignore what is in here
 app.post('/quizData', function (req, res) {
   if(!req.body) return res.sendStatus(400);
-  var temp = JSON_Object;
+  /*var temp = JSON_Object;
 
   var question = req.body.quiz.question;
   var answer = req.body.quiz.answer;
@@ -39,7 +45,7 @@ app.post('/quizData', function (req, res) {
   if(JSON.stringify(temp)!=='{}'){
     //TODO
   }
-  res.send(JSON.stringify(JSON_Object));
+  res.send(JSON.stringify(JSON_Object));*/
 });
 
 app.delete('/', function (req, res){
