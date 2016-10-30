@@ -100,15 +100,20 @@ public class Quiz extends AppCompatActivity {
         protected void onPostExecute(String result) {
             JSONObject giraffe = new JSONObject();
             try {
+                //This gets the hardcoded quiz question of type "math"
                 giraffe = new JSONObject(new JSONObject(result).getString("math"));
+                //This grabs the hardcoded question and puts it into the XML
                 String question = giraffe.getString("question");
                 textView.setText(question);
+                //Generates a random number to determine the choice (A, B, C, or D) of the answer
                 Random j = new Random();
                 int answer = 1+j.nextInt(4);
                 String radio = "radioButton" + answer;
+                //sets the answer to that radio button that was selected above
                 int resID = getResources().getIdentifier(radio, "id", getPackageName());
                 RadioButton b = (RadioButton)findViewById(resID);
                 b.setText(giraffe.getString("answer"));
+                //Sets the remaining unused radio buttons to random numbers from 1 to 10
                 for(int i = 1; i <= 4; i++){
                     if(i!=answer){
                         resID = getResources().getIdentifier("radioButton"+i, "id", getPackageName());
