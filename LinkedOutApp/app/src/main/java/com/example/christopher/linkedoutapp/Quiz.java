@@ -111,26 +111,20 @@ public class Quiz extends AppCompatActivity {
                 //will grab the format as a string
                 String quizFormat = jsonData.getString("quizFormat");
 
-                //This grabs the hardcoded question and puts it into the XML this is the radio group
+                //This grabs the hardcoded question and puts it into the XML (this will also be the radio group)
                 String quizQuestion = jsonData.getString("quizQuestion");
                 textView.setText(quizQuestion);
 
-                //This grabs the hardcoded question and puts it into the XML this is the radio group
-                //RadioGroup radioGroup = jsonData.getString("quizQuestion");
-                //textView.setText(quizQuestion);
-
-                //this  sectionfinds out how the question should be formatted, and connects the
-                //correct strings to the radio buttons
-
+                //this  sectionfinds out how the question should be formatted
                 if(quizFormat == "True/False"){
                     isTrueFalse(jsonData);
-
                 }
                 else if(quizFormat == "Mulitple Choice"){
                     isMultipleChoice(jsonData);
                 }
                 else if(quizFormat == "Short Answer"){
-                    //create a textbox input
+                    isShortAnswer(jsonData);
+
 
                 }
 
@@ -164,24 +158,17 @@ public class Quiz extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-        }
-
-        /** This function will find out which radio button was clicked
-         * @Param: View v
-         */
-        public void rbClick(View view){
-            int radioButtonid = rg.getCheckedRadioButtonId();
-            rb = (RadioButton) findViewById(radioButtonid);
-        }
+        }//******************End onPost()*************************************
 
 
-    }//****************End AsyncTask*****************
+    }//****************End AsyncTask()****************************************
+
     /**
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute("http://192.168.0.22:4321/quizData", "GET");
+        new HTTPAsyncTask().execute("http://192.168.1.6:4321/quizData", "GET");
     }
 
 
@@ -203,8 +190,17 @@ public class Quiz extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://192.168.0.22:4321/quizData", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://192.168.1.6:4321/quizData", "POST", jsonParam.toString());
     }
+
+    /** This function will find out which radio button was clicked
+     * @Param: View v
+     */
+    public void rbClick(View view){
+        int radioButtonid = rg.getCheckedRadioButtonId();
+        rb = (RadioButton) findViewById(radioButtonid);
+    }
+
 
     /**This function creates a true/false question format
      * @param: String quizFormat
@@ -268,6 +264,14 @@ public class Quiz extends AppCompatActivity {
             e.printStackTrace();
         }
         textView.setText(quizAnswerChoiceFour);
+    }
+
+    /**This function creates a short answer question format
+     *
+     */
+    void isShortAnswer(JSONObject jsonData){
+        //create short answer text box
+
     }
 
 
