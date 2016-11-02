@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:id="@+id/quizAnswerChoiceOne"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
         android:tag="quizAnswerChoiceOne"
         android:text="@+id/quizAnswerChoiceOne"/>
@@ -41,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceTwo"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
         android:tag="quizAnswerChoiceTwo"
         android:text="@+id/quizAnswerChoiceTwo"/>
@@ -50,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceThree"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
         android:tag="quizAnswerChoiceThree"
         android:text="@+id/quizAnswerChoiceThree"/>
@@ -59,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceFour"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
         android:tag="quizAnswerChoiceFour"
         android:text="@+id/quizAnswerChoiceFour"/>

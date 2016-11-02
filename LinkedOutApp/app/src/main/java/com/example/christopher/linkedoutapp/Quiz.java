@@ -26,6 +26,7 @@ public class Quiz extends AppCompatActivity {
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
+    private String question; //question to be stored and sent back along with the users answer
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -112,9 +113,17 @@ public class Quiz extends AppCompatActivity {
                 String quizFormat = jsonData.getString("quizFormat");
 
                 //This grabs the hardcoded question and puts it into the XML (this will also be the radio group)
+                //RadioGroup quizQuestion = jsonData.getString("quizQuestion");
+                //rg.findViewById(R.id.quizQuestion);
+                //rg = (RadioGroup) findViewById(R.id.quizQuestion)
+
+
                 String quizQuestion = jsonData.getString("quizQuestion");
                 System.out.println(quizFormat);
                 textView.setText(quizQuestion);
+                //sets private variable to the string of the current question
+                setQuestion(quizQuestion);
+
                 //this  sectionfinds out how the question should be formatted
                 if(quizFormat.equals("True/False")){
                     isTrueFalse(jsonData);
@@ -182,6 +191,7 @@ public class Quiz extends AppCompatActivity {
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
+            jsonParam.put("question", getQuestion());
             jsonParam.put("answer", rg.getCheckedRadioButtonId());
 
         } catch (JSONException e) {
@@ -191,20 +201,30 @@ public class Quiz extends AppCompatActivity {
         new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "POST", jsonParam.toString());
     }
 
-    /** This function will find out which radio button was clicked
+    /** This function will find out which radio button was clicked and return it
      * @Param: View v
+     *
+     * @Return: int of radio button clicked
      */
-    public void rbClick(View view){
+    public int rbClick(View view){
         int radioButtonid = rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(radioButtonid);
+        return radioButtonid;
     }
 
+    public void setQuestion(String quizQuestion){
+            question = quizQuestion;
+    }
 
+    public String getQuestion()
+    {
+        return question;
+    }
     /**This function creates a true/false question format
      * @param: String quizFormat
      *
      */
-    void isTrueFalse(JSONObject jsonData){
+    public void isTrueFalse(JSONObject jsonData){
         //create two buttons one for true and one for false
         String quizAnswerChoiceOne = null;
         try {
@@ -230,7 +250,7 @@ public class Quiz extends AppCompatActivity {
      *
      *
      */
-    void isMultipleChoice(JSONObject jsonData){
+    public void isMultipleChoice(JSONObject jsonData){
         //create four buttons
         String quizAnswerChoiceOne = null;
         try {
@@ -274,7 +294,7 @@ public class Quiz extends AppCompatActivity {
     /**This function creates a short answer question format
      *
      */
-    void isShortAnswer(JSONObject jsonData){
+    public void isShortAnswer(JSONObject jsonData){
         //create short answer text box
 
     }
@@ -288,6 +308,6 @@ public class Quiz extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.quizQuestion);
         restGET();
 
-        //rg = (RadioGroup) findViewById(R.id.rGroup);
+        //rg = (RadioGroup) findViewById(R.id.quizQuestion);
     }
 }
