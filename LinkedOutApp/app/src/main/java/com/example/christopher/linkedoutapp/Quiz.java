@@ -24,8 +24,8 @@ import java.net.URL;
 public class Quiz extends AppCompatActivity {
 
     private TextView textView;
-    //private RadioButton rb;
-    //private RadioGroup rg;
+    private RadioButton rb;
+    private RadioGroup rg;
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -119,30 +119,15 @@ public class Quiz extends AppCompatActivity {
                 //RadioGroup radioGroup = jsonData.getString("quizQuestion");
                 //textView.setText(quizQuestion);
 
-                
+                //this  sectionfinds out how the question should be formatted, and connects the
+                //correct strings to the radio buttons
 
                 if(quizFormat == "True/False"){
-                    //create two buttons one for true and one for false
-                    String quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-                    textView.setText(quizAnswerChoiceOne);
+                    isTrueFalse(jsonData);
 
-                    String quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-                    textView.setText(quizAnswerChoiceTwo);
                 }
                 else if(quizFormat == "Mulitple Choice"){
-                    //create four buttons
-                    String quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-                    //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
-                    textView.setText(quizAnswerChoiceOne);
-
-                    String quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-                    textView.setText(quizAnswerChoiceTwo);
-
-                    String quizAnswerChoiceThree = jsonData.getString("quizAnswerChoiceThree");
-                    textView.setText(quizAnswerChoiceThree);
-
-                    String quizAnswerChoiceFour = jsonData.getString("quizAnswerChoiceFour");
-                    textView.setText(quizAnswerChoiceFour);
+                    isMultipleChoice(jsonData);
                 }
                 else if(quizFormat == "Short Answer"){
                     //create a textbox input
@@ -183,14 +168,14 @@ public class Quiz extends AppCompatActivity {
 
         /** This function will find out which radio button was clicked
          * @Param: View v
-         *
+         */
         public void rbClick(View view){
             int radioButtonid = rg.getCheckedRadioButtonId();
             rb = (RadioButton) findViewById(radioButtonid);
         }
-        */
 
-    }
+
+    }//****************End AsyncTask*****************
     /**
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
@@ -198,6 +183,93 @@ public class Quiz extends AppCompatActivity {
     public void restGET() {
         new HTTPAsyncTask().execute("http://192.168.0.22:4321/quizData", "GET");
     }
+
+
+    /**
+     * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
+     * action to the REST Server.
+     *
+     * @param view
+     */
+    public void restPOST(View view) {
+
+        JSONObject jsonParam = null;
+        try {
+            //Create JSONObject here
+            jsonParam = new JSONObject();
+            jsonParam.put("answer", rg.getCheckedRadioButtonId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG:", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://192.168.0.22:4321/quizData", "POST", jsonParam.toString());
+    }
+
+    /**This function creates a true/false question format
+     * @param: String quizFormat
+     *
+     */
+    void isTrueFalse(JSONObject jsonData){
+        //create two buttons one for true and one for false
+        String quizAnswerChoiceOne = null;
+        try {
+            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(quizAnswerChoiceOne);
+
+        String quizAnswerChoiceTwo = null;
+        try {
+            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(quizAnswerChoiceTwo);
+    }
+
+    /**This function creates a multiple choice question format
+     * @param: String quizFormat
+     *
+     *
+     */
+    void isMultipleChoice(JSONObject jsonData){
+        //create four buttons
+        String quizAnswerChoiceOne = null;
+        try {
+            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
+        textView.setText(quizAnswerChoiceOne);
+
+        String quizAnswerChoiceTwo = null;
+        try {
+            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(quizAnswerChoiceTwo);
+
+        String quizAnswerChoiceThree = null;
+        try {
+            quizAnswerChoiceThree = jsonData.getString("quizAnswerChoiceThree");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(quizAnswerChoiceThree);
+
+        String quizAnswerChoiceFour = null;
+        try {
+            quizAnswerChoiceFour = jsonData.getString("quizAnswerChoiceFour");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        textView.setText(quizAnswerChoiceFour);
+    }
+
 
 
     @Override
