@@ -1,5 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -127,13 +128,13 @@ public class Quiz extends AppCompatActivity {
             }
         }
     }
-        /**
-         * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
-         * action to the REST Server.
-         */
-        public void restGET() {
-            new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "GET");
-        }
+    /**
+     * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
+     * action to the REST Server.
+     */
+    public void restGET() {
+        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "GET");
+    }
 
 
     @Override
@@ -143,4 +144,22 @@ public class Quiz extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.question);
         restGET();
     }
+
+
+    //button listeners to create questions
+    public void onClick_sa(View view) {
+        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_mc(View view) {
+        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_tf(View view) {
+        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+        startActivity(questionIntent);
+    }
+
 }
