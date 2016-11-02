@@ -33,7 +33,8 @@
         android:layout_marginTop="13dp"
         android:id="@+id/quizAnswerChoiceOne"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceOne"/>
+        android:tag="quizAnswerChoiceOne"
+        android:text="@+id/quizAnswerChoiceOne"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
@@ -41,7 +42,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceTwo"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceTwo"/>
+        android:tag="quizAnswerChoiceTwo"
+        android:text="@+id/quizAnswerChoiceTwo"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
@@ -49,7 +51,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceThree"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceThree"/>
+        android:tag="quizAnswerChoiceThree"
+        android:text="@+id/quizAnswerChoiceThree"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
@@ -57,7 +60,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceFour"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceFour"/>
+        android:tag="quizAnswerChoiceFour"
+        android:text="@+id/quizAnswerChoiceFour"/>
 </RadioGroup>
 
     <TextView

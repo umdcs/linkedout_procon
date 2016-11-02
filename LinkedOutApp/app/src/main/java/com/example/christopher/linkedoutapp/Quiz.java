@@ -238,7 +238,6 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
         textView.setText(quizAnswerChoiceOne);
 
         String quizAnswerChoiceTwo = null;
