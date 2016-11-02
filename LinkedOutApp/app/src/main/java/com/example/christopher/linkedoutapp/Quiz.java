@@ -113,19 +113,17 @@ public class Quiz extends AppCompatActivity {
 
                 //This grabs the hardcoded question and puts it into the XML (this will also be the radio group)
                 String quizQuestion = jsonData.getString("quizQuestion");
+                System.out.println(quizFormat);
                 textView.setText(quizQuestion);
-
                 //this  sectionfinds out how the question should be formatted
-                if(quizFormat == "True/False"){
+                if(quizFormat.equals("True/False")){
                     isTrueFalse(jsonData);
                 }
-                else if(quizFormat == "Mulitple Choice"){
+                else if(quizFormat.equals("Mulitple Choice")){
                     isMultipleChoice(jsonData);
                 }
-                else if(quizFormat == "Short Answer"){
+                else if(quizFormat.equals("Short Answer")){
                     isShortAnswer(jsonData);
-
-
                 }
 
 
@@ -168,7 +166,7 @@ public class Quiz extends AppCompatActivity {
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute("http://192.168.1.6:4321/quizData", "GET");
+        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "GET");
     }
 
 
@@ -190,7 +188,7 @@ public class Quiz extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://192.168.1.6:4321/quizData", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "POST", jsonParam.toString());
     }
 
     /** This function will find out which radio button was clicked
@@ -214,6 +212,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
         textView.setText(quizAnswerChoiceOne);
 
         String quizAnswerChoiceTwo = null;
@@ -222,6 +221,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
         textView.setText(quizAnswerChoiceTwo);
     }
 
@@ -238,6 +238,9 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
         textView.setText(quizAnswerChoiceOne);
 
         String quizAnswerChoiceTwo = null;
@@ -246,6 +249,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
         textView.setText(quizAnswerChoiceTwo);
 
         String quizAnswerChoiceThree = null;
@@ -254,6 +258,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceThree);
         textView.setText(quizAnswerChoiceThree);
 
         String quizAnswerChoiceFour = null;
@@ -262,6 +267,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        textView = (TextView) findViewById(R.id.quizAnswerChoiceFour);
         textView.setText(quizAnswerChoiceFour);
     }
 
