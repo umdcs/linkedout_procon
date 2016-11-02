@@ -112,12 +112,10 @@ public class Quiz extends AppCompatActivity {
                 //will grab the format as a string
                 String quizFormat = jsonData.getString("quizFormat");
 
-                //This grabs the hardcoded question and puts it into the XML (this will also be the radio group)
-                //RadioGroup quizQuestion = jsonData.getString("quizQuestion");
-                //rg.findViewById(R.id.quizQuestion);
-                //rg = (RadioGroup) findViewById(R.id.quizQuestion)
+                //This is the radio group id
+                rg = (RadioGroup) findViewById(R.id.rGroup);
 
-
+                //This grabs the hardcoded quiz
                 String quizQuestion = jsonData.getString("quizQuestion");
                 System.out.println(quizFormat);
                 textView.setText(quizQuestion);
@@ -128,7 +126,7 @@ public class Quiz extends AppCompatActivity {
                 if(quizFormat.equals("True/False")){
                     isTrueFalse(jsonData);
                 }
-                else if(quizFormat.equals("Mulitple Choice")){
+                else if(quizFormat.equals("Multiple Choice")){
                     isMultipleChoice(jsonData);
                 }
                 else if(quizFormat.equals("Short Answer")){
@@ -184,6 +182,8 @@ public class Quiz extends AppCompatActivity {
      * action to the REST Server.
      *
      * @param view
+     *
+     *
      */
     public void restPOST(View view) {
 
@@ -248,7 +248,6 @@ public class Quiz extends AppCompatActivity {
     /**This function creates a multiple choice question format
      * @param: String quizFormat
      *
-     *
      */
     public void isMultipleChoice(JSONObject jsonData){
         //create four buttons
@@ -308,6 +307,6 @@ public class Quiz extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.quizQuestion);
         restGET();
 
-        //rg = (RadioGroup) findViewById(R.id.quizQuestion);
+        rg = (RadioGroup) findViewById(R.id.rGroup);
     }
 }
