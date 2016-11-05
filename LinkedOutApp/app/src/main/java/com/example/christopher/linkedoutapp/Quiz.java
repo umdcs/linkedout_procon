@@ -137,6 +137,10 @@ public class Quiz extends AppCompatActivity {
     }
 
 
+    public void restPOST(View view){
+        //rest post function
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
