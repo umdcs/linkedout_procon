@@ -21,7 +21,7 @@
         android:id="@+id/textView" />
 
     <RadioGroup
-    android:layout_below="@+id/question"
+    android:layout_below="@+id/quizQuestion"
     android:layout_alignLeft="@+id/textView"
     android:layout_alignStart="@+id/textView"
     android:layout_width="match_parent"
@@ -31,40 +31,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
-        android:id="@+id/radioButton1"
+        android:id="@+id/quizAnswerChoiceOne"
         android:textColor="#FFFFFF"
-        android:tag="radioButton1"/>
+        android:tag="quizAnswerChoiceOne"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton2"
+        android:id="@+id/quizAnswerChoiceTwo"
         android:textColor="#FFFFFF"
-        android:tag="radioButton2"/>
+        android:tag="quizAnswerChoiceTwo"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton3"
+        android:id="@+id/quizAnswerChoiceThree"
         android:textColor="#FFFFFF"
-        android:tag="radioButton3"/>
+        android:tag="quizAnswerChoiceThree"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton4"
+        android:id="@+id/quizAnswerChoiceFour"
         android:textColor="#FFFFFF"
-        android:tag="radioButton4"/>
+        android:tag="quizAnswerChoiceFour"/>
 </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
-        android:id="@+id/question"
+        android:id="@+id/quizQuestion"
         android:textColor="#FFFFFF"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />

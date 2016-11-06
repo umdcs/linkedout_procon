@@ -5,7 +5,12 @@ var app = express();
 
 
 //Hardcoded question
-var JSON_String = '{"math":{"question":"What is 2 + 2?", "answer":"4"}}';
+//should have data formatted as follows"
+//'{"quizSubject":{"quizFormat": " ", "quizQuestion" : " ", "quizAnswerChoices" : " " }}';
+//quizFormat string choices: "True/False, "Multiple Choice", "Short Answer"
+//if shortAnswer no quizAnswe choices needed
+var JSON_String = '{"math":{"quizFormat" : "True/False","quizQuestion":"Does 2+2=4?", "quizAnswerChoiceOne" : "True","quizAnswerChoiceTwo" : "False"}}';
+                                 
 var JSON_Object = JSON.parse(JSON_String);
 
 app.set("port", 4321);
