@@ -280,7 +280,7 @@ public class Quiz extends AppCompatActivity {
     }
 /*
 >>>>>>> origin/Sprint1-Clarence
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,7 +291,7 @@ public class Quiz extends AppCompatActivity {
         //rg = (RadioGroup) findViewById(R.id.rGroup);
     }
 
-*/
+
     //button listeners to create questions
     public void onClick_sa(View view) {
         Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
