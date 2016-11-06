@@ -1,5 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -277,8 +278,8 @@ public class Quiz extends AppCompatActivity {
         //create short answer text box
 
     }
-
-
+/*
+>>>>>>> origin/Sprint1-Clarence
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,4 +290,22 @@ public class Quiz extends AppCompatActivity {
 
         //rg = (RadioGroup) findViewById(R.id.rGroup);
     }
+
+*/
+    //button listeners to create questions
+    public void onClick_sa(View view) {
+        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_mc(View view) {
+        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_tf(View view) {
+        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+        startActivity(questionIntent);
+    }
+
 }
