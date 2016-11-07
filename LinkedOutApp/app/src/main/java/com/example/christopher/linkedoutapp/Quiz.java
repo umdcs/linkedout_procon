@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,10 +25,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
+import java.util.ArrayList;
 
-public class Quiz extends AppCompatActivity {
+public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private TextView textView;
+
+    ArrayAdapter<String> adapter;
+    ArrayList<String> itemList;
+    Spinner spinner;
+
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -147,6 +156,41 @@ public class Quiz extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         textView = (TextView) findViewById(R.id.question);
         restGET();
+
+        //implement spinner
+        spinner = (Spinner) findViewById(R.id.question_spinner);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.questions_list, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int qv = parent.getSelectedItemPosition();
+        String value  = spinner.getSelectedItem().toString();
+        Log.d("Debug: ", "position on array: : " + value + "," + "Position: " + qv );
+
+        if (qv == 1)
+        {
+
+        }
+        else if (qv == 2)
+        {
+
+        }
+        else if (qv == 3)
+        {
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 

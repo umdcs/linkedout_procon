@@ -77,25 +77,35 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="onClick_sa"/>
-
-    <Button
-        android:text="Multiple choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shortanswer_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/multiplechoice_button"
-        android:onClick="onClick_mc"/>
+        android:onClick="onClick_sa"
+        android:layout_toLeftOf="@+id/multiplechoice_button"
+        android:layout_toStartOf="@+id/multiplechoice_button" />
 
     <Button
         android:text="True/false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/shortanswer_button"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
         android:id="@+id/truefalse_button"
-        android:onClick="onClick_tf"/>
+        android:onClick="onClick_tf"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:text="Multiple choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/multiplechoice_button"
+        android:onClick="onClick_mc"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/truefalse_button"
+        android:layout_toStartOf="@+id/truefalse_button" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shortanswer_button"
+        android:layout_marginTop="16dp"
+        android:id="@+id/question_spinner" />
+
 </RelativeLayout>
