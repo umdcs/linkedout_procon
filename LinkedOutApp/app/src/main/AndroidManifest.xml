@@ -27,7 +27,7 @@
         <activity android:name=".Quiz" />
         <activity android:name=".ShortAnswerActivity" />
         <activity android:name=".MultipleChoiceActivity" />
-        <activity android:name=".TrueFalseActivity"></activity>
+        <activity android:name=".TrueFalseActivity" />
     </application>
 
 </manifest>
