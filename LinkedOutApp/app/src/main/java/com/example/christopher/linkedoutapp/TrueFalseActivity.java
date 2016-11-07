@@ -138,13 +138,15 @@ public class TrueFalseActivity extends AppCompatActivity {
         else if(FALSE.isChecked()){
             answer = "False";
         }
-        JSONObject jsonParam = null;
+        JSONObject jsonParam = null, jsonChild = null;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("quizFormat", "TrueFalse");
-            jsonParam.put("quizQuestion", question);
-            jsonParam.put("quizAnswer", answer);
+            jsonChild = new JSONObject();
+            jsonChild.put("quizFormat", "TrueFalse");
+            jsonChild.put("quizQuestion", question);
+            jsonChild.put("quizAnswer", answer);
+            jsonParam.put("type", jsonChild);
         }
 
         catch (JSONException e) {

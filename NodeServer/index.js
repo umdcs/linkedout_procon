@@ -36,7 +36,7 @@ app.get('/quizData', function(req, res){
 app.post('/quizData', function (req, res) {
   if(!req.body) return res.sendStatus(400);
 
-  //console.log("POST " + res.send());
+  console.log("POST " + JSON.stringify(req.body));
 });
 
 app.delete('/', function (req, res){
