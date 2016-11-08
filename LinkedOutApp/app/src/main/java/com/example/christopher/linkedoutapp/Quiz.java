@@ -188,11 +188,13 @@ public class Quiz extends AppCompatActivity {
     public void restPOST(View view) {
 
         JSONObject jsonParam = null;
+        RadioButton answer;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("question", getQuestion());
-            jsonParam.put("answer", rg.getCheckedRadioButtonId());
+            answer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+            jsonParam.put("answer", answer.getText());
 
         } catch (JSONException e) {
             e.printStackTrace();
