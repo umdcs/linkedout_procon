@@ -3,6 +3,23 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+// ///////////// IMPORTANT Port Information //////////////
+// The port may be determined by where we are running our code. The CS machine
+//     lempo.d.umn.edu
+// is set to run your node server on TLS/SSL port 4532 (or your assigned port + 1). It
+// then redirects all traffic internally to your actual port, which is 4531. Your server
+// now needs to respond to port 4531. You can still run your node server on your local
+// machine under port 4531, but access to it will differ on the Android side.
+//
+// If you want to test locally, you can still use localhost:4531 if you're running it on
+// your own machine, but if you want to access the version of your server running on lempo,
+// you will need to access
+//    https://lempo.d.umn.edu:4532
+//
+// Again, my server routes all your traffic through SSL/TLS so it IS encrypted. However, it
+// redirects internally on lempo to your actual port number 4531.
+
+app.set("port", 4531);
 
 //Hardcoded question
 //should have data formatted as follows"
@@ -13,7 +30,7 @@ var JSON_String = '{"math":{"quizFormat" : "True/False","quizQuestion":"Does 2+2
                                  
 var JSON_Object = JSON.parse(JSON_String);
 
-app.set("port", 4321);
+
 
 app.use(bodyParser.urlencoded({   // support encoded bodies
     extended: true
