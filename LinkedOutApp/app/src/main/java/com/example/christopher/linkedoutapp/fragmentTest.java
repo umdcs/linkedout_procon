@@ -14,14 +14,13 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class fragmentTest extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class fragmentTest extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener{
 
     ArrayAdapter<String> adapter;
     ArrayList<String> itemList;
     Spinner spinner;
     String Q,A;
-    //FragmentExample obj;
-
+    Fragment_SA obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class fragmentTest extends AppCompatActivity implements AdapterView.OnIte
                     .add(R.id.contentContainer, Fragment_SA.newInstance())
                     .commit();
 
-            //onFragmentInteraction(Q,A);
+            onFragmentInteraction(Q,A);
         }
         else if (qv == 2)
         {
@@ -69,6 +68,15 @@ public class fragmentTest extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(String value, String value1) {
+
+        Q = value;
+        A = value1;
+        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
 
     }
 }
