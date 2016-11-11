@@ -48,5 +48,5 @@
         android:padding="15dp"
         android:background="#42B0D1"
         android:textColor="#FFFFFF"
-        />
+        android:onClick="onClickSignUp" />
 </RelativeLayout>

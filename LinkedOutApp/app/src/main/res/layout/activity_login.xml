@@ -59,20 +59,31 @@
                 android:textColorHint="#3e435b" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/editText2"
                 android:layout_alignLeft="@+id/editText2"
-                android:layout_alignRight="@+id/editText2"
                 android:layout_alignStart="@+id/editText2"
                 android:layout_below="@+id/editText2"
                 android:layout_marginTop="12dp"
                 android:background="#42B0D1"
                 android:padding="15dp"
-                android:text="Submit"
+                android:text="Student"
                 android:textColor="#FFFFFF"
-                android:onClick="onClickQuiz" />
+                android:onClick="onClickStudent" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#42B0D1"
+                android:padding="15dp"
+                android:text="Employer"
+                android:textColor="#FFFFFF"
+                android:onClick="onClickEmployer"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/imageView"
+                android:layout_alignEnd="@+id/imageView" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

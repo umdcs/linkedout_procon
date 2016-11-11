@@ -23,7 +23,7 @@ import java.net.URL;
 
 public class TrueFalseActivity extends AppCompatActivity {
     private EditText editText;
-
+    private String Server = "http://lempo.d.umn.edu:4531/quizData";
     public void sendMessage(View view) {
         //When the 'Save Question' button is pressed, the data gets posted to the node.js server
         restPOST(view);
@@ -113,7 +113,7 @@ public class TrueFalseActivity extends AppCompatActivity {
 
 
     public void restGET() {
-        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "GET");
+        new HTTPAsyncTask().execute(Server, "GET");
     }
 
     @Override
@@ -153,7 +153,7 @@ public class TrueFalseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         System.out.println(jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
         super.onBackPressed();
         Intent intent = new Intent(this, Quiz.class);
         startActivity(intent);
