@@ -28,6 +28,10 @@
         <activity android:name=".ShortAnswerActivity" />
         <activity android:name=".MultipleChoiceActivity" />
         <activity android:name=".TrueFalseActivity" />
+        <activity
+            android:name=".StudentDefaultView"
+            android:label="@string/title_activity_student_default_view"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
