@@ -157,15 +157,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         textView = (TextView) findViewById(R.id.question);
         restGET();
 
-        //implement spinner
-        spinner = (Spinner) findViewById(R.id.question_spinner);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.questions_list, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -195,18 +186,8 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
 
     //button listeners to create questions
-    public void onClick_sa(View view) {
-        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_mc(View view) {
-        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_tf(View view) {
-        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+    public void onClick_fragmentTest(View view) {
+        Intent questionIntent = new Intent(this, fragmentTest.class);
         startActivity(questionIntent);
     }
 

@@ -25,9 +25,8 @@
             android:name=".login"
             android:screenOrientation="portrait" />
         <activity android:name=".Quiz" />
-        <activity android:name=".ShortAnswerActivity" />
-        <activity android:name=".MultipleChoiceActivity" />
-        <activity android:name=".TrueFalseActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".fragmentTest"></activity>
     </application>
 
 </manifest>
