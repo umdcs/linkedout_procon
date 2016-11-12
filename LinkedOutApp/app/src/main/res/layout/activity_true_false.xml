@@ -32,12 +32,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="58dp"
+<<<<<<< HEAD
         android:id="@+id/radioButton7" />
+=======
+        android:id="@+id/TRUE"
+        android:checked="false" />
+>>>>>>> 774a345a2ac4ccc101762d195f2839c24cfaac1f
 
     <RadioButton
         android:text="False"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_below="@+id/radioButton7"
         android:layout_marginTop="26dp"
         android:id="@+id/radioButton8" />
@@ -54,4 +60,19 @@
         android:layout_marginTop="85dp"
         android:id="@+id/button5"
         android:onClick="onBackPressedtf"/>
+=======
+        android:layout_below="@+id/TRUE"
+        android:layout_marginTop="26dp"
+        android:id="@+id/FALSE" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:onClick="sendMessage"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/FALSE"
+        android:layout_centerHorizontal="true" />
+
+>>>>>>> 774a345a2ac4ccc101762d195f2839c24cfaac1f
 </RelativeLayout>
