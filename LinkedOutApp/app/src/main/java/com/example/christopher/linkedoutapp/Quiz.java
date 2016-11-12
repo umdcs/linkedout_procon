@@ -320,7 +320,7 @@ public class Quiz extends AppCompatActivity {
         Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
         startActivity(questionIntent);
     }
-    
+
     public void onClick_mc(View view) {
         Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
         startActivity(questionIntent);

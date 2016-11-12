@@ -35,7 +35,7 @@
             android:name=".StudentDefaultView"
             android:label="@string/title_activity_student_default_view"
             android:theme="@style/AppTheme"></activity>
->>>>>>> 774a345a2ac4ccc101762d195f2839c24cfaac1f
+
     </application>
 
 </manifest>
