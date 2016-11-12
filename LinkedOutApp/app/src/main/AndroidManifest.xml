@@ -3,7 +3,7 @@
     package="com.example.christopher.linkedoutapp">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,10 @@
         <activity
             android:name=".login"
             android:screenOrientation="portrait" />
-        <activity android:name=".Quiz"></activity>
+        <activity android:name=".Quiz" />
+        <activity android:name=".ShortAnswerActivity" />
+        <activity android:name=".MultipleChoiceActivity" />
+        <activity android:name=".TrueFalseActivity"></activity>
     </application>
 
 </manifest>
