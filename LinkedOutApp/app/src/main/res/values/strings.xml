@@ -1,11 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">LinkedOutApp</string>
     <string name="login">Login</string>
     <string name="sign">Sign Up</string>
     <string name="title_activity_student_default_view">StudentDefaultView</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="action_create">Create</string>
+    <string-array name="questions_list">
+        <item>Select Question Type</item>
+        <item>Short Answer</item>
+        <item>Multiple Choice</item>
+        <item>True/False</item>
+    </string-array>
+>>>>>>> Sprint1-Clarence
 </resources>
