@@ -25,40 +25,60 @@
     android:layout_alignLeft="@+id/textView"
     android:layout_alignStart="@+id/textView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+        android:id="@+id/rGroup">
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:id="@+id/quizAnswerChoiceOne"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceOne"/>
+        android:tag="quizAnswerChoiceOne"
+        android:text="@+id/quizAnswerChoiceOne"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceTwo"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceTwo"/>
+        android:tag="quizAnswerChoiceTwo"
+        android:text="@+id/quizAnswerChoiceTwo"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceThree"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceThree"/>
+        android:tag="quizAnswerChoiceThree"
+        android:text="@+id/quizAnswerChoiceThree"/>
 
     <RadioButton
         android:buttonTint="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quizAnswerChoiceFour"
+        android:onClick="rbClick"
         android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceFour"/>
-</RadioGroup>
+        android:tag="quizAnswerChoiceFour"
+        android:text="@+id/quizAnswerChoiceFour"/>
+
+        <Button
+            android:text="Submit"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="53dp"
+            android:id="@+id/submit"
+            android:onClick="restPOST"/>
+    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,33 +89,6 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Short answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shortanswer_button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClick_sa"/>
 
-    <Button
-        android:text="Multiple choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/shortanswer_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/multiplechoice_button"
-        android:onClick="onClick_mc"/>
 
-    <Button
-        android:text="True/false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/shortanswer_button"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:id="@+id/truefalse_button"
-        android:onClick="onClick_tf"/>
 </RelativeLayout>

@@ -22,11 +22,11 @@ var app = express();
 app.set("port", 4531);
 
 //Hardcoded question
-//should have data formatted as follows"
+//should have data formatted as follows:
 //'{"quizSubject":{"quizFormat": " ", "quizQuestion" : " ", "quizAnswerChoices" : " " }}';
 //quizFormat string choices: "True/False, "Multiple Choice", "Short Answer"
 //if shortAnswer no quizAnswe choices needed
-var JSON_String = '{"math":{"quizFormat" : "True/False","quizQuestion":"Does 2+2=4?", "quizAnswerChoiceOne" : "True","quizAnswerChoiceTwo" : "False"}}';
+var JSON_String = '{"math":{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswerChoiceOne" : "1","quizAnswerChoiceTwo" : "2", "quizAnswerChoiceThree" : "3", "quizAnswerChoiceFour" : "4", "quizAnswer" : "4"}}';
                                  
 var JSON_Object = JSON.parse(JSON_String);
 
