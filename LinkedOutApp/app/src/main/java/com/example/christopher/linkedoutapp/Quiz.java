@@ -1,5 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Quiz extends AppCompatActivity {
-
+    private String Server = "http://lempo.d.umn.edu:4531/quizData";
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
@@ -152,7 +153,7 @@ public class Quiz extends AppCompatActivity {
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "GET");
+        new HTTPAsyncTask().execute(Server, "GET");
     }
 
     /**
@@ -178,7 +179,7 @@ public class Quiz extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:4321/quizData", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
     /**
@@ -319,9 +320,9 @@ public class Quiz extends AppCompatActivity {
         //create short answer text box
 
     }
-
-
-
+/*
+>>>>>>> origin/Sprint1-Clarence
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -331,4 +332,22 @@ public class Quiz extends AppCompatActivity {
 
         rg = (RadioGroup) findViewById(R.id.rGroup);
     }
+
+
+    //button listeners to create questions
+    public void onClick_sa(View view) {
+        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_mc(View view) {
+        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
+        startActivity(questionIntent);
+    }
+
+    public void onClick_tf(View view) {
+        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+        startActivity(questionIntent);
+    }
+
 }

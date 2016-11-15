@@ -8,10 +8,15 @@
         <item name="android:colorBackground">@color/background</item>
         <!--<item name="android:buttonStyle">@style/ButtonTheme</item>-->
     </style>
-    <style name = "ButtonTheme" parent="android:Theme">
-        <item name = "android:padding">15dp</item>
-        <item name = "android:background">#42B0D1</item>
-        <item name = "android:textColor">#FFFFFF</item>
+
+    <style name="ButtonTheme" parent="android:Theme">
+        <item name="android:padding">15dp</item>
+        <item name="android:background">#42B0D1</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
