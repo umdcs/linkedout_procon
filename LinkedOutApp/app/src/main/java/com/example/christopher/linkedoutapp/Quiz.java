@@ -183,7 +183,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("question", getQuestion());
-            jsonParam.put("answer", isCorrect(view));
+            jsonParam.put("answer", isCorrect());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -196,7 +196,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      * This function will tell if the question was answered correctly or not
      *
      */
-    public boolean isCorrect(View view){
+    public boolean isCorrect(){
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
         if(studentAnswer.getText().equals(getAnswer())){
