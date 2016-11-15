@@ -54,13 +54,15 @@ public class fragmentTest extends AppCompatActivity implements AdapterView.OnIte
         }
         else if (qv == 2)
         {
-            Log.d("Debug: ", "4531 fragment " );
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer, Fragment_TF.newInstance())
+                    .replace(R.id.contentContainer, Fragment_MC.newInstance())
                     .commit();
         }
         else if (qv == 3)
         {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainer, Fragment_TF.newInstance())
+                    .commit();
 
         }
 

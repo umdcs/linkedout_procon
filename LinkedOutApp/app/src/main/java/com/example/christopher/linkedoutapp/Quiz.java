@@ -27,13 +27,12 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class Quiz extends AppCompatActivity{
 
     private TextView textView;
 
-    ArrayAdapter<String> adapter;
-    ArrayList<String> itemList;
-    Spinner spinner;
+    //ArrayAdapter<String> adapter;
+    //ArrayList<String> itemList;
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -158,31 +157,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         restGET();
 
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int qv = parent.getSelectedItemPosition();
-        String value  = spinner.getSelectedItem().toString();
-        Log.d("Debug: ", "position on array: : " + value + "," + "Position: " + qv );
 
-        if (qv == 1)
-        {
-
-        }
-        else if (qv == 2)
-        {
-
-        }
-        else if (qv == 3)
-        {
-
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
 
     //button listeners to create questions
