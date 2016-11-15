@@ -167,13 +167,11 @@ public class Quiz extends AppCompatActivity {
     public void restPOST(View view) {
 
         JSONObject jsonParam = null;
-        RadioButton answer;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("question", getQuestion());
-            answer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-            jsonParam.put("answer", answer.getText());
+            jsonParam.put("answer", isCorrect(view));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -186,7 +184,7 @@ public class Quiz extends AppCompatActivity {
      * This function will tell if the question was answered correctly or not
      *
      */
-    public boolean isCorrect(){
+    public boolean isCorrect(View view){
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
         if(studentAnswer.getText().equals(getAnswer())){
