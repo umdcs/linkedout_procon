@@ -25,20 +25,7 @@
             android:name=".login"
             android:screenOrientation="portrait" />
         <activity android:name=".Quiz" />
-<<<<<<< HEAD
-        <activity android:name=".ShortAnswerActivity" />
-        <activity android:name=".MultipleChoiceActivity" />
-<<<<<<< HEAD
-        <activity android:name=".TrueFalseActivity"></activity>
-=======
-        <activity android:name=".TrueFalseActivity" />
-        <activity
-            android:name=".StudentDefaultView"
-            android:label="@string/title_activity_student_default_view"
-            android:theme="@style/AppTheme"></activity>
 
-=======
-        <activity android:name=".TrueFalseActivity" />
         <activity
             android:name=".StudentDefaultView"
             android:label=""
@@ -46,7 +33,6 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".fragmentTest" />
         <activity android:name=".EmployerDefaultView"></activity>
->>>>>>> 41ecd5a1bb6b6b7a99cb9c791ec9429461bc03ff
     </application>
 
 </manifest>
