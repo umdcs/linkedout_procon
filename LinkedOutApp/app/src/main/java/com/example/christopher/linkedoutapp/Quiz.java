@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,13 +25,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class Quiz extends AppCompatActivity {
+
+
+public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
     private String question; //question to be stored and sent back along with the users answer
+    private String answer;
+    ArrayAdapter<String> adapter;
+    ArrayList<String> itemList;
+    Spinner spinner;
+
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -123,6 +136,10 @@ public class Quiz extends AppCompatActivity {
                 //sets private variable to the string of the current question
                 setQuestion(quizQuestion);
 
+                //creates the quiz/answer variable
+                String quizAnswer = jsonData.getString("quizAnswer");
+                setAnswer(quizAnswer);
+
                 //this  sectionfinds out how the question should be formatted
                 if(quizFormat.equals("True/False")){
                     isTrueFalse(jsonData);
@@ -134,32 +151,6 @@ public class Quiz extends AppCompatActivity {
                     isShortAnswer(jsonData);
                 }
 
-
-                /*
-                //Generates a random number to determine the choice (A, B, C, or D) of the answer
-                Random j = new Random();
-                int answer = 1+j.nextInt(4);
-                String radio = "radioButton" + answer;
-                //sets the answer to that radio button that was selected above
-                int resID = getResources().getIdentifier(radio, "id", getPackageName());
-                RadioButton b = (RadioButton)findViewById(resID);
-                b.setText(jsonData.getString("answer"));
-                //Sets the remaining unused radio buttons to random numbers from 1 to 10
-                for(int i = 1; i <= 4; i++){
-                    if(i!=answer){
-                        resID = getResources().getIdentifier("radioButton"+i, "id", getPackageName());
-                        int response = 1+j.nextInt(10);
-                        while(jsonData.getString("answer").equals(""+response)){
-                            response = 1+j.nextInt(10);
-                        }
-                        b = ((RadioButton)findViewById(resID));
-                        //For some reason the setText doesn't work with pure integers, so that's why I'm adding empty string
-                        b.setText("" + response);
-
-                    }
-                }
-
-                */
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -176,7 +167,6 @@ public class Quiz extends AppCompatActivity {
     public void restGET() {
         new HTTPAsyncTask().execute(Server, "GET");
     }
-
 
     /**
      * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
@@ -204,6 +194,20 @@ public class Quiz extends AppCompatActivity {
         new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
+    /**
+     * This function will tell if the question was answered correctly or not
+     *
+     */
+    public boolean isCorrect(){
+        RadioButton studentAnswer;
+        studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+        if(studentAnswer.getText().equals(getAnswer())){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     /** This function will find out which radio button was clicked and return it
      * @Param: View v
@@ -216,14 +220,41 @@ public class Quiz extends AppCompatActivity {
         return radioButtonid;
     }
 
+    /**This function sets the question
+     *
+     * @param quizQuestion
+     */
     public void setQuestion(String quizQuestion){
             question = quizQuestion;
     }
+
+    /**This function gets the question
+     *
+     * @return question
+     */
 
     public String getQuestion()
     {
         return question;
     }
+
+    /**This function gets the answer
+     *
+     * @return answer
+     */
+    public String getAnswer()
+    {
+        return answer;
+    }
+
+    /**This question sets the aswer
+     *
+     * @param quizAnswer
+     */
+    public void setAnswer(String quizAnswer){
+        answer = quizAnswer;
+    }
+
     /**This function creates a true/false question format
      * @param: String quizFormat
      *
@@ -312,22 +343,39 @@ public class Quiz extends AppCompatActivity {
         restGET();
 
         rg = (RadioGroup) findViewById(R.id.rGroup);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int qv = parent.getSelectedItemPosition();
+        String value  = spinner.getSelectedItem().toString();
+        Log.d("Debug: ", "position on array: : " + value + "," + "Position: " + qv );
+
+        if (qv == 1)
+        {
+
+        }
+        else if (qv == 2)
+        {
+
+        }
+        else if (qv == 3)
+        {
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 
     //button listeners to create questions
-    public void onClick_sa(View view) {
-        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_mc(View view) {
-        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_tf(View view) {
-        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+    public void onClick_fragmentTest(View view) {
+        Intent questionIntent = new Intent(this, fragmentTest.class);
         startActivity(questionIntent);
     }
 
