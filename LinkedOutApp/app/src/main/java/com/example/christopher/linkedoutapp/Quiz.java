@@ -40,8 +40,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
-    private String question; //question to be stored and sent back along with the users answer
-    private String answer;
     ArrayAdapter<String> adapter;
     ArrayList<String> itemList;
     Spinner spinner;
@@ -172,37 +170,16 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
             }
 
-            /*
-            try {
-                //This gets the hardcoded quiz question of type "math"
-                jsonData = new JSONObject(new JSONObject(result).getString("math"));
-
-
-
-                //will grab the format as a string
-                String quizFormat = jsonData.getString("quizFormat");
 
                 //This is the radio group id
                 rg = (RadioGroup) findViewById(R.id.rGroup);
 
-                //This grabs the hardcoded quiz
-                String quizQuestion = jsonData.getString("quizQuestion");
-                System.out.println(quizFormat);
-                textView.setText(quizQuestion);
-                //sets private variable to the string of the current question
-                setQuestion(quizQuestion);
-
-                //creates the quiz/answer variable
-                String quizAnswer = jsonData.getString("quizAnswer");
-                setAnswer(quizAnswer);
+                String toTextView = new QuizModel().getQuestion();
+                textView.setText(toTextView);
 
                 //hardcoded multiple choice question
-                isMultipleChoice(jsonData);
+                isMultipleChoice(parentObject);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            */
 
         }//******************End onPost()*************************************
 
@@ -225,12 +202,12 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      *
      */
     public void restPOST(View view) {
-
+        QuizModel quizModel = null;
         JSONObject jsonParam = null;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("question", getQuestion());
+            jsonParam.put("question", quizModel.getQuestion());
             jsonParam.put("answer", isCorrect());
 
         } catch (JSONException e) {
@@ -246,9 +223,10 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      *
      */
     public String isCorrect(){
+        QuizModel quizModel = null;
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-        if(studentAnswer.getText().equals(getAnswer())){
+        if(studentAnswer.getText().equals(quizModel.getAnswer())){
             return "true"; //correct
         }
         else {
@@ -265,41 +243,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         int radioButtonid = rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(radioButtonid);
         return radioButtonid;
-    }
-
-    /**This function sets the question
-     *
-     * @param quizQuestion
-     */
-    public void setQuestion(String quizQuestion){
-            question = quizQuestion;
-    }
-
-    /**This function gets the question
-     *
-     * @return question
-     */
-
-    public String getQuestion()
-    {
-        return question;
-    }
-
-    /**This function gets the answer
-     *
-     * @return answer
-     */
-    public String getAnswer()
-    {
-        return answer;
-    }
-
-    /**This question sets the answer
-     *
-     * @param quizAnswer
-     */
-    public void setAnswer(String quizAnswer){
-        answer = quizAnswer;
     }
 
 
