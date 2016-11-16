@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
+import com.example.christopher.linkedoutapp.QuizModel.QuizModel;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +28,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 
@@ -117,12 +121,47 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
          */
         protected void onPostExecute(String result) {
 
-            //this whole section is basically taking in the jsondata and setting to different buttons to be displayed. Hopefully dynamically.
-            JSONObject jsonData = new JSONObject(); //holds the json data pulled from server
+            JSONObject parentObject = new JSONObject(); //holds the json data pulled from server
+            String finalJson = parentObject.toString();
+            JSONArray parentArray = null;
+            try {
+                parentArray = parentObject.getJSONArray("math");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            for(int i = 0; i < parentArray.length(); i++){
+                QuizModel quizModel = new QuizModel();
+                JSONObject finalObject = null;
+                try {
+                    finalObject = parentArray.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    quizModel.setName(finalObject.getString("math"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    quizModel.setFormat(finalObject.getString("quizFormat"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    quizModel.setQuestion(finalObject.getString("quizQuestion"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
 
             try {
                 //This gets the hardcoded quiz question of type "math"
                 jsonData = new JSONObject(new JSONObject(result).getString("math"));
+
+
 
                 //will grab the format as a string
                 String quizFormat = jsonData.getString("quizFormat");

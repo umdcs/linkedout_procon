@@ -12,6 +12,7 @@ public class QuizModel {
     private String answer;
     private String format;
     private String name;
+    private List<Choices> choiceList;
 
     public String getQuestion() {
         return question;
@@ -53,7 +54,6 @@ public class QuizModel {
         this.choiceList = choiceList;
     }
 
-    private List<Choices> choiceList;
     public static class Choices{
         private String name;
 
