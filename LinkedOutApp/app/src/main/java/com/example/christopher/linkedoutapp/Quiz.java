@@ -140,16 +140,9 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 String quizAnswer = jsonData.getString("quizAnswer");
                 setAnswer(quizAnswer);
 
-                //this  sectionfinds out how the question should be formatted
-                if(quizFormat.equals("True/False")){
-                    isTrueFalse(jsonData);
-                }
-                else if(quizFormat.equals("Multiple Choice")){
-                    isMultipleChoice(jsonData);
-                }
-                else if(quizFormat.equals("Short Answer")){
-                    isShortAnswer(jsonData);
-                }
+
+                isMultipleChoice(jsonData);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -255,30 +248,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         answer = quizAnswer;
     }
 
-    /**This function creates a true/false question format
-     * @param: String quizFormat
-     *
-     */
-    public void isTrueFalse(JSONObject jsonData){
-        //create two buttons one for true and one for false
-        String quizAnswerChoiceOne = null;
-        try {
-            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
-        textView.setText(quizAnswerChoiceOne);
-
-        String quizAnswerChoiceTwo = null;
-        try {
-            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
-        textView.setText(quizAnswerChoiceTwo);
-    }
 
     /**This function creates a multiple choice question format
      * @param: String quizFormat
