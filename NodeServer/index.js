@@ -22,7 +22,7 @@ var app = express();
 app.set("port", 4321);
 
 //Hardcoded questions Array with two questions
-var JSON_String = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "choiceList":[{"quizAnswerChoiceOne" : "1"},{"quizAnswerChoiceTwo" : "2"}, {"quizAnswerChoiceThree" : "3"}, {"quizAnswerChoiceFour" : "4"}, {"quizAnswer" : "4"}]},{"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "choiceList":[{"quizAnswerChoiceOne" : "2"},{"quizAnswerChoiceTwo" : "3"}, {"quizAnswerChoiceThree" : "4"}, {"quizAnswerChoiceFour" : "6"}, {"quizAnswer" : "6"}]} ]}';
+var JSON_String = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]} ]}';
                                  
 var JSON_Object = JSON.parse(JSON_String);
 

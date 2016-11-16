@@ -30,7 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.Buffer;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -130,6 +130,8 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 e.printStackTrace();
             }
 
+            List<QuizModel> quizModelList = new ArrayList<>();
+
             for(int i = 0; i < parentArray.length(); i++){
                 QuizModel quizModel = new QuizModel();
                 JSONObject finalObject = null;
@@ -139,7 +141,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                     e.printStackTrace();
                 }
                 try {
-                    quizModel.setName(finalObject.getString("math"));
+                    quizModel.setName(finalObject.getString("quizzes"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -154,9 +156,23 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                     e.printStackTrace();
                 }
 
+                List<QuizModel.Choices> choicesList = new ArrayList<>();
+                try {
+                    for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
+                        QuizModel.Choices choices = new QuizModel.Choices();
+                        choices.setName(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
+                        choicesList.add(choices);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                quizModel.setChoiceList(choicesList);
+                quizModelList.add(quizModel);
+
 
             }
 
+            /*
             try {
                 //This gets the hardcoded quiz question of type "math"
                 jsonData = new JSONObject(new JSONObject(result).getString("math"));
@@ -186,6 +202,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            */
 
         }//******************End onPost()*************************************
 
