@@ -32,6 +32,7 @@ import java.util.ArrayList;
 public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
+    private String Server2 = "http://10.0.2.2:4321/quizData";
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
@@ -157,7 +158,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server, "GET");
+        new HTTPAsyncTask().execute(Server2, "GET");
     }
 
     /**
@@ -180,7 +181,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server2, "POST", jsonParam.toString());
     }
 
     /** This function will tell if the question was answered correctly or not
@@ -188,14 +189,14 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      *@Return: A true of false for the answer being correct or incorrect
      *
      */
-    public boolean isCorrect(){
+    public String isCorrect(){
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
         if(studentAnswer.getText().equals(getAnswer())){
-            return true; //correct
+            return "true"; //correct
         }
         else {
-            return false; //incorrect
+            return "false"; //incorrect
         }
     }
 
