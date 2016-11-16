@@ -72,6 +72,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#42B0D1"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:onClick="fragmentTest"/>
 
 </RelativeLayout>
