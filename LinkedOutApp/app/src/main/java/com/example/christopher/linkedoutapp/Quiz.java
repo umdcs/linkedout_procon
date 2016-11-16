@@ -109,7 +109,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             return "Should not get to this if the data has been sent/received correctly!";
         }
 
-        /**
+        /** This function passes the json data to a quiz layout and variables for helper function
          * The following executes after the Asynchronous task is finished executing
          *
          * @param result the result from the query
@@ -140,16 +140,8 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 String quizAnswer = jsonData.getString("quizAnswer");
                 setAnswer(quizAnswer);
 
-                //this  sectionfinds out how the question should be formatted
-                if(quizFormat.equals("True/False")){
-                    isTrueFalse(jsonData);
-                }
-                else if(quizFormat.equals("Multiple Choice")){
-                    isMultipleChoice(jsonData);
-                }
-                else if(quizFormat.equals("Short Answer")){
-                    isShortAnswer(jsonData);
-                }
+                //hardcoded multiple choice question
+                isMultipleChoice(jsonData);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -170,10 +162,9 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
     /**
      * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
-     * action to the REST Server.
+     * action to the REST Server. It is called when the submit button is pressed.
      *
      * @param view
-     *
      *
      */
     public void restPOST(View view) {
@@ -192,18 +183,19 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
-    /**
-     * This function will tell if the question was answered correctly or not
+    /** This function will tell if the question was answered correctly or not
+     *
+     *@Return: A true of false for the answer being correct or incorrect
      *
      */
     public boolean isCorrect(){
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
         if(studentAnswer.getText().equals(getAnswer())){
-            return true;
+            return true; //correct
         }
         else {
-            return false;
+            return false; //incorrect
         }
     }
 
@@ -245,7 +237,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         return answer;
     }
 
-    /**This question sets the aswer
+    /**This question sets the answer
      *
      * @param quizAnswer
      */
@@ -253,30 +245,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         answer = quizAnswer;
     }
 
-    /**This function creates a true/false question format
-     * @param: String quizFormat
-     *
-     */
-    public void isTrueFalse(JSONObject jsonData){
-        //create two buttons one for true and one for false
-        String quizAnswerChoiceOne = null;
-        try {
-            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
-        textView.setText(quizAnswerChoiceOne);
-
-        String quizAnswerChoiceTwo = null;
-        try {
-            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
-        textView.setText(quizAnswerChoiceTwo);
-    }
 
     /**This function creates a multiple choice question format
      * @param: String quizFormat
@@ -323,13 +291,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         textView.setText(quizAnswerChoiceFour);
     }
 
-    /**This function creates a short answer question format
-     *
-     */
-    public void isShortAnswer(JSONObject jsonData){
-        //create short answer text box
 
-    }
 /*
 >>>>>>> origin/Sprint1-Clarence
 */
