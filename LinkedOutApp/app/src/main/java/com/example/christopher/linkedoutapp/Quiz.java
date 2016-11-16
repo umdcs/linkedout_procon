@@ -32,6 +32,7 @@ import java.util.ArrayList;
 public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
+    private String Server2 = "http://10.0.2.2:4321/quizData";
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
@@ -109,7 +110,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             return "Should not get to this if the data has been sent/received correctly!";
         }
 
-        /**
+        /** This function passes the json data to a quiz layout and variables for helper function
          * The following executes after the Asynchronous task is finished executing
          *
          * @param result the result from the query
@@ -140,9 +141,8 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 String quizAnswer = jsonData.getString("quizAnswer");
                 setAnswer(quizAnswer);
 
-
+                //hardcoded multiple choice question
                 isMultipleChoice(jsonData);
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -158,47 +158,45 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server, "GET");
+        new HTTPAsyncTask().execute(Server2, "GET");
     }
 
     /**
      * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
-     * action to the REST Server.
+     * action to the REST Server. It is called when the submit button is pressed.
      *
      * @param view
-     *
      *
      */
     public void restPOST(View view) {
 
         JSONObject jsonParam = null;
-        RadioButton answer;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("question", getQuestion());
-            answer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-            jsonParam.put("answer", answer.getText());
+            jsonParam.put("answer", isCorrect());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server2, "POST", jsonParam.toString());
     }
 
-    /**
-     * This function will tell if the question was answered correctly or not
+    /** This function will tell if the question was answered correctly or not
+     *
+     *@Return: A true of false for the answer being correct or incorrect
      *
      */
-    public boolean isCorrect(){
+    public String isCorrect(){
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
         if(studentAnswer.getText().equals(getAnswer())){
-            return true;
+            return "true"; //correct
         }
         else {
-            return false;
+            return "false"; //incorrect
         }
     }
 
@@ -240,7 +238,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         return answer;
     }
 
-    /**This question sets the aswer
+    /**This question sets the answer
      *
      * @param quizAnswer
      */
@@ -294,13 +292,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         textView.setText(quizAnswerChoiceFour);
     }
 
-    /**This function creates a short answer question format
-     *
-     */
-    public void isShortAnswer(JSONObject jsonData){
-        //create short answer text box
 
-    }
 /*
 >>>>>>> origin/Sprint1-Clarence
 */

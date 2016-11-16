@@ -25,7 +25,6 @@
             android:name=".login"
             android:screenOrientation="portrait" />
         <activity android:name=".Quiz" />
-
         <activity
             android:name=".StudentDefaultView"
             android:label=""

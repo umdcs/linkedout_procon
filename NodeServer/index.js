@@ -19,7 +19,7 @@ var app = express();
 // Again, my server routes all your traffic through SSL/TLS so it IS encrypted. However, it
 // redirects internally on lempo to your actual port number 4531.
 
-app.set("port", 4531);
+app.set("port", 4321);
 
 //Hardcoded question
 //should have data formatted as follows:
