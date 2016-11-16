@@ -128,35 +128,38 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 e.printStackTrace();
             }
 
+            //this array holds all the data and holds the arrays that hold anser choices
             List<QuizModel> quizModelList = new ArrayList<>();
 
             for(int i = 0; i < parentArray.length(); i++){
-                QuizModel quizModel = new QuizModel();
+                QuizModel quizModel = new QuizModel(); //create new QuizModel object
                 JSONObject finalObject = null;
                 try {
-                    finalObject = parentArray.getJSONObject(i);
+                    finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 try {
-                    quizModel.setName(finalObject.getString("quizzes"));
+                    quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 try {
-                    quizModel.setFormat(finalObject.getString("quizFormat"));
+                    quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 try {
-                    quizModel.setQuestion(finalObject.getString("quizQuestion"));
+                    quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                //this array holds the answer choices
                 List<QuizModel.Choices> choicesList = new ArrayList<>();
                 try {
                     for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
+                        //creats a new QuizModel.Choices object to store choices
                         QuizModel.Choices choices = new QuizModel.Choices();
                         choices.setName(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
                         choicesList.add(choices);
@@ -164,11 +167,11 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                quizModel.setChoiceList(choicesList);
-                quizModelList.add(quizModel);
+                quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
+                quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time
 
 
-            }
+            }//end for
 
 
                 //This is the radio group id
