@@ -12,8 +12,5 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
-    public void goToQuizPage(View view){
-        Intent intent = new Intent(this, Quiz.class);
-        startActivity(intent);
-    }
+
 }
