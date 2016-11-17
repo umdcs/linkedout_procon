@@ -13,4 +13,11 @@
     tools:context="com.example.christopher.linkedoutapp.StudentDefaultView"
     tools:showIn="@layout/app_bar_student_default_view">
 
+    <Button
+        android:text="Quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Quiz"
+        android:onClick="onClickQuiz"
+        />
 </RelativeLayout>

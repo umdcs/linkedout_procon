@@ -23,13 +23,9 @@
         app:headerLayout="@layout/nav_header_student_default_view"
         app:menu="@menu/activity_student_default_view_drawer" >
 
-        <Button
-            android:text="Quiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Quiz"
-            android:onClick="onClickQuiz"/>/>
+        />
     </android.support.design.widget.NavigationView>
+
 
 
 </android.support.v4.widget.DrawerLayout>
