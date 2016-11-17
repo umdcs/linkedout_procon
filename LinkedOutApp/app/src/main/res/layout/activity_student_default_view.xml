@@ -25,7 +25,8 @@
         <Button
             android:text="Quiz"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="139dp"
+            android:padding="6dp"
             android:id="@+id/Quiz"
             android:onClick="onClickQuiz"/>/>
     </android.support.design.widget.NavigationView>

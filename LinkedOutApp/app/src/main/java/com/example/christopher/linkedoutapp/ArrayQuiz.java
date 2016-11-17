@@ -1,7 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
 import com.example.christopher.linkedoutapp.QuizModel.QuizModel;
@@ -32,27 +29,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class ArrayQuiz extends AppCompatActivity {
 
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
-    private String Server2 = "http://10.0.2.2:4321/quizData";
-    private TextView textView;
-    private RadioButton rb;
-    private RadioGroup rg;
-    ArrayAdapter<String> adapter;
-    ArrayList<String> itemList;
-    Spinner spinner;
+    private String Server2 = "http://10.0.2.2:4321/arrayQuizData";
+    //private TextView textView;
+    //private RadioButton rb;
+    //private RadioGroup rg;
+    //ArrayAdapter<String> adapter;
+    //ArrayList<String> itemList;
+    //Spinner spinner;
     private ListView lvQuizzes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        setContentView(R.layout.activity_arrayquiz);
         //textView = (TextView) findViewById(R.id.quizQuestion);
         lvQuizzes = (ListView)findViewById(R.id.lvQuizzes);
         restGET();
@@ -164,8 +160,8 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
 
                     }//end for
-                    return  quizModelList;
-                }
+                    return  quizModelList; //this is the List tht is sent to the onPostExecute
+                }//end doInBackground
 
 
             } catch (MalformedURLException e) {
@@ -197,9 +193,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             //textView.setText(toTextView);
 
 
-            //return
-
-        }//******************End onPost()*************************************
+        }//end onPostExecute
 
 
     }//****************End AsyncTask()****************************************
@@ -241,6 +235,16 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      *
      */
     public String isCorrect(){
+
+        return null;
+    }
+
+    /** This function will tell if the question was answered correctly or not
+     * This is the radio group version
+     *@Return: A true of false for the answer being correct or incorrect
+     *
+     */
+   /* public String isCorrect(){
         QuizModel quizModel = null;
         RadioButton studentAnswer;
         studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
@@ -250,23 +254,23 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         else {
             return "false"; //incorrect
         }
-    }
+    }*/
 
     /** This function will find out which radio button was clicked and return it
      * @Param: View v
      *
      * @Return: int of radio button clicked
      */
-    public int rbClick(View view){
+    /*public int rbClick(View view){
         int radioButtonid = rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(radioButtonid);
         return radioButtonid;
-    }
+    }*/
 
 
 /*
 >>>>>>> origin/Sprint1-Clarence
-*/
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int qv = parent.getSelectedItemPosition();
@@ -298,10 +302,11 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
     public void onClick_fragmentTest(View view) {
         Intent questionIntent = new Intent(this, fragmentTest.class);
         startActivity(questionIntent);
-    }
+    }*/
 
-
-
+    /**This is the QuizAdapter that is used to set the layout of the xml files
+     *
+     */
 
     public class QuizAdapter extends ArrayAdapter{
 
@@ -326,6 +331,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 convertView = inflater.inflate(resource, null);
                 holder.tvQuiz = (TextView)convertView.findViewById(R.id.tvQuiz);
                 holder.tvChoices = (TextView)convertView.findViewById(R.id.tvChoices);
+                holder.etAnswer = (EditText)convertView.findViewById(R.id.etAnswer);
                 convertView.setTag(holder);
             }
             else{
@@ -334,18 +340,24 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
             //holder for the quiz question
             holder.tvQuiz.setText(quizModelList.get(position).getQuestion());
-            //for loop for multiple answer choices
+            //for loop for multiple answer choices string buffer adds one to letter to lidst A,B,C for answers
             StringBuffer stringBuffer = new StringBuffer();
+            char letter = 'A';
             for(QuizModel.Choices choices : quizModelList.get(position).getChoiceList()){
+                stringBuffer.append( letter + ") "  );
                 stringBuffer.append(choices.getAnswerChoice());
+                letter++;
+                stringBuffer.append("\n");
             }
             holder.tvChoices.setText(stringBuffer);
+            //holder.etAnswer.setText("Enter Letter Choice Here");
 
             return convertView;
         }
         class ViewHolder{
             private TextView tvQuiz;
             private TextView tvChoices;
+            private EditText etAnswer;
         }
-    }
+    }//end adapter
 }
