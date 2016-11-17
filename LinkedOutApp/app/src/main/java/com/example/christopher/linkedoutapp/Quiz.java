@@ -1,13 +1,17 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,12 +47,25 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
     ArrayAdapter<String> adapter;
     ArrayList<String> itemList;
     Spinner spinner;
+    private ListView lvQuizzes;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_quiz);
+        //textView = (TextView) findViewById(R.id.quizQuestion);
+        lvQuizzes = (ListView)findViewById(R.id.lvQuizzes);
+        restGET();
+
+        //rg = (RadioGroup) findViewById(R.id.rGroup);
+
+    }
 
 
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
+    private class HTTPAsyncTask extends AsyncTask<String, Integer, List<QuizModel>> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected List<QuizModel> doInBackground(String... params) {
 
             HttpURLConnection serverConnection = null;
             InputStream is = null;
@@ -92,12 +109,62 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                         sb.append(line);
                     }
 
+                    //start of my code
+
+                    String finalJson = sb.toString();
+                    JSONObject parentObject = new JSONObject(finalJson); //holds the json data pulled from server
+                    JSONArray parentArray = null;
                     try {
-                        JSONObject jsonData = new JSONObject(sb.toString()); //json object
-                        return jsonData.toString();                          //returns json data
+                        parentArray = parentObject.getJSONArray("quizzes");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    //this array holds all the data and holds the arrays that hold anser choices
+                    List<QuizModel> quizModelList = new ArrayList<>();
+
+                    for(int i = 0; i < parentArray.length(); i++){
+                        QuizModel quizModel = new QuizModel(); //create new QuizModel object
+                        JSONObject finalObject = null;
+                        try {
+                            finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        //this array holds the answer choices
+                        List<QuizModel.Choices> choicesList = new ArrayList<>();
+                        try {
+                            for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
+                                //creats a new QuizModel.Choices object to store choices
+                                QuizModel.Choices choices = new QuizModel.Choices();
+                                choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
+                                choicesList.add(choices);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
+                        quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
+
+
+                    }//end for
+                    return  quizModelList;
                 }
 
 
@@ -105,11 +172,13 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             } finally {
                 serverConnection.disconnect();
             }
 
-            return "Should not get to this if the data has been sent/received correctly!";
+            return null;
         }
 
         /** This function passes the json data to a quiz layout and variables for helper function
@@ -117,72 +186,18 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
          *
          * @param result the result from the query
          */
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(List<QuizModel> result) {
 
-            JSONObject parentObject = new JSONObject(); //holds the json data pulled from server
-            String finalJson = parentObject.toString();
-            JSONArray parentArray = null;
-            try {
-                parentArray = parentObject.getJSONArray("math");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, result);
+            lvQuizzes.setAdapter(adapter);
 
-            //this array holds all the data and holds the arrays that hold anser choices
-            List<QuizModel> quizModelList = new ArrayList<>();
-
-            for(int i = 0; i < parentArray.length(); i++){
-                QuizModel quizModel = new QuizModel(); //create new QuizModel object
-                JSONObject finalObject = null;
-                try {
-                    finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                //this array holds the answer choices
-                List<QuizModel.Choices> choicesList = new ArrayList<>();
-                try {
-                    for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
-                        //creats a new QuizModel.Choices object to store choices
-                        QuizModel.Choices choices = new QuizModel.Choices();
-                        choices.setName(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
-                        choicesList.add(choices);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
-                quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time
+            //This is the radio group id
+            //rg = (RadioGroup) findViewById(R.id.rGroup);
+            //String toTextView = new QuizModel().getQuestion();
+            //textView.setText(toTextView);
 
 
-            }//end for
-
-
-                //This is the radio group id
-                rg = (RadioGroup) findViewById(R.id.rGroup);
-
-                String toTextView = new QuizModel().getQuestion();
-                textView.setText(toTextView);
-
-                //hardcoded multiple choice question
-                isMultipleChoice(parentObject);
-
+            //return
 
         }//******************End onPost()*************************************
 
@@ -249,66 +264,9 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
 
-    /**This function creates a multiple choice question format
-     * @param: String quizFormat
-     *
-     */
-    public void isMultipleChoice(JSONObject jsonData){
-        //create four buttons
-        String quizAnswerChoiceOne = null;
-        try {
-            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
-        textView.setText(quizAnswerChoiceOne);
-
-        String quizAnswerChoiceTwo = null;
-        try {
-            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
-        textView.setText(quizAnswerChoiceTwo);
-
-        String quizAnswerChoiceThree = null;
-        try {
-            quizAnswerChoiceThree = jsonData.getString("quizAnswerChoiceThree");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceThree);
-        textView.setText(quizAnswerChoiceThree);
-
-        String quizAnswerChoiceFour = null;
-        try {
-            quizAnswerChoiceFour = jsonData.getString("quizAnswerChoiceFour");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceFour);
-        textView.setText(quizAnswerChoiceFour);
-    }
-
-
 /*
 >>>>>>> origin/Sprint1-Clarence
 */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
-        textView = (TextView) findViewById(R.id.quizQuestion);
-        restGET();
-
-        rg = (RadioGroup) findViewById(R.id.rGroup);
-
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int qv = parent.getSelectedItemPosition();
@@ -342,4 +300,52 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
         startActivity(questionIntent);
     }
 
+
+
+
+    public class QuizAdapter extends ArrayAdapter{
+
+        private List<QuizModel> quizModelList;
+        private int resource;
+        private LayoutInflater inflater;
+
+        public QuizAdapter(Context context, int resource, List<QuizModel> objects) {
+            super(context, resource, objects);
+            quizModelList = objects;
+            this.resource = resource;
+            inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder = null;
+            if(convertView == null){
+                holder = new ViewHolder();
+                convertView = inflater.inflate(resource, null);
+                holder.tvQuiz = (TextView)convertView.findViewById(R.id.tvQuiz);
+                holder.tvChoices = (TextView)convertView.findViewById(R.id.tvChoices);
+                convertView.setTag(holder);
+            }
+            else{
+                holder = (ViewHolder)convertView.getTag();
+            }
+
+            //holder for the quiz question
+            holder.tvQuiz.setText(quizModelList.get(position).getQuestion());
+            //for loop for multiple answer choices
+            StringBuffer stringBuffer = new StringBuffer();
+            for(QuizModel.Choices choices : quizModelList.get(position).getChoiceList()){
+                stringBuffer.append(choices.getAnswerChoice());
+            }
+            holder.tvChoices.setText(stringBuffer);
+
+            return convertView;
+        }
+        class ViewHolder{
+            private TextView tvQuiz;
+            private TextView tvChoices;
+        }
+    }
 }
