@@ -30,8 +30,13 @@ public class login extends AppCompatActivity {
 
     }
 
-    public void onClickQuiz(View view){
-        Intent intent = new Intent(this, Quiz.class);
+    public void onClickStudent(View view){
+        Intent intent = new Intent(this, StudentDefaultView.class);
+        startActivity(intent);
+    }
+
+    public void onClickEmployer(View view){
+        Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
     }
 }

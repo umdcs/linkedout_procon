@@ -1,17 +1,27 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/background</item>
-        <item name="colorPrimaryDark">@color/background</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:colorBackground">@color/background</item>
+    <style name="MidnightTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorAccentMid</item>
+        <item name="colorPrimaryDark">@color/colorAccentLight</item>
+        <item name="colorAccent">@color/colorAccentHighlight</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
+        <item name="android:textColorSecondary">@color/colorTextLight</item>
+        <item name="android:textColorSecondaryInverse">@android:color/darker_gray</item>
+        <item name="android:colorForeground">@color/colorAccentMid</item>
+        <item name="android:textColorPrimaryInverse">@android:color/black</item>
         <!--<item name="android:buttonStyle">@style/ButtonTheme</item>-->
     </style>
-    <style name = "ButtonTheme" parent="android:Theme">
-        <item name = "android:padding">15dp</item>
-        <item name = "android:background">#42B0D1</item>
-        <item name = "android:textColor">#FFFFFF</item>
+
+    <style name="ButtonTheme" parent="android:Theme">
+        <item name="android:padding">15dp</item>
+        <item name="android:background">#42B0D1</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
