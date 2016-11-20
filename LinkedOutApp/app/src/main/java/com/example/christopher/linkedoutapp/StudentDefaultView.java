@@ -14,11 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import static com.example.christopher.linkedoutapp.R.layout.fragment_news;
-
 
 public class StudentDefaultView extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, News.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, News.OnFragmentInteractionListener, Profile.OnFragmentInteractionListener, QuizStatus.OnFragmentInteractionListener, JobsInYourArea.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,6 @@ public class StudentDefaultView extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Fragment fragment = null;
         Class fragmentClass = News.class;
-        //Class fragmentClass = News.class;
         FragmentManager fragmentManager = getSupportFragmentManager();
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -78,11 +75,11 @@ public class StudentDefaultView extends AppCompatActivity
         if (id == R.id.news) {
            fragmentClass = News.class;
         } else if (id == R.id.profile) {
-
+            fragmentClass = Profile.class;
         } else if (id == R.id.QuizStatus) {
-
+            fragmentClass = QuizStatus.class;
         } else if (id == R.id.Jobs) {
-
+            fragmentClass = JobsInYourArea.class;
         }
         else{
             fragmentClass = News.class;
