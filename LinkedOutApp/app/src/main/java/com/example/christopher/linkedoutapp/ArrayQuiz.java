@@ -231,12 +231,18 @@ public class ArrayQuiz extends AppCompatActivity {
 
     /** This function will tell if the question was answered correctly or not
      *
-     *@Return: A true of false for the answer being correct or incorrect
+     *@Return: A correct of incorrect for the answer being correct or incorrect
      *
      */
     public String isCorrect(){
-
-        return null;
+        EditText etAnswer = (EditText)findViewById(R.id.etAnswer);
+        String studentAnswer = etAnswer.toString();
+        QuizModel correctAnswer = null;
+        if(studentAnswer.equals(correctAnswer.getAnswer())){
+            return "Correct";
+        }
+        else
+            return "Incorrect";
     }
 
     /** This function will tell if the question was answered correctly or not
