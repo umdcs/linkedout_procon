@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onClickEmployer(View view){
-        Intent intent = new Intent(this, Quiz.class);
+        Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
     }
 }

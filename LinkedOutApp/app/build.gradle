@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.example.christopher.linkedoutapp"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"

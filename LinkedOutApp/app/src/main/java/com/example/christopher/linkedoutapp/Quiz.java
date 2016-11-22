@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,12 +25,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class Quiz extends AppCompatActivity {
+
+
+public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
+    private String Server2 = "http://10.0.2.2:4321/quizData";
     private TextView textView;
     private RadioButton rb;
     private RadioGroup rg;
+    private String question; //question to be stored and sent back along with the users answer
+    private String answer;
+    ArrayAdapter<String> adapter;
+    ArrayList<String> itemList;
+    Spinner spinner;
+
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -95,7 +110,7 @@ public class Quiz extends AppCompatActivity {
             return "Should not get to this if the data has been sent/received correctly!";
         }
 
-        /**
+        /** This function passes the json data to a quiz layout and variables for helper function
          * The following executes after the Asynchronous task is finished executing
          *
          * @param result the result from the query
@@ -112,47 +127,23 @@ public class Quiz extends AppCompatActivity {
                 //will grab the format as a string
                 String quizFormat = jsonData.getString("quizFormat");
 
-                //This grabs the hardcoded question and puts it into the XML (this will also be the radio group)
+                //This is the radio group id
+                rg = (RadioGroup) findViewById(R.id.rGroup);
+
+                //This grabs the hardcoded quiz
                 String quizQuestion = jsonData.getString("quizQuestion");
                 System.out.println(quizFormat);
                 textView.setText(quizQuestion);
-                //this  sectionfinds out how the question should be formatted
-                if(quizFormat.equals("True/False")){
-                    isTrueFalse(jsonData);
-                }
-                else if(quizFormat.equals("Mulitple Choice")){
-                    isMultipleChoice(jsonData);
-                }
-                else if(quizFormat.equals("Short Answer")){
-                    isShortAnswer(jsonData);
-                }
+                //sets private variable to the string of the current question
+                setQuestion(quizQuestion);
 
+                //creates the quiz/answer variable
+                String quizAnswer = jsonData.getString("quizAnswer");
+                setAnswer(quizAnswer);
 
-                /*
-                //Generates a random number to determine the choice (A, B, C, or D) of the answer
-                Random j = new Random();
-                int answer = 1+j.nextInt(4);
-                String radio = "radioButton" + answer;
-                //sets the answer to that radio button that was selected above
-                int resID = getResources().getIdentifier(radio, "id", getPackageName());
-                RadioButton b = (RadioButton)findViewById(resID);
-                b.setText(jsonData.getString("answer"));
-                //Sets the remaining unused radio buttons to random numbers from 1 to 10
-                for(int i = 1; i <= 4; i++){
-                    if(i!=answer){
-                        resID = getResources().getIdentifier("radioButton"+i, "id", getPackageName());
-                        int response = 1+j.nextInt(10);
-                        while(jsonData.getString("answer").equals(""+response)){
-                            response = 1+j.nextInt(10);
-                        }
-                        b = ((RadioButton)findViewById(resID));
-                        //For some reason the setText doesn't work with pure integers, so that's why I'm adding empty string
-                        b.setText("" + response);
+                //hardcoded multiple choice question
+                isMultipleChoice(jsonData);
 
-                    }
-                }
-
-                */
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -170,12 +161,12 @@ public class Quiz extends AppCompatActivity {
         new HTTPAsyncTask().execute(Server, "GET");
     }
 
-
     /**
      * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
-     * action to the REST Server.
+     * action to the REST Server. It is called when the submit button is pressed.
      *
      * @param view
+     *
      */
     public void restPOST(View view) {
 
@@ -183,7 +174,8 @@ public class Quiz extends AppCompatActivity {
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("answer", rg.getCheckedRadioButtonId());
+            jsonParam.put("question", getQuestion());
+            jsonParam.put("answer", isCorrect());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -192,46 +184,74 @@ public class Quiz extends AppCompatActivity {
         new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
-    /** This function will find out which radio button was clicked
-     * @Param: View v
-     */
-    public void rbClick(View view){
-        int radioButtonid = rg.getCheckedRadioButtonId();
-        rb = (RadioButton) findViewById(radioButtonid);
-    }
-
-
-    /**This function creates a true/false question format
-     * @param: String quizFormat
+    /** This function will tell if the question was answered correctly or not
+     *
+     *@Return: A true of false for the answer being correct or incorrect
      *
      */
-    void isTrueFalse(JSONObject jsonData){
-        //create two buttons one for true and one for false
-        String quizAnswerChoiceOne = null;
-        try {
-            quizAnswerChoiceOne = jsonData.getString("quizAnswerChoiceOne");
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public String isCorrect(){
+        RadioButton studentAnswer;
+        studentAnswer = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+        if(studentAnswer.getText().equals(getAnswer())){
+            return "true"; //correct
         }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
-        textView.setText(quizAnswerChoiceOne);
-
-        String quizAnswerChoiceTwo = null;
-        try {
-            quizAnswerChoiceTwo = jsonData.getString("quizAnswerChoiceTwo");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        else {
+            return "false"; //incorrect
         }
-        textView = (TextView) findViewById(R.id.quizAnswerChoiceTwo);
-        textView.setText(quizAnswerChoiceTwo);
     }
+
+    /** This function will find out which radio button was clicked and return it
+     * @Param: View v
+     *
+     * @Return: int of radio button clicked
+     */
+    public int rbClick(View view){
+        int radioButtonid = rg.getCheckedRadioButtonId();
+        rb = (RadioButton) findViewById(radioButtonid);
+        return radioButtonid;
+    }
+
+    /**This function sets the question
+     *
+     * @param quizQuestion
+     */
+    public void setQuestion(String quizQuestion){
+            question = quizQuestion;
+    }
+
+    /**This function gets the question
+     *
+     * @return question
+     */
+
+    public String getQuestion()
+    {
+        return question;
+    }
+
+    /**This function gets the answer
+     *
+     * @return answer
+     */
+    public String getAnswer()
+    {
+        return answer;
+    }
+
+    /**This question sets the answer
+     *
+     * @param quizAnswer
+     */
+    public void setAnswer(String quizAnswer){
+        answer = quizAnswer;
+    }
+
 
     /**This function creates a multiple choice question format
      * @param: String quizFormat
      *
-     *
      */
-    void isMultipleChoice(JSONObject jsonData){
+    public void isMultipleChoice(JSONObject jsonData){
         //create four buttons
         String quizAnswerChoiceOne = null;
         try {
@@ -239,6 +259,7 @@ public class Quiz extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         //RadioButton buttonAnswerChoiceOne = (RadioButton)findViewById();
         textView = (TextView) findViewById(R.id.quizAnswerChoiceOne);
         textView.setText(quizAnswerChoiceOne);
@@ -271,13 +292,7 @@ public class Quiz extends AppCompatActivity {
         textView.setText(quizAnswerChoiceFour);
     }
 
-    /**This function creates a short answer question format
-     *
-     */
-    void isShortAnswer(JSONObject jsonData){
-        //create short answer text box
 
-    }
 /*
 >>>>>>> origin/Sprint1-Clarence
 */
@@ -288,23 +303,40 @@ public class Quiz extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.quizQuestion);
         restGET();
 
-        //rg = (RadioGroup) findViewById(R.id.rGroup);
+        rg = (RadioGroup) findViewById(R.id.rGroup);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int qv = parent.getSelectedItemPosition();
+        String value  = spinner.getSelectedItem().toString();
+        Log.d("Debug: ", "position on array: : " + value + "," + "Position: " + qv );
+
+        if (qv == 1)
+        {
+
+        }
+        else if (qv == 2)
+        {
+
+        }
+        else if (qv == 3)
+        {
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 
     //button listeners to create questions
-    public void onClick_sa(View view) {
-        Intent questionIntent = new Intent(this, ShortAnswerActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_mc(View view) {
-        Intent questionIntent = new Intent(this, MultipleChoiceActivity.class);
-        startActivity(questionIntent);
-    }
-
-    public void onClick_tf(View view) {
-        Intent questionIntent = new Intent(this, TrueFalseActivity.class);
+    public void onClick_fragmentTest(View view) {
+        Intent questionIntent = new Intent(this, fragmentTest.class);
         startActivity(questionIntent);
     }
 

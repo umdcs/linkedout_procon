@@ -1,7 +1,10 @@
 package com.example.christopher.linkedoutapp;
 
+import android.support.v4.app.Fragment;
+
 
 import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class StudentDefaultView extends AppCompatActivity
@@ -100,7 +104,12 @@ public class StudentDefaultView extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri){
+    public void onFragmentInteraction(Uri uri) {
         //you can leave it empty
+    }
+
+    public void onClickQuiz(View view){
+        Intent intent = new Intent(this, Quiz.class);
+        startActivity(intent);
     }
 }
