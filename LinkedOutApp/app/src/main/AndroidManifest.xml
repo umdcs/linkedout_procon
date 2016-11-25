@@ -31,7 +31,8 @@
             android:theme="@style/MidnightTheme" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".fragmentTest" />
-        <activity android:name=".EmployerDefaultView"></activity>
+        <activity android:name=".EmployerDefaultView" />
+        <activity android:name=".EmployerCreateJob"></activity>
     </application>
 
 </manifest>
