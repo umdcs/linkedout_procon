@@ -10,15 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.christopher.linkedoutapp.fragmentTest">
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/questions_spinner"
-        android:layout_marginBottom="235dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <FrameLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
@@ -29,6 +20,14 @@
         android:layout_marginTop="33dp">
 
     </FrameLayout>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/questions_spinner"
+        android:layout_marginBottom="235dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

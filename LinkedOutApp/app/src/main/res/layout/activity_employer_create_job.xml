@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_employer_create_job"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.christopher.linkedoutapp.EmployerCreateJob">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8"
+            android:layout_weight="1"
+            android:textAppearance="@style/H1" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="251dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccentDark"
+            android:ems="10"
+            android:hint="Name"
+            android:textColorHint="#3e435b"
+            android:singleLine="true"
+            android:selectAllOnFocus="true"
+            android:textAppearance="@style/TextField"
+            android:inputType="text"
+            style="@style/EditTextField"
+            android:layout_weight="0.63" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Keywords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            android:textAppearance="@style/H1"
+            android:layout_marginTop="10dp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="3D Modeling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button9" />
+
+            <Button
+                android:text="+"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTextLight"
+                android:id="@+id/button8" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            android:textAppearance="@style/H1"
+            android:layout_marginTop="10dp" />
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccentDark"
+            android:ems="10"
+            android:hint="Enter Description"
+            android:textColorHint="#3e435b"
+            android:singleLine="false"
+            android:selectAllOnFocus="false"
+            android:textAppearance="@style/TextField"
+            android:inputType="text"
+            style="@style/EditTextField"
+            android:layout_marginLeft="20dp"
+            android:gravity="top"
+            android:layout_height="72dp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_height="5dp"
+            android:background="@color/colorAccentMid"
+            android:id="@+id/divider"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:layout_width="50dp" />
+
+        <TextView
+            android:text="Tasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:layout_weight="1"
+            android:textAppearance="@style/H2"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal|center" />
+
+        <View
+            android:layout_height="5dp"
+            android:background="@color/colorAccentMid"
+            android:id="@+id/divider2"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:layout_width="50dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="1. -------------------------------------"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView12"
+            android:textAppearance="@style/H1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:text="Type:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_weight="1"
+                android:textAppearance="@style/H2" />
+
+            <Spinner
+                android:layout_width="287dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccentMid"
+            android:layout_marginLeft="20dp">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:text="+Add New Task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button14"
+        android:backgroundTint="@color/colorAccentLight" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorAccentMid"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancelButton" />
+
+        <Button
+            android:text="Done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirmJob"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>
