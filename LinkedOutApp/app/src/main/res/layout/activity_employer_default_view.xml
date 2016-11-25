@@ -91,7 +91,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
 
         <FrameLayout
@@ -153,6 +154,14 @@
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
+
+        <Button
+            android:text="Create Job"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button5"
+            android:onClick="createJob"
+            android:layout_weight="0.09" />
     </LinearLayout>
 
     <View
