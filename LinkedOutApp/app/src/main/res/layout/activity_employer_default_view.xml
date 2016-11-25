@@ -115,7 +115,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp">
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -176,17 +177,17 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Left" />
+            android:text="News" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Center" />
+            android:text="Messages" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Right" />
+            android:text="Settings" />
     </android.support.design.widget.TabLayout>
 
     <LinearLayout
@@ -202,7 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:background="#292d3d"
+            android:background="@color/colorAccentDark"
             android:ems="10"
             android:hint="Search"
             android:textColorHint="#3e435b"
