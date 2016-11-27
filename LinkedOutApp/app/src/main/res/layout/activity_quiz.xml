@@ -21,52 +21,52 @@
         android:id="@+id/textView" />
 
     <RadioGroup
-    android:layout_below="@+id/quizQuestion"
-    android:layout_alignLeft="@+id/textView"
-    android:layout_alignStart="@+id/textView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+        android:layout_below="@+id/quizQuestion"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/rGroup">
-    <RadioButton
-        android:buttonTint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:id="@+id/quizAnswerChoiceOne"
-        android:onClick="rbClick"
-        android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceOne"
-        android:text="@+id/quizAnswerChoiceOne"/>
+        <RadioButton
+            android:buttonTint="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:id="@+id/quizAnswerChoiceOne"
+            android:onClick="rbClick"
+            android:textColor="#FFFFFF"
+            android:tag="quizAnswerChoiceOne"
+            android:text="@+id/quizAnswerChoiceOne"/>
 
-    <RadioButton
-        android:buttonTint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quizAnswerChoiceTwo"
-        android:onClick="rbClick"
-        android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceTwo"
-        android:text="@+id/quizAnswerChoiceTwo"/>
+        <RadioButton
+            android:buttonTint="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quizAnswerChoiceTwo"
+            android:onClick="rbClick"
+            android:textColor="#FFFFFF"
+            android:tag="quizAnswerChoiceTwo"
+            android:text="@+id/quizAnswerChoiceTwo"/>
 
-    <RadioButton
-        android:buttonTint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quizAnswerChoiceThree"
-        android:onClick="rbClick"
-        android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceThree"
-        android:text="@+id/quizAnswerChoiceThree"/>
+        <RadioButton
+            android:buttonTint="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quizAnswerChoiceThree"
+            android:onClick="rbClick"
+            android:textColor="#FFFFFF"
+            android:tag="quizAnswerChoiceThree"
+            android:text="@+id/quizAnswerChoiceThree"/>
 
-    <RadioButton
-        android:buttonTint="#FFFFFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quizAnswerChoiceFour"
-        android:onClick="rbClick"
-        android:textColor="#FFFFFF"
-        android:tag="quizAnswerChoiceFour"
-        android:text="@+id/quizAnswerChoiceFour"/>
+        <RadioButton
+            android:buttonTint="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quizAnswerChoiceFour"
+            android:onClick="rbClick"
+            android:textColor="#FFFFFF"
+            android:tag="quizAnswerChoiceFour"
+            android:text="@+id/quizAnswerChoiceFour"/>
 
         <Button
             android:text="Submit"
@@ -96,5 +96,6 @@
         android:id="@+id/multiplechoice_button"
         android:onClick="onClick_fragmentTest"
         android:layout_alignParentTop="true" />
+
 
 </RelativeLayout>

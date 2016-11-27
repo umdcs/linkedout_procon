@@ -158,7 +158,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server2, "GET");
+        new HTTPAsyncTask().execute(Server, "GET");
     }
 
     /**
@@ -181,7 +181,7 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute(Server2, "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
     /** This function will tell if the question was answered correctly or not

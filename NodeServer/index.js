@@ -53,6 +53,16 @@ app.get('/quizData', function(req, res){
 app.post('/quizData', function (req, res) {
   if(!req.body) return res.sendStatus(400);
 
+  /*
+  '{"users":{}}' was the default json object in my previous project
+  if(JSON.stringify(temp)!=='{"users":{}}'){
+        var tempString = JSON.stringify(JSON_Object);
+        tempString = tempString.substr(0, tempString.length - 1);
+        tempString = tempString + ',' + JSON.stringify(temp).substr(1, JSON.stringify(temp).length);
+        JSON_Object = JSON.parse(tempString);
+    }
+    res.send(JSON.stringify(JSON_Object));
+    */
   console.log("POST " + JSON.stringify(req.body));
 });
 
