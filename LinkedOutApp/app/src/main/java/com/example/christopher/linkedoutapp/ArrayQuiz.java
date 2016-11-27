@@ -105,7 +105,7 @@ public class ArrayQuiz extends AppCompatActivity {
                         sb.append(line);
                     }
 
-                    //start of my code
+                    //start of Isaiah's code
 
                     String finalJson = sb.toString();
                     JSONObject parentObject = new JSONObject(finalJson); //holds the json data pulled from server
@@ -186,12 +186,6 @@ public class ArrayQuiz extends AppCompatActivity {
 
             QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, result);
             lvQuizzes.setAdapter(adapter);
-
-            //This is the radio group id
-            //rg = (RadioGroup) findViewById(R.id.rGroup);
-            //String toTextView = new QuizModel().getQuestion();
-            //textView.setText(toTextView);
-
 
         }//end onPostExecute
 
