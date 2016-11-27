@@ -1,18 +1,13 @@
 package com.example.christopher.linkedoutapp;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +20,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 
-public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class Quiz extends AppCompatActivity{
 
     private String Server = "http://lempo.d.umn.edu:4531/quizData";
     private String Server2 = "http://10.0.2.2:4321/quizData";
@@ -38,10 +32,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
     private RadioGroup rg;
     private String question; //question to be stored and sent back along with the users answer
     private String answer;
-    ArrayAdapter<String> adapter;
-    ArrayList<String> itemList;
-    Spinner spinner;
-
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -305,39 +295,6 @@ public class Quiz extends AppCompatActivity implements AdapterView.OnItemSelecte
 
         rg = (RadioGroup) findViewById(R.id.rGroup);
 
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int qv = parent.getSelectedItemPosition();
-        String value  = spinner.getSelectedItem().toString();
-        Log.d("Debug: ", "position on array: : " + value + "," + "Position: " + qv );
-
-        if (qv == 1)
-        {
-
-        }
-        else if (qv == 2)
-        {
-
-        }
-        else if (qv == 3)
-        {
-
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-
-    //button listeners to create questions
-    public void onClick_fragmentTest(View view) {
-        Intent questionIntent = new Intent(this, fragmentTest.class);
-        startActivity(questionIntent);
     }
 
 }

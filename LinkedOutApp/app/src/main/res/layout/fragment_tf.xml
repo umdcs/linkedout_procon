@@ -3,11 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@android:color/holo_blue_dark">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" A True/False fragment"/>
-
     <EditText
         android:id="@+id/frag2_Q"
         android:layout_width="match_parent"

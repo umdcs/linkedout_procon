@@ -17,7 +17,6 @@ public class Fragment_TF extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_tf, container, false);
-        // Inflate the layout for this fragment
         return rootView;
     }
 
