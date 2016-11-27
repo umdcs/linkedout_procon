@@ -173,7 +173,7 @@
             <Spinner
                 android:layout_width="287dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner" />
+                android:id="@+id/questions_spinner" />
         </LinearLayout>
 
         <FrameLayout

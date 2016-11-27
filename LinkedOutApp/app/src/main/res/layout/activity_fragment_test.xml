@@ -24,7 +24,6 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/questions_spinner"
         android:layout_marginBottom="235dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
