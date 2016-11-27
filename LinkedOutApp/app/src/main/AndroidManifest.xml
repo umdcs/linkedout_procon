@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".login"
             android:screenOrientation="portrait" />
         <activity android:name=".Quiz" />
         <activity
