@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * Created by kaliscuba on 11/15/16.
+ * This QuizModel is for getting and setting the JSON data to the ArrayLists
+ * to be displayed as quizzes
+ * 
  */
 
 public class QuizModel {
