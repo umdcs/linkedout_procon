@@ -15,6 +15,7 @@ public class QuizModel {
     private String answer;
     private String format;
     private String name;
+    private List<Choices> choiceList;
 
     public String getQuestion() {
         return question;
@@ -56,16 +57,15 @@ public class QuizModel {
         this.choiceList = choiceList;
     }
 
-    private List<Choices> choiceList;
     public static class Choices{
-        private String name;
+        private String answerChoice;
 
-        public String getName() {
-            return name;
+        public String getAnswerChoice() {
+            return answerChoice;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setAnswerChoice(String answerChoice) {
+            this.answerChoice = answerChoice;
         }
     }
 

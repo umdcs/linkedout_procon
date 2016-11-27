@@ -24,7 +24,7 @@
         <activity
             android:name=".login"
             android:screenOrientation="portrait" />
-        <activity android:name=".Quiz" />
+        <activity android:name=".ArrayQuiz" />
         <activity
             android:name=".StudentDefaultView"
             android:label=""

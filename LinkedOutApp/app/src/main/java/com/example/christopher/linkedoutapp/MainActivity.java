@@ -18,10 +18,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickSignUp(View view){
-        Intent intent = new Intent(this, Quiz.class);
-        startActivity(intent);
-    }
 
     public void onClickRegister(View view){
         Intent intent = new Intent(this, RegisterActivity.class);
