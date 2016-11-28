@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener_SA, Fragment_TF.OnFragmentInteractionListener_TF{
+public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener_SA, Fragment_TF.OnFragmentInteractionListener_TF, Fragment_MC.OnFragmentInteractionListener_MC{
 
     Spinner spinner;
-    String Q,A;
+    String Q,A,O1,O2,O3;
 
     ArrayList<String[]> quiz = new ArrayList<String[]>();
 
@@ -98,8 +98,28 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
 
         //save values to array
-        String[] saq1 = {Q,A};
-        quiz.add(saq1);
+        String[] saq2 = {Q,A};
+        quiz.add(saq2);
+
+
+        for (String[] strArr : quiz) {
+            //Log.d("Debug: ", "current array is : " + Arrays.toString(strArr));
+            Log.d("Debug: ", Arrays.toString(strArr) );
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction_MC(String value, String value1, String value2, String value3) {
+        Q = value;
+        O1 = value1;
+        O2 = value2;
+        O3 = value3;
+
+        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
+
+        //save values to array
+        String[] saq3 = {Q,O1,O2,O3};
+        quiz.add(saq3);
 
 
         for (String[] strArr : quiz) {
