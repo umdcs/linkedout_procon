@@ -35,7 +35,7 @@ import java.util.List;
 
 public class ArrayQuiz extends AppCompatActivity {
 
-    private String Server = "http://lempo.d.umn.edu:4531/quizData";
+    private String Server = "http://lempo.d.umn.edu:4531/arrayQuizData";
     private String Server2 = "http://10.0.2.2:4321/arrayQuizData";
     //private TextView textView;
     //private RadioButton rb;
@@ -197,7 +197,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server2, "GET");
+        new HTTPAsyncTask().execute(Server, "GET");
     }
 
     /**
@@ -220,7 +220,7 @@ public class ArrayQuiz extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute(Server2, "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 
     /** This function will tell if the question was answered correctly or not
