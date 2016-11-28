@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -108,8 +109,9 @@ public class StudentDefaultView extends AppCompatActivity
         //you can leave it empty
     }
 
-    public void onClickQuiz(View view){
-        Intent intent = new Intent(this, Quiz.class);
+    public void onClickAQuiz(View view){
+        Intent intent = new Intent(this, ArrayQuiz.class);
         startActivity(intent);
     }
+    
 }

@@ -21,15 +21,13 @@ var app = express();
 
 app.set("port", 4321);
 
-//Hardcoded question
-//should have data formatted as follows:
-//'{"quizSubject":{"quizFormat": " ", "quizQuestion" : " ", "quizAnswerChoices" : " " }}';
-//quizFormat string choices: "True/False, "Multiple Choice", "Short Answer"
-//if shortAnswer no quizAnswe choices needed
-var JSON_String = '{"math":{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswerChoiceOne" : "1","quizAnswerChoiceTwo" : "2", "quizAnswerChoiceThree" : "3", "quizAnswerChoiceFour" : "4", "quizAnswer" : "4"}}';
-                                 
+//Hardcoded questions Array with two questions
+var JSON_ArrayString = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"1+1=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"7+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "6"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"8-2=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}, {"choice" : "6"}]} ]}';
+                      
+var JSON_String = '{"quizzes": {"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "answerChoiceOne" : "1", "answerChoiceTwo" : "2", "answerChoiceThree" : "3", "answerChoiceFour" : "4"}}';      
+                           
+var JSON_ArrayObject = JSON.parse(JSON_ArrayString);
 var JSON_Object = JSON.parse(JSON_String);
-
 
 
 app.use(bodyParser.urlencoded({   // support encoded bodies
@@ -41,6 +39,12 @@ app.get('/', function (req, res) {
   res.send('<HTML><HEAD></HEAD><BODY><H1>This is a basic Node.js server for the LinkedOut Application</H1></BODY></HTML>');
 });
 
+
+//REST API Get, Gets the hardcoded string that is declared above *****ARRAY****
+app.get('/arrayQuizData', function(req, res){
+  console.log(JSON.stringify(JSON_ArrayObject));
+  res.send(JSON.stringify(JSON_ArrayObject));
+});
 
 //REST API Get, Gets the hardcoded string that is declared above
 app.get('/quizData', function(req, res){
