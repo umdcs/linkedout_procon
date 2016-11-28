@@ -34,9 +34,8 @@
         app:headerLayout="@layout/nav_header_student_default_view"
         app:menu="@menu/activity_student_default_view_drawer" >
 
-        />
-    </android.support.design.widget.NavigationView>
 
+    </android.support.design.widget.NavigationView>
 
 
 </android.support.v4.widget.DrawerLayout>
