@@ -7,11 +7,18 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+//array imports
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener{
+public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener_SA, Fragment_TF.OnFragmentInteractionListener_TF{
 
     Spinner spinner;
     String Q,A;
+
+    ArrayList<String[]> quiz = new ArrayList<String[]>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +49,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
                     .add(R.id.contentContainer, Fragment_SA.newInstance())
                     .commit();
 
-            onFragmentInteraction(Q,A);
+            //onFragmentInteraction_SA(Q,A);
         }
         else if (qv == 2)
         {
@@ -64,12 +71,40 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     }
 
+
     @Override
-    public void onFragmentInteraction(String value, String value1) {
+    public void onFragmentInteraction_SA(String value, String value1) {
 
         Q = value;
         A = value1;
         Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
 
+        //save values
+
+        String[] saq = {Q,A};
+        quiz.add(saq);
+
+
+        for (String[] strArr : quiz) {
+            Log.d("Debug: ", "current array is : " + Arrays.toString(strArr));
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction_TF(String value, String value1) {
+        Q = value;
+        A = value1;
+
+        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
+
+        //save values to array
+        String[] saq1 = {Q,A};
+        quiz.add(saq1);
+
+
+        for (String[] strArr : quiz) {
+            //Log.d("Debug: ", "current array is : " + Arrays.toString(strArr));
+            Log.d("Debug: ", Arrays.toString(strArr) );
+        }
     }
 }
