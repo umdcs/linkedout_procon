@@ -20,11 +20,11 @@ public class Fragment_SA extends Fragment implements View.OnClickListener{
     Button b1;
     EditText et1,et2;
     String e1,e2;
-    OnFragmentInteractionListener mListener;
+    OnFragmentInteractionListener_SA mListener;
 
 
-    public interface OnFragmentInteractionListener{
-        void onFragmentInteraction(String value, String value1);
+    public interface OnFragmentInteractionListener_SA{
+        void onFragmentInteraction_SA(String value, String value1);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Fragment_SA extends Fragment implements View.OnClickListener{
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mListener = (OnFragmentInteractionListener) context;
+            mListener = (OnFragmentInteractionListener_SA) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -60,7 +60,7 @@ public class Fragment_SA extends Fragment implements View.OnClickListener{
                                       e1=et1.getText().toString();
                                       e2=et2.getText().toString();
 
-                                      mListener.onFragmentInteraction(e1,e2);
+                                      mListener.onFragmentInteraction_SA(e1,e2);
                                   }}
         );
 

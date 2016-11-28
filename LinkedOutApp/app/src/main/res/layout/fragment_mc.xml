@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/colorAccentMid">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Type question here"
+                android:ems="6"
+                android:id="@+id/frag3_Q"
+                android:layout_weight="0.00"/>
+
+            <EditText
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="text"
+                android:hint="Option 1"
+                android:ems="6"
+                android:id="@+id/option1" />
+
+            <EditText
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="text"
+                android:ems="6"
+                android:hint="Option 2"
+                android:id="@+id/option2" />
+
+            <EditText
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="text"
+                android:hint="Option3"
+                android:ems="6"
+                android:id="@+id/option3"
+                android:layout_weight="0.00"/>
+
+            <Button
+                android:text="Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/button6" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
-
+/*
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -80,3 +80,4 @@ public class fragmentTest extends AppCompatActivity implements AdapterView.OnIte
 
     }
 }
+*/
