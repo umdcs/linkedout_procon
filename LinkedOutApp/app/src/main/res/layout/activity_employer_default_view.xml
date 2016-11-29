@@ -207,7 +207,7 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/jobName"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"

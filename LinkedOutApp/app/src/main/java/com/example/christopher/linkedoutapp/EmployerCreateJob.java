@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_create_job);
+
 
 
         //implement question spinner
@@ -81,7 +83,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
         //save values
 
-        String[] saq = {Q,A};
+        String[] saq = {"SA",Q,A};
         quiz.add(saq);
 
 
@@ -98,7 +100,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
 
         //save values to array
-        String[] saq2 = {Q,A};
+        String[] saq2 = {"TF",Q,A};
         quiz.add(saq2);
 
 
@@ -118,7 +120,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
 
         //save values to array
-        String[] saq3 = {Q,O1,O2,O3};
+        String[] saq3 = {"MC",Q,O1,O2,O3};
         quiz.add(saq3);
 
 
@@ -127,4 +129,10 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
             Log.d("Debug: ", Arrays.toString(strArr) );
         }
     }
+
+
+    //Asynchronous Task
+
+
+
 }
