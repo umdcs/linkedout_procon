@@ -139,26 +139,4 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         startActivity(intent);
     }
 
-    /**
-     * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
-     * action to the REST Server. It is called when the submit button is pressed.
-     *
-     * @param view
-     *
-     */
-    public void restPOST(View view) {
-        QuizModel quizModel = null;
-        JSONObject jsonParam = null;
-        try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("question", quizModel.getQuestion());
-            jsonParam.put("answer", isCorrect());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("DEBUG:", jsonParam.toString());
-        new ArrayQuiz.HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
-    }
 }
