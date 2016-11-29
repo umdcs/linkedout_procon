@@ -10,6 +10,11 @@ import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 //array imports
+import com.example.christopher.linkedoutapp.QuizModel.QuizModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +22,7 @@ import java.util.List;
 public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener_SA, Fragment_TF.OnFragmentInteractionListener_TF, Fragment_MC.OnFragmentInteractionListener_MC{
 
     Spinner spinner;
-    String Q,A,O1,O2,O3;
+    String question,answer,option1,option2,option3;
 
     ArrayList<String[]> quiz = new ArrayList<String[]>();
 
@@ -77,13 +82,13 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     @Override
     public void onFragmentInteraction_SA(String value, String value1) {
 
-        Q = value;
-        A = value1;
-        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
+        question = value;
+        answer = value1;
+        Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
         //save values
 
-        String[] saq = {Q,A};
+        String[] saq = {question,answer};
         quiz.add(saq);
 
 
@@ -94,13 +99,13 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onFragmentInteraction_TF(String value, String value1) {
-        Q = value;
-        A = value1;
+        question = value;
+        answer = value1;
 
-        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
+        Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
         //save values to array
-        String[] saq2 = {Q,A};
+        String[] saq2 = {question,answer};
         quiz.add(saq2);
 
 
@@ -112,15 +117,15 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onFragmentInteraction_MC(String value, String value1, String value2, String value3) {
-        Q = value;
-        O1 = value1;
-        O2 = value2;
-        O3 = value3;
+        question = value;
+        option1 = value1;
+        option2 = value2;
+        option3 = value3;
 
-        Log.d("Debug: ", "question and answer values --> Q:"+ Q + " Answer:" + A);
+        Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
         //save values to array
-        String[] saq3 = {Q,O1,O2,O3};
+        String[] saq3 = {question,option1,option3,option3};
         quiz.add(saq3);
 
 
@@ -132,5 +137,28 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     public void onClickCancel(View view){
         Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
+    }
+
+    /**
+     * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
+     * action to the REST Server. It is called when the submit button is pressed.
+     *
+     * @param view
+     *
+     */
+    public void restPOST(View view) {
+        QuizModel quizModel = null;
+        JSONObject jsonParam = null;
+        try {
+            //Create JSONObject here
+            jsonParam = new JSONObject();
+            jsonParam.put("question", quizModel.getQuestion());
+            jsonParam.put("answer", isCorrect());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG:", jsonParam.toString());
+        new ArrayQuiz.HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
     }
 }

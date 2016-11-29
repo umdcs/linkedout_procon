@@ -207,6 +207,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * @param view
      *
      */
+    /*
     public void restPOST(View view) {
         QuizModel quizModel = null;
         JSONObject jsonParam = null;
@@ -221,7 +222,7 @@ public class ArrayQuiz extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
         new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
-    }
+    }*/
 
     /** This function will tell if the question was answered correctly or not
      *
