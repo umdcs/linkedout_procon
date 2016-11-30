@@ -19,14 +19,16 @@ var app = express();
 // Again, my server routes all your traffic through SSL/TLS so it IS encrypted. However, it
 // redirects internally on lempo to your actual port number 4531.
 
+
 app.set("port", 4321);
 
+var JSON_ArrayObject;
+
 //Hardcoded questions Array with two questions
-var JSON_ArrayString = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"1+1=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"7+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "6"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"8-2=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}, {"choice" : "6"}]} ]}';
+var JSON_ArrayStringH = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"1+1=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"7+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "6"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"8-2=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}, {"choice" : "6"}]} ]}';
                       
-var JSON_String = '{"quizzes": {"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "answerChoiceOne" : "1", "answerChoiceTwo" : "2", "answerChoiceThree" : "3", "answerChoiceFour" : "4"}}';      
-                           
-var JSON_ArrayObject = JSON.parse(JSON_ArrayString);
+var JSON_String = '{"quizzes": {"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "answerChoiceOne" : "1", "answerChoiceTwo" : "2", "answerChoiceThree" : "3", "answerChoiceFour" : "4"}}';
+
 var JSON_Object = JSON.parse(JSON_String);
 
 
@@ -70,7 +72,13 @@ app.post('/arrayQuizData', function (req, res) {
 
  
   console.log("POST " + JSON.stringify(req.body));
+  var JSON_ArrayString = JSON.stringify(req.body);
+  JSON_ArrayObject = JSON.parse(JSON_ArrayString);
+  
+  res.send(JSON.stringify(JSON_ArrayObject));
 });
+
+
 
 app.delete('/', function (req, res){
 
