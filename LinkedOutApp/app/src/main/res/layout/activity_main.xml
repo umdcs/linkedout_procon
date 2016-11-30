@@ -12,43 +12,62 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.christopher.linkedoutapp.MainActivity">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/linkedoutlogo"
-        android:id="@+id/logo"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="93dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_alignParentBottom="false"
+        android:gravity="center">
 
-    <Button
-        android:text="@string/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_below="@+id/logo"
-        android:layout_alignLeft="@+id/logo"
-        android:layout_alignStart="@+id/logo"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:background="#42B0D1"
-        android:textColor="#FFFFFF"
-        android:onClick="onClickLogin" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/linkedoutlogo"
+            android:id="@+id/logo"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp" />
 
-    <Button
-        android:text="@string/sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:padding="15dp"
-        android:background="#42B0D1"
-        android:textColor="#FFFFFF"
-        android:onClick="onClickRegister"
-        android:layout_alignBaseline="@+id/button"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignRight="@+id/logo"
-        android:layout_alignEnd="@+id/logo" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="@string/sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button2"
+                android:background="@color/colorAccentHighlight"
+                android:textColor="#FFFFFF"
+                android:onClick="onClickRegister"
+                android:layout_alignBaseline="@+id/button"
+                android:layout_alignBottom="@+id/button"
+                android:layout_alignRight="@+id/logo"
+                android:layout_alignEnd="@+id/logo"
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
+
+            <Button
+                android:text="@string/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_below="@+id/logo"
+                android:layout_alignLeft="@+id/logo"
+                android:layout_alignStart="@+id/logo"
+                android:background="@color/colorAccentHighlight"
+                android:textColor="#FFFFFF"
+                android:onClick="onClickLogin"
+                android:layout_weight="1"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
