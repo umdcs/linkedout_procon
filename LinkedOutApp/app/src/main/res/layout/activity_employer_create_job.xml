@@ -154,7 +154,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp">
 
             <TextView
@@ -168,21 +167,22 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/questions_spinner" />
+                android:id="@+id/questions_spinner"
+                android:background="@color/colorAccentMid"
+                android:elevation="1dp" />
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="25dp">
 
             <FrameLayout
                 android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccentMid"
-                android:layout_marginLeft="20dp">
+                android:layout_height="match_parent"
+                android:background="@color/colorAccentMid">
 
             </FrameLayout>
         </ScrollView>
