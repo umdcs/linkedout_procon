@@ -197,7 +197,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server, "GET");
+        new HTTPAsyncTask().execute(Server2, "GET");
     }
 
     /**

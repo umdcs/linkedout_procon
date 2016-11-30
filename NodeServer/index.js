@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
 
 
 //REST API Get, Gets the hardcoded string that is declared above *****ARRAY****
-app.get('/arrayQuizData', function(req, res){
+app.get('/arraQuizData', function(req, res){
   console.log(JSON.stringify(JSON_ArrayObject));
   res.send(JSON.stringify(JSON_ArrayObject));
 });
@@ -52,14 +52,10 @@ app.get('/quizData', function(req, res){
   res.send(JSON.stringify(JSON_Object));
 });
 
-
-//REST API Post, not completed, nor is it functional, ignore what is in here
-app.post('/quizData', function (req, res) {
-  if(!req.body) return res.sendStatus(400);
-
-  /*
-  '{"users":{}}' was the default json object in my previous project
-  if(JSON.stringify(temp)!=='{"users":{}}'){
+/////////////////////////////may use later
+ /*
+  '{"quizzes":{}}' was the default json object in my previous project
+  if(JSON.stringify(temp)!=='{"quizzes":{}}'){
         var tempString = JSON.stringify(JSON_Object);
         tempString = tempString.substr(0, tempString.length - 1);
         tempString = tempString + ',' + JSON.stringify(temp).substr(1, JSON.stringify(temp).length);
@@ -67,6 +63,12 @@ app.post('/quizData', function (req, res) {
     }
     res.send(JSON.stringify(JSON_Object));
     */
+////////////////////////////////////////////////////////
+//REST API Post, not completed, nor is it functional, ignore what is in here
+app.post('/arrayQuizData', function (req, res) {
+  if(!req.body) return res.sendStatus(400);
+
+ 
   console.log("POST " + JSON.stringify(req.body));
 });
 

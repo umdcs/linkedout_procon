@@ -114,7 +114,6 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            List<QuizModel> quizModelList = new ArrayList<>();
 
 
         }//******************End onPost()*************************************
@@ -123,36 +122,52 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     }//****************End AsyncTask()****************************************
 
     public void restPOST() {
-        JSONArray finalJSONObject = new JSONArray();
+
+        JSONArray finalJSONAraay = new JSONArray(); // the outer most layer of array (for whole quiz)
+        JSONObject finalJSONObject = new JSONObject(); //the outer most layer of object (for all quizzes)
+
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArrayChoices = new JSONArray();
-        JSONObject jsonObjectChoice = new JSONObject();
+        JSONObject jsonObjectChoice1 = new JSONObject();
+        JSONObject jsonObjectChoice2 = new JSONObject();
+        JSONObject jsonObjectChoice3 = new JSONObject();
+
 
         List<JSONObject> jsonObjectList = new ArrayList<>();
 
         try {
-            //one quiz
-            jsonObject.put("quizQuestion", question);
-            jsonObject.put("quizAnswer", answer);
 
             //choice objects
-            jsonObjectChoice.put("choice", option1);
-            jsonObjectChoice.put("choice", option2);
-            jsonObjectChoice.put("choice", option3);
+            jsonObjectChoice1.put("choice", option1);
+            jsonObjectChoice2.put("choice", option2);
+            jsonObjectChoice3.put("choice", option3);
 
-            //choiceLsit array
-            jsonArrayChoices.put(jsonObjectChoice);
+            //array for choice objects
+            jsonArrayChoices.put(jsonObjectChoice1);
+            jsonArrayChoices.put(jsonObjectChoice2);
+            jsonArrayChoices.put(jsonObjectChoice3);
 
             //put array jsonObject
+
+            //one quiz
+            jsonObject.put("quizAnswer", answer);
+            jsonObject.put("quizQuestion", question);
             jsonObject.put("choiceList", jsonArrayChoices);
+
+            //puts json objects into the array to make up a quiz
+            finalJSONAraay.put(jsonObject);
+
+            //puts quiz into final big object
+            finalJSONObject.put("quizzes", finalJSONAraay);
+
 
             //finalJSONObject.put(jsonObject);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG:", jsonObject.toString());
-        new HTTPAsyncTask().execute(Server2, "POST", jsonObject.toString());
+        Log.d("DEBUG:", finalJSONObject.toString());
+        new HTTPAsyncTask().execute(Server2, "POST", finalJSONObject.toString());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
