@@ -231,13 +231,14 @@
             android:background="@color/colorAccentDark"
             android:ems="10"
             android:hint="Search"
-            android:textColorHint="#3e435b"
+            android:textColorHint="@color/colorAccentLight"
             android:singleLine="true"
             android:selectAllOnFocus="true"
             android:textAppearance="@style/TextField"
             android:inputType="text"
             style="@style/EditTextField"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorText" />
 
         <Button
             android:text="Search"

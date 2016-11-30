@@ -25,6 +25,7 @@
             android:layout_weight="0"
             android:textAppearance="@style/H1"
             android:layout_marginRight="10dp" />
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
             android:textAppearance="@style/TextField"
             android:inputType="text"
             style="@style/EditTextField"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/colorText" />
 
     </LinearLayout>
 
@@ -90,24 +92,22 @@
             android:id="@+id/textView10"
             android:textAppearance="@style/H1"
             android:layout_marginTop="10dp" />
+
         <EditText
-            android:id="@+id/editText2"
             android:layout_width="match_parent"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorAccentDark"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
             android:ems="10"
+            android:id="@+id/editText5"
             android:hint="Enter Description"
-            android:textColorHint="@color/colorAccentLight"
-            android:singleLine="false"
-            android:selectAllOnFocus="false"
-            android:textAppearance="@style/TextField"
-            android:inputType="text"
             style="@style/EditTextField"
+            android:textAppearance="@style/TextField"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorAccentLight"
+            android:background="@color/colorAccentDark"
             android:layout_marginLeft="20dp"
-            android:gravity="top"
-            android:layout_height="72dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -154,7 +154,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:text="1."
@@ -164,22 +165,17 @@
                 android:layout_width="20dp"
                 android:layout_marginRight="5dp" />
 
-            <TextView
-                android:text="Type:"
-                android:layout_width="51dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView13"
-                android:textAppearance="@style/H2" />
-
             <Spinner
-                android:layout_width="287dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/questions_spinner" />
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp">
 
             <FrameLayout
                 android:id="@+id/contentContainer"
