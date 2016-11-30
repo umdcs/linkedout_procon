@@ -108,6 +108,9 @@ public class ArrayQuiz extends AppCompatActivity {
                     //start of Isaiah's code
 
                     String finalJson = sb.toString();
+                    //test
+                    System.out.println(finalJson);
+
                     JSONObject parentObject = new JSONObject(finalJson); //holds the json data pulled from server
                     JSONArray parentArray = null;
                     try {
@@ -183,6 +186,7 @@ public class ArrayQuiz extends AppCompatActivity {
          * @param result the result from the query
          */
         protected void onPostExecute(List<QuizModel> result) {
+
 
             QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, result);
             lvQuizzes.setAdapter(adapter);
