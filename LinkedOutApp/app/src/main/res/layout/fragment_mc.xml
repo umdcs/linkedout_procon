@@ -29,54 +29,89 @@
                 style="@style/EditTextField"
                 android:textColor="@color/colorText" />
 
-            <EditText
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:inputType="text"
-                android:hint="Option 1"
-                android:ems="6"
-                android:id="@+id/option1"
-                android:background="@color/colorAccentDark"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:textColorHint="@color/colorAccentLight"
-                android:textAppearance="@style/TextField"
-                style="@style/EditTextField"
-                android:textColor="@color/colorText" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.00">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:inputType="text"
-                android:ems="6"
-                android:hint="Option 2"
-                android:id="@+id/option2"
-                android:background="@color/colorAccentDark"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:textColorHint="@color/colorAccentLight"
-                android:textAppearance="@style/TextField"
-                style="@style/EditTextField"
-                android:textColor="@color/colorText" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.00"
+                    android:layout_marginRight="5dp">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:inputType="text"
-                android:hint="Option3"
-                android:ems="6"
-                android:id="@+id/option3"
-                android:layout_weight="0.00"
-                android:background="@color/colorAccentDark"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:textColorHint="@color/colorAccentLight"
-                android:textAppearance="@style/TextField"
-                style="@style/EditTextField"
-                android:textColor="@color/colorText" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/option1Toggle"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/option2Toggle"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/option3Toggle"
+                        android:layout_weight="1" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:inputType="text"
+                        android:hint="Option 1"
+                        android:ems="6"
+                        android:id="@+id/option1"
+                        android:background="@color/colorAccentDark"
+                        android:padding="5dp"
+                        android:textColorHint="@color/colorAccentLight"
+                        android:textAppearance="@style/TextField"
+                        style="@style/EditTextField"
+                        android:textColor="@color/colorText" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:inputType="text"
+                        android:ems="6"
+                        android:hint="Option 2"
+                        android:id="@+id/option2"
+                        android:background="@color/colorAccentDark"
+                        android:padding="5dp"
+                        android:textColorHint="@color/colorAccentLight"
+                        android:textAppearance="@style/TextField"
+                        style="@style/EditTextField"
+                        android:textColor="@color/colorText" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:inputType="text"
+                        android:hint="Option3"
+                        android:ems="6"
+                        android:id="@+id/option3"
+                        android:layout_weight="0.00"
+                        android:background="@color/colorAccentDark"
+                        android:padding="5dp"
+                        android:textColorHint="@color/colorAccentLight"
+                        android:textAppearance="@style/TextField"
+                        style="@style/EditTextField"
+                        android:textColor="@color/colorText" />
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
                 android:text="Save"
