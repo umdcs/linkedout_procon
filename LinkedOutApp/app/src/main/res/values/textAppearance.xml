@@ -16,14 +16,16 @@
     <style name="TextField" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorAccentLight</item>
+        <item name="android:textColor">@color/colorText</item>
         <item name="android:textSize">18dp</item>
+        <item name="android:textColorHint">@color/colorAccentLight</item>
         <item name="android:padding">5sp</item>
     </style>
     <style name="EditTextField" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorAccentLight</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColorHint">@color/colorAccentLight</item>
         <item name="android:textSize">18dp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:padding">5sp</item>
