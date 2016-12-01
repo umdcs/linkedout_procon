@@ -27,7 +27,7 @@
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
-            app:srcCompat="@drawable/linkedoutlogo" />
+            app:srcCompat="@drawable/connect2melogo" />
 
         <LinearLayout
             android:orientation="vertical"

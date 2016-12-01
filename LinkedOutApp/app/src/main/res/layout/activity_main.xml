@@ -25,7 +25,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/linkedoutlogo"
+            app:srcCompat="@drawable/connect2melogo"
             android:id="@+id/logo"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
