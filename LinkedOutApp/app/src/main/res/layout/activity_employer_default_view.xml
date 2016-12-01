@@ -142,14 +142,29 @@
                             android:layout_marginTop="3dp" />
                     </LinearLayout>
 
-                    <ProgressBar
-                        style="@android:style/Widget.Material.ProgressBar.Horizontal"
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/progressBar2"
-                        android:progress="80"
-                        android:indeterminate="false"
-                        android:max="100" />
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/progressBar2"
+                            android:progress="80"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="80%"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView14"
+                            android:layout_weight="0"
+                            android:layout_marginLeft="10dp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -157,11 +172,12 @@
 
         <Button
             android:text="Create Job"
-            android:layout_width="119dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button5"
             android:onClick="createJob"
-            android:layout_weight="0.09" />
+            android:layout_weight="0.09"
+            android:backgroundTint="@color/colorAccentMid" />
     </LinearLayout>
 
     <View
@@ -208,25 +224,28 @@
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="251dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
             android:background="@color/colorAccentDark"
             android:ems="10"
             android:hint="Search"
-            android:textColorHint="#3e435b"
+            android:textColorHint="@color/colorAccentLight"
             android:singleLine="true"
             android:selectAllOnFocus="true"
             android:textAppearance="@style/TextField"
             android:inputType="text"
-            style="@style/EditTextField" />
+            style="@style/EditTextField"
+            android:layout_weight="1"
+            android:textColor="@color/colorText" />
 
         <Button
             android:text="Search"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4" />
+            android:id="@+id/button4"
+            android:layout_weight="0" />
 
     </LinearLayout>
 
