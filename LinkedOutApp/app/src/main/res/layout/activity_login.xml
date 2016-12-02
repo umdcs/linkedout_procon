@@ -44,7 +44,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/jobName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
@@ -63,9 +63,9 @@
                 android:id="@+id/editText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/editText"
-                android:layout_alignStart="@+id/editText"
-                android:layout_below="@+id/editText"
+                android:layout_alignLeft="@+id/jobName"
+                android:layout_alignStart="@+id/jobName"
+                android:layout_below="@+id/jobName"
                 android:layout_marginTop="11dp"
                 android:background="@color/colorAccentDark"
                 android:ems="10"

@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 
 public class Fragment_TF extends Fragment implements View.OnClickListener{
@@ -20,6 +22,7 @@ public class Fragment_TF extends Fragment implements View.OnClickListener{
     Button button;
     EditText et1;
     String e1,e2;
+    RadioGroup radioGroup;
 
     @Override
     public void onAttach(Context context) {
@@ -58,13 +61,31 @@ public class Fragment_TF extends Fragment implements View.OnClickListener{
                                           e1=et1.getText().toString();
                                           //e2=et2.getText().toString();
 
-                                          Log.d("Debug: ", "question: "+ e1+ " Answer:"+"true");
+                                          Log.d("Debug: ", "question: "+ e1+ " Answer:"+e2);
 
-                                          mListener.onFragmentInteraction_TF(e1,"true");
+                                          mListener.onFragmentInteraction_TF(e1,e2);
                                           Log.d("Debug: ", "questionnnnnnnnnn: "+ e1);
 
                                       }}
         );
+
+        radioGroup = (RadioGroup) rootView.findViewById(R.id.truefalsegroup);
+
+        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+
+                switch(checkedId) {
+                    case R.id.trueButton:
+                        e2 = "true";
+                        break;
+                    case R.id.falseButton:
+                        e2 = "false";
+                        break;
+                }
+            }
+        });
 
 
         return rootView;
