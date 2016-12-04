@@ -132,66 +132,65 @@ public class ArrayQuiz extends AppCompatActivity {
          */
         protected void onPostExecute(String result) {
             //start of Isaiah's code
-
+            JSONObject parentObject = null;
+            JSONArray parentArray = null;
             //String finalJson = sb.toString();
             //test
             //System.out.println(finalJson);
             try {
-            JSONObject parentObject = new JSONObject(result); //holds the json data pulled from server
-            JSONArray parentArray = null;
-
-                parentArray = parentObject.getJSONArray("quizzes");
+            parentObject = new JSONObject(result); //holds the json data pulled from server
+            parentArray = parentObject.getJSONArray("quizzes");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            System.out.println("Is this a thing?" + parentObject.toString());
             //this array holds all the data and holds the arrays that hold anser choices
             List<QuizModel> quizModelList = new ArrayList<>();
-
-            for(int i = 0; i < parentArray.length(); i++){
-                QuizModel quizModel = new QuizModel(); //create new QuizModel object
-                JSONObject finalObject = null;
-                try {
-                    finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                //this array holds the answer choices
-                List<QuizModel.Choices> choicesList = new ArrayList<>();
-                try {
-                    for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
-                        //creats a new QuizModel.Choices object to store choices
-                        QuizModel.Choices choices = new QuizModel.Choices();
-                        choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
-                        choicesList.add(choices);
+            if(parentArray!=null) {
+                for (int i = 0; i < parentArray.length(); i++) {
+                    QuizModel quizModel = new QuizModel(); //create new QuizModel object
+                    JSONObject finalObject = null;
+                    try {
+                        finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
-                quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
+                    try {
+                        quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //this array holds the answer choices
+                    List<QuizModel.Choices> choicesList = new ArrayList<>();
+                    try {
+                        for (int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++) {
+                            //creats a new QuizModel.Choices object to store choices
+                            QuizModel.Choices choices = new QuizModel.Choices();
+                            choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
+                            choicesList.add(choices);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
+                    quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
 
 
-            }//end for
-            return  quizModelList; //this is the List tht is sent to the onPostExecute
+                }//end for
+            }
 
-            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, result);
+            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, quizModelList);
             lvQuizzes.setAdapter(adapter);
 
         }//end onPostExecute

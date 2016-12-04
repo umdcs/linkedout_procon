@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
 
 
 //REST API Get, Gets the hardcoded string that is declared above *****ARRAY****
-app.get('/arraQuizData', function(req, res){
+app.get('/arrayQuizData', function(req, res){
   console.log(JSON.stringify(JSON_ArrayObject));
   res.send(JSON.stringify(JSON_ArrayObject));
 });
