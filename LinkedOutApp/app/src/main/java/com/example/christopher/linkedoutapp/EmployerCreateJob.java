@@ -234,9 +234,8 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
         //save values
-
-
         String[] saq = {"SA",question,answer};
+
         quiz.add(saq);
 
 
@@ -256,6 +255,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
         //save values to array
         String[] saq2 = {"TF",question,answer};
+
         quiz.add(saq2);
 
 
@@ -279,6 +279,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
         //save values to array
         String[] saq3 = {"MC", question, option1, option2, option3};
+
         quiz.add(saq3);
 
 
@@ -293,6 +294,5 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
     }
-
-
+    
 }
