@@ -35,7 +35,6 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     Spinner spinner;
     String question,answer,option1,option2,option3, jobName;
-    String name;
     String format;
     private String Server = "http://lempo.d.umn.edu:4531/arrayQuizData";
     private String Server2 = "http://10.0.2.2:4321/arrayQuizData";
@@ -150,8 +149,9 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
             //put array jsonObject
 
             //one quiz
-            jsonObject.put("quizAnswer", answer);
+            jsonObject.put("quizFormat", format);
             jsonObject.put("quizQuestion", question);
+            jsonObject.put("quizAnswer", answer);
             jsonObject.put("choiceList", jsonArrayChoices);
 
             //puts json objects into the array to make up a quiz
@@ -229,6 +229,8 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
         question = value;
         answer = value1;
+        format = "SA";
+
         Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
         //save values
@@ -248,6 +250,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     public void onFragmentInteraction_TF(String value, String value1) {
         question = value;
         answer = value1;
+        format = "TF";
 
         Log.d("Debug: ", "question and answer values --> Q:"+ question + " Answer:" + answer);
 
@@ -266,10 +269,11 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
     @Override
     public void onFragmentInteraction_MC(String value, String value1, String value2, String value3) {
         question = value;
+        answer = "notPassesIn";
         option1 = value1;
         option2 = value2;
         option3 = value3;
-
+        format = "MC";
 
         Log.d("Debug: ", "question and answer values --> Q:" + question + " Answer:" + answer);
 
