@@ -27,8 +27,8 @@
             android:layout_marginRight="10dp" />
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:id="@+id/jobName"
+            android:layout_width="251dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
