@@ -147,6 +147,7 @@ public class ArrayQuiz extends AppCompatActivity {
             //this array holds all the data and holds the arrays that hold anser choices
             List<QuizModel> quizModelList = new ArrayList<>();
             if(parentArray!=null) {
+
                 for (int i = 0; i < parentArray.length(); i++) {
                     QuizModel quizModel = new QuizModel(); //create new QuizModel object
                     JSONObject finalObject = null;

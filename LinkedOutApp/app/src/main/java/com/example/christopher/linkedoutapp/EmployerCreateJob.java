@@ -53,7 +53,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
             try {
-                URL url = new URL(params[0]);
+                URL url = new URL( params[0] );
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
                 if (params[1].equals("POST") ||
@@ -90,8 +90,8 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
                     }
 
                     try {
-                        JSONObject jsonData = new JSONObject(sb.toString()); //json object
-                        return jsonData.toString();                          //returns json data
+                        JSONObject jsonData = new JSONObject(sb.toString());
+                        return jsonData.toString();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
