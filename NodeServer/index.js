@@ -19,15 +19,14 @@ var app = express();
 // Again, my server routes all your traffic through SSL/TLS so it IS encrypted. However, it
 // redirects internally on lempo to your actual port number 4531.
 
+
 app.set("port", 4321);
+var JSON_ArrayString;
+var JSON_ArrayObject;
 
 //Hardcoded questions Array with two questions
-var JSON_ArrayString = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"1+1=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"7+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "6"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"8-2=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}, {"choice" : "6"}]} ]}';
-                      
-var JSON_String = '{"quizzes": {"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "answerChoiceOne" : "1", "answerChoiceTwo" : "2", "answerChoiceThree" : "3", "answerChoiceFour" : "4"}}';      
-                           
-var JSON_ArrayObject = JSON.parse(JSON_ArrayString);
-var JSON_Object = JSON.parse(JSON_String);
+//var JSON_ArrayStringH = '{"quizzes":[{"quizFormat" : "Multiple Choice","quizQuestion":"2+2=?", "quizAnswer" : "4", "choiceList":[{"choice" : "1"},{"choice" : "2"}, {"choice" : "3"}, {"choice" : "4"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"3+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"1+1=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"7+3=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "6"}, {"choice" : "4"}, {"choice" : "6"}]}, {"quizFormat" : "Multiple Choice","quizQuestion":"8-2=?", "quizAnswer" : "6", "choiceList":[{"choice" : "2"},{"choice" : "3"}, {"choice" : "4"}, {"choice" : "6"}, {"choice" : "6"}]} ]}';
+//const defaulyJSON = JSON_ArrayStringH;
 
 
 app.use(bodyParser.urlencoded({   // support encoded bodies
@@ -46,20 +45,10 @@ app.get('/arrayQuizData', function(req, res){
   res.send(JSON.stringify(JSON_ArrayObject));
 });
 
-//REST API Get, Gets the hardcoded string that is declared above
-app.get('/quizData', function(req, res){
-  console.log(JSON.stringify(JSON_Object));
-  res.send(JSON.stringify(JSON_Object));
-});
-
-
-//REST API Post, not completed, nor is it functional, ignore what is in here
-app.post('/quizData', function (req, res) {
-  if(!req.body) return res.sendStatus(400);
-
-  /*
-  '{"users":{}}' was the default json object in my previous project
-  if(JSON.stringify(temp)!=='{"users":{}}'){
+/////////////////////////////may use later
+ /*
+  '{"quizzes":{}}' was the default json object in my previous project
+  if(JSON.stringify(temp)!=='{"quizzes":{}}'){
         var tempString = JSON.stringify(JSON_Object);
         tempString = tempString.substr(0, tempString.length - 1);
         tempString = tempString + ',' + JSON.stringify(temp).substr(1, JSON.stringify(temp).length);
@@ -67,7 +56,18 @@ app.post('/quizData', function (req, res) {
     }
     res.send(JSON.stringify(JSON_Object));
     */
+////////////////////////////////////////////////////////
+//REST API Post, not completed, nor is it functional, ignore what is in here
+app.post('/arrayQuizData', function (req, res) {
+  if(!req.body) return res.sendStatus(400);
+
+
   console.log("POST " + JSON.stringify(req.body));
+  JSON_ArrayString = JSON.stringify(req.body);
+  console.log(JSON_ArrayString);
+  JSON_ArrayObject = JSON.parse(JSON_ArrayString);
+  console.log("Fully transferred to node server");
+
 });
 
 app.delete('/', function (req, res){
