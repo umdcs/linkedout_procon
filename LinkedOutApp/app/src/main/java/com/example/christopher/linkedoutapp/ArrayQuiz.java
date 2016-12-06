@@ -153,20 +153,8 @@ public class ArrayQuiz extends AppCompatActivity {
                     JSONObject finalObject = null;
                     try {
                         finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
                     } catch (JSONException e) {
                         e.printStackTrace();
