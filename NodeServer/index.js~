@@ -71,8 +71,6 @@ app.post('/quizData', function (req, res) {
     res.send(JSON.stringify(JSON_Object));
     */
   console.log("POST " + JSON.stringify(req.body));
-  //insert to DB
-  mongodb.insertQuizData(req.body );
 });
 
 app.delete('/', function (req, res){
