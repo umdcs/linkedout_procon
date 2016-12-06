@@ -41,8 +41,8 @@ module.exports = function() {
     mongodb.insertQuizData = function(weekData) {
 
         mongodb.collection('documents').save({week: weekData}, function (err, result) {
-		if(err || !result) console.log ("Week not saved in database.");
-		else console.log("Inserted a week record into the documents collection.");
+		if(err || !result) console.log ("Quiz not saved in database.");
+		else console.log("Inserted a quiz into the documents collection.");
 	    });
     };
 
