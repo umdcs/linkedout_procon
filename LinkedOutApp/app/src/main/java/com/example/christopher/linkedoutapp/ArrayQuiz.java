@@ -58,10 +58,10 @@ public class ArrayQuiz extends AppCompatActivity {
     }
 
 
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, List<QuizModel>> {
+    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
-        protected List<QuizModel> doInBackground(String... params) {
+        protected String doInBackground(String... params) {
 
             HttpURLConnection serverConnection = null;
             InputStream is = null;
@@ -69,7 +69,7 @@ public class ArrayQuiz extends AppCompatActivity {
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
             try {
-                URL url = new URL(params[0]);
+                URL url = new URL( params[0] );
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
                 if (params[1].equals("POST") ||
@@ -105,76 +105,24 @@ public class ArrayQuiz extends AppCompatActivity {
                         sb.append(line);
                     }
 
-                    //start of Isaiah's code
-
-                    String finalJson = sb.toString();
-                    JSONObject parentObject = new JSONObject(finalJson); //holds the json data pulled from server
-                    JSONArray parentArray = null;
                     try {
-                        parentArray = parentObject.getJSONArray("quizzes");
+                        JSONObject jsonData = new JSONObject(sb.toString());
+                        return jsonData.toString();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    //this array holds all the data and holds the arrays that hold anser choices
-                    List<QuizModel> quizModelList = new ArrayList<>();
-
-                    for(int i = 0; i < parentArray.length(); i++){
-                        QuizModel quizModel = new QuizModel(); //create new QuizModel object
-                        JSONObject finalObject = null;
-                        try {
-                            finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        //this array holds the answer choices
-                        List<QuizModel.Choices> choicesList = new ArrayList<>();
-                        try {
-                            for(int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++){
-                                //creats a new QuizModel.Choices object to store choices
-                                QuizModel.Choices choices = new QuizModel.Choices();
-                                choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
-                                choicesList.add(choices);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
-                        quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
-
-
-                    }//end for
-                    return  quizModelList; //this is the List tht is sent to the onPostExecute
-                }//end doInBackground
+                }
 
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             } finally {
                 serverConnection.disconnect();
             }
 
-            return null;
+            return "Should not get to this if the data has been sent/received correctly!";
         }
 
         /** This function passes the json data to a quiz layout and variables for helper function
@@ -182,9 +130,56 @@ public class ArrayQuiz extends AppCompatActivity {
          *
          * @param result the result from the query
          */
-        protected void onPostExecute(List<QuizModel> result) {
+        protected void onPostExecute(String result) {
+            //start of Isaiah's code
+            JSONObject parentObject = null;
+            JSONArray parentArray = null;
+            //String finalJson = sb.toString();
+            //test
+            //System.out.println(finalJson);
+            try {
+            parentObject = new JSONObject(result); //holds the json data pulled from server
+            parentArray = parentObject.getJSONArray("quizzes");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Is this a thing?" + parentObject.toString());
+            //this array holds all the data and holds the arrays that hold anser choices
+            List<QuizModel> quizModelList = new ArrayList<>();
+            if(parentArray!=null) {
 
-            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, result);
+                for (int i = 0; i < parentArray.length(); i++) {
+                    QuizModel quizModel = new QuizModel(); //create new QuizModel object
+                    JSONObject finalObject = null;
+                    try {
+                        finalObject = parentArray.getJSONObject(i); //grab i object in JSON data from sever
+                        quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
+                        quizModel.setFormat(finalObject.getString("quizFormat")); //get format from JSON data in server and put it into the array as QuizModel object for format
+                        quizModel.setQuestion(finalObject.getString("quizQuestion")); //get question from JSON data in server and put it into the array as QuizModel object for question
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //this array holds the answer choices
+                    List<QuizModel.Choices> choicesList = new ArrayList<>();
+                    try {
+                        for (int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++) {
+                            //creats a new QuizModel.Choices object to store choices
+                            QuizModel.Choices choices = new QuizModel.Choices();
+                            choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
+                            choicesList.add(choices);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
+                    quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
+
+
+                }//end for
+            }
+
+            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, quizModelList);
             lvQuizzes.setAdapter(adapter);
 
         }//end onPostExecute
@@ -197,7 +192,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * action to the REST Server.
      */
     public void restGET() {
-        new HTTPAsyncTask().execute(Server, "GET");
+        new HTTPAsyncTask().execute(Server2, "GET");
     }
 
     /**
@@ -207,6 +202,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * @param view
      *
      */
+    /*
     public void restPOST(View view) {
         QuizModel quizModel = null;
         JSONObject jsonParam = null;
@@ -221,7 +217,7 @@ public class ArrayQuiz extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
         new HTTPAsyncTask().execute(Server, "POST", jsonParam.toString());
-    }
+    }*/
 
     /** This function will tell if the question was answered correctly or not
      *
