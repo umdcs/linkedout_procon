@@ -7,3 +7,7 @@ An app focused on the interaction between students in college and employers look
   
   Run "npm install" in the NodeServer directory to get all the required packages if running the server locally.
   Afterwards the server can be started by typing "node index.js"
+
+#Other information
+ This project was run using version 6.6.0 of Node.js
+ It was built using Android Studio version 2.2.2 using JRE 1.8.0
