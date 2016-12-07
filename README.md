@@ -10,4 +10,5 @@ An app focused on the interaction between students in college and employers look
 
 #Other information
  This project was run using version 6.6.0 of Node.js
+ 
  It was built using Android Studio version 2.2.2 using JRE 1.8.0
