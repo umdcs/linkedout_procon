@@ -167,7 +167,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
             e.printStackTrace();
         }
         Log.d("DEBUG:", finalJSONObject.toString());
-        new HTTPAsyncTask().execute(Server2, "POST", finalJSONObject.toString());
+        new HTTPAsyncTask().execute(Server, "POST", finalJSONObject.toString());
         System.out.println("Post complete! :)");
     }
     @Override
