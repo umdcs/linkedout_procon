@@ -72,8 +72,9 @@ app.post('/arrayQuizData', function (req, res) {
   JSON_ArrayObject = JSON.parse(JSON_ArrayString);
   console.log("Fully transferred to node server");
 
-  //insert to DB                                                                                                                                                                                                                     
-  mongodb.insertQuizData(req.body );
+  //insert to DB                                                                                                                                                                                                                    
+  // mongodb.insertQuizData(req.body);
+  mongodb.insertQuizData(JSON_ArrayObject);
 });
 
 app.delete('/', function (req, res){

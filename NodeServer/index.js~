@@ -66,16 +66,14 @@ app.post('/arrayQuizData', function (req, res) {
 
 
   console.log("POST " + JSON.stringify(req.body));
-<<<<<<< HEAD
-  //insert to DB
-  mongodb.insertQuizData(req.body );
-=======
+
   JSON_ArrayString = JSON.stringify(req.body);
   console.log(JSON_ArrayString);
   JSON_ArrayObject = JSON.parse(JSON_ArrayString);
   console.log("Fully transferred to node server");
 
->>>>>>> storeData1
+  //insert to DB                                                                                                                                                                                                                    
+  mongodb.insertQuizData(req.body);
 });
 
 app.delete('/', function (req, res){
