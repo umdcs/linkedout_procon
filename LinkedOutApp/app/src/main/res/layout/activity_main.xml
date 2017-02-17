@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:srcCompat="@drawable/linkedoutlogo"
+        app:srcCompat="@drawable/proconlogo"
         android:id="@+id/logo"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
