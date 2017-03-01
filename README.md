@@ -1,6 +1,6 @@
 # Connect2Me
 
-An app focused on the interaction between students in college and employers looking for specific skills to complete jobs. Connect2Me is looking to bridge the gap between students and employers.
+An app focused on the interaction between students in college and employers looking for specific skills to complete jobs. Connect2Me is looking to bridge the gap between students and employers in a more interactive way:.
 
 # Instructions to run Node server:
   **You will need to start the Node.js server in order for the Android application to function properly or run it through Lempo**
