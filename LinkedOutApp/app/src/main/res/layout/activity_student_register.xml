@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/switchToEmployer"
                 android:layout_weight="1"
-                android:textAppearance="@style/H2" />
+                android:textAppearance="@style/H2"
+                android:onClick="changeViewToEmployer" />
         </RadioGroup>
 
     </LinearLayout>
@@ -77,7 +78,7 @@
             <ImageView
                 app:srcCompat="@drawable/ic_menu_camera"
                 android:id="@+id/imageView4"
-                android:layout_height="match_parent"
+                android:layout_height="176dp"
                 android:layout_width="100dp" />
 
             <LinearLayout

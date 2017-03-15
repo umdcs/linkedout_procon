@@ -1,9 +1,10 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.view.View;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
@@ -34,6 +35,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         */
+    }
+
+    public void changeViewToEmployer(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
 }

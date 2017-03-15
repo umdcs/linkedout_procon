@@ -13,4 +13,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
+    public void changeViewToStudent(View view) {
+        Intent intent = new Intent(this, StudentRegisterActivity.class);
+        startActivity(intent);
+    }
+
 }

@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checkedButton="@+id/switchToStudent">
+            android:checkedButton="@+id/switchToEmployer">
 
             <RadioButton
                 android:text="Student"
@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/switchToStudent"
                 android:layout_weight="1"
-                android:textAppearance="@style/H2" />
+                android:textAppearance="@style/H2"
+                android:onClick="changeViewToStudent"/>
 
             <RadioButton
                 android:text="Employer"
