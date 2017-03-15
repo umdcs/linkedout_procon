@@ -16,7 +16,7 @@ public class RegisterPresenter {
 
 
     void clickRegister(){
-        
+
     }
 
 }
