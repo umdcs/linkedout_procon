@@ -106,6 +106,27 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:layout_below="@+id/User_Name"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/user_Email"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Email"
+                    android:background="@color/colorAccentDark"
+                    android:textColorHint="@color/colorAccentLight"
+                    android:layout_weight="1"
+                    android:padding="5sp"
+                    android:textAppearance="@style/TextField"
+                    style="@style/EditTextField"
+                    android:textColor="@color/colorText"
+                    android:layout_marginBottom="10dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="text"
                     android:ems="10"
                     android:id="@+id/employerCompanyName"
@@ -133,7 +154,7 @@
                     android:textColorHint="@color/colorAccentLight"
                     android:layout_marginBottom="10dp" />
 
-                <EditText
+               <!-- <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
@@ -146,7 +167,7 @@
                     android:textAppearance="@style/H1"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorAccentLight"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp" /> -->
 
             </LinearLayout>
 
@@ -161,11 +182,48 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/registerEmployerCity"
+            android:background="@color/colorAccentDark"
+            android:hint="City"
+            style="@style/EditTextField"
+            android:textAppearance="@style/H1"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorAccentLight"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:text="State"
+            android:layout_marginBottom="5dp"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/stateText"
+            android:layout_weight="0.05" />
+
+        <Spinner
+            android:layout_width="100dp"
+            android:id="@+id/stateSpinner"
+            android:layout_height="wrap_content"
+            android:entries="@array/state_list"
+            android:layout_weight="0.04" />
+    </LinearLayout>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="5dp"
         android:background="@color/colorAccentMid"
-        android:id="@+id/divider"
+        android:id="@+id/divider2"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
@@ -179,15 +237,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:ems="10"
-            android:layout_below="@+id/User_Name"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/user_Email"
+            android:id="@+id/employerUsername"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Email"
+            android:hint="Username"
             android:background="@color/colorAccentDark"
             android:textColorHint="@color/colorAccentLight"
             android:layout_weight="1"
