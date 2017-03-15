@@ -5,4 +5,18 @@ package com.example.christopher.linkedoutapp;
  */
 
 public class RegisterPresenter {
+
+    private ModelViewPresenterComponents.Model mModel;
+    private ModelViewPresenterComponents.View mView;
+
+    public RegisterPresenter(ModelViewPresenterComponents.View mpgView){
+        mView = mpgView;
+        mModel = new MPGCalc(this);
+    }
+
+
+    void clickRegister(){
+        
+    }
+
 }

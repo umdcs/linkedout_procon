@@ -23,7 +23,7 @@ public interface ModelViewPresenterComponents {
 
     interface RegisterPresenterContract{
 
-
+        void clickRegister();
 
     }
 
