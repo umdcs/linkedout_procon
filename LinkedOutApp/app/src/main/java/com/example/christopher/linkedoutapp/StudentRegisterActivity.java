@@ -38,7 +38,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
 
     public void changeViewToEmployer(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, EmployerRegisterActivity.class);
         startActivity(intent);
     }
 
