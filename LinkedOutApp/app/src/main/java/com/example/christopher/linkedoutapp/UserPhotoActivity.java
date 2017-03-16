@@ -1,7 +1,9 @@
 package com.example.christopher.linkedoutapp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
@@ -12,13 +14,15 @@ import android.widget.EditText;
 public class UserPhotoActivity extends AppCompatActivity
         implements ModelViewPresenterComponents.UserPhotoView {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_photo);
-        //EditText prevNum = (EditText) findViewById(R.id.editPrev);
-        //setupModelViewPresenterComponents();
+    public final static int PICK_PHOTO_CODE = 1046;
 
+    public void onClickGallery() {
+        //Create new intent for selection on photo
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            startActivityForResult(intent, PICK_PHOTO_CODE);
+        }
     }
 
 }

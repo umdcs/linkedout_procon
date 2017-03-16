@@ -11,20 +11,27 @@ import android.widget.TextView;
 public interface ModelViewPresenterComponents {
 
     interface UserPhotoView {
+        void onClickGallery();
+    }
 
+    interface UserPhotoPresenter {
+
+    }
+
+    interface UserPhotoModel{
+
+    }
+
+    interface RegisterModel {
 
     }
 
     interface RegisterActivityView {
-
         void onClickRegister();
-
     }
 
     interface RegisterPresenterContract{
-
         void clickRegister();
-
     }
 
 }

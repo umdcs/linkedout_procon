@@ -4,15 +4,12 @@ package com.example.christopher.linkedoutapp;
  * Created by imcdo on 3/15/2017.
  */
 
-public class RegisterPresenter {
+public class RegisterPresenter implements ModelViewPresenterComponents.RegisterPresenterContract{
 
-    private ModelViewPresenterComponents.Model mModel;
-    private ModelViewPresenterComponents.View mView;
+    private ModelViewPresenterComponents.RegisterModel rModel;
+    private ModelViewPresenterComponents.RegisterActivityView rView;
 
-    public RegisterPresenter(ModelViewPresenterComponents.View mpgView){
-        mView = mpgView;
-        mModel = new MPGCalc(this);
-    }
+
 
 
     void clickRegister(){
