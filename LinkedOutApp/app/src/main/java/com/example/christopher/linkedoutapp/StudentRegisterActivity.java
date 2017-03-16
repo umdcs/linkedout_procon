@@ -32,7 +32,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         String email = ((EditText) findViewById(R.id.studentEmail)).getText().toString();
         String password = ((EditText) findViewById(R.id.studentPassword)).getText().toString();
         String city = ((EditText) findViewById(R.id.registerStudentCity)).getText().toString();
-        int gradyear = Integer.parseInt( ((EditText) findViewById(R.id.registerStudentGradYear)).getText().toString() );
+        String gradyear = ((EditText) findViewById(R.id.registerStudentGradYear)).getText().toString();
         String major = ((EditText) findViewById(R.id.registerStudentMajor)).getText().toString();
 
         //Need to grab the spinner select info
