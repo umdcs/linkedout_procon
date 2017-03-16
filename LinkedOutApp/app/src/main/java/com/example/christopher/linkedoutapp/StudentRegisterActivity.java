@@ -35,9 +35,12 @@ public class StudentRegisterActivity extends AppCompatActivity {
         String gradyear = ((EditText) findViewById(R.id.registerStudentGradYear)).getText().toString();
         String major = ((EditText) findViewById(R.id.registerStudentMajor)).getText().toString();
 
-        //Need to grab the spinner select info
-        String state = "MN";
-        String gradterm = "2018";
+        //Grab the spinner select info
+        Spinner stateSpinner = (Spinner) findViewById(R.id.stateSpinner);
+        String state = stateSpinner.getSelectedItem().toString();
+
+        Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
+        String gradterm = gradTermSpinner.getSelectedItem().toString();
 
         //rest functions?
 
