@@ -1,11 +1,16 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.view.View;
+
+import java.io.IOException;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
@@ -51,6 +56,21 @@ public class StudentRegisterActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             // Bring up gallery to select a photo
             startActivityForResult(intent, PICK_PHOTO_CODE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Uri photoUri = data.getData();
+            Bitmap selectedImage = null;
+            try {
+                selectedImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ImageView thumbnail = (ImageView) findViewById(R.id.imageView4);
+            thumbnail.setImageBitmap(selectedImage);
         }
     }
 
