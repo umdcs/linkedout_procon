@@ -17,7 +17,7 @@ public interface ModelViewPresenterComponents {
 
     interface RegisterActivityView {
 
-        void onClickRegister();
+        void onClickSignUp();
 
     }
 

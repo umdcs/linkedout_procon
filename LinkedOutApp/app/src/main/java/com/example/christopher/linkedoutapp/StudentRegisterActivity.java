@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.view.View;
+import android.widget.TextView;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         //Sets intent to the student profile
         Intent intent = new Intent(this, StudentDefaultView.class);
 
+        //Creates strings from entered text in student profile
         String name = ((EditText) findViewById(R.id.studentName)).getText().toString();
         String username = ((EditText) findViewById(R.id.studentUsername)).getText().toString();
         String email = ((EditText) findViewById(R.id.studentEmail)).getText().toString();
@@ -35,10 +37,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         String gradyear = ((EditText) findViewById(R.id.registerStudentGradYear)).getText().toString();
         String major = ((EditText) findViewById(R.id.registerStudentMajor)).getText().toString();
 
-        //Grab the spinner select info
+        //Grab the selected spinner info
         Spinner stateSpinner = (Spinner) findViewById(R.id.stateSpinner);
         String state = stateSpinner.getSelectedItem().toString();
-
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
         String gradterm = gradTermSpinner.getSelectedItem().toString();
 
@@ -47,8 +48,18 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Student_Profile profile = new Student_Profile(email, password, username, name,
                                                         city, state, gradterm, gradyear, major);
 
+
+        fillInData(profile);
+
         //switches to the student profile page
         startActivity(intent);
+    }
+
+    private void fillInData(Student_Profile profile) {
+
+        setContentView(R.layout.fragment_profile);
+        TextView nameText = (TextView)findViewById(R.id.displayStudentName);
+        nameText.setText(profile.getName());
 
     }
 

@@ -42,10 +42,9 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:text="Charles McGregor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
+                    android:id="@+id/displayStudentName"
                     android:textAppearance="@style/H1"
                     android:layout_weight="1" />
 

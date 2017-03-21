@@ -22,8 +22,8 @@ public class EmployerRegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickRegister() {
+    /*public void onClickRegister() {
 
-    }
+    }            */
 
 }
