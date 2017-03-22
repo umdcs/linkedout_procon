@@ -26,7 +26,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
 
         //Sets intent to the student profile
-        Intent intent = new Intent(this, StudentDefaultView.class);
+        //Intent intent = new Intent(this, StudentDefaultView.class);
+
 
         //Creates strings from entered text in student profile
         String name = ((EditText) findViewById(R.id.studentName)).getText().toString();
@@ -52,7 +53,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         fillInData(profile);
 
         //switches to the student profile page
-        startActivity(intent);
+        //startActivity(intent);
     }
 
     private void fillInData(Student_Profile profile) {
@@ -60,6 +61,15 @@ public class StudentRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_profile);
         TextView nameText = (TextView)findViewById(R.id.displayStudentName);
         nameText.setText(profile.getName());
+
+        TextView majorText = (TextView)findViewById(R.id.displayMajor);
+        majorText.setText(profile.getMajor() + " Major");
+
+        TextView graduationText = (TextView)findViewById(R.id.displayGraduation);
+        graduationText.setText("Graduating " + profile.getGradTerm() + " " + profile.getGradYear());
+
+        TextView locationText = (TextView)findViewById(R.id.displayLocation);
+        locationText.setText(profile.getCity() + ", " + profile.getState());
 
     }
 

@@ -114,13 +114,4 @@ public class StudentDefaultView extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void populateProfile(Student_Profile profile) {
-
-        TextView text = (TextView) findViewById(R.id.studentUsername);
-        String name = profile.getName();
-                text.setText(name);
-
-
-    }
-
 }
