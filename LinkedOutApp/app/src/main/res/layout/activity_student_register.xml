@@ -293,7 +293,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text|textPassword"
+            android:inputType="text"
             android:ems="10"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
