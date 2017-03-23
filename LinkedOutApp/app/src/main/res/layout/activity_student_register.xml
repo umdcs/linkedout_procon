@@ -84,7 +84,7 @@
 
             <ImageView
                 app:srcCompat="@drawable/ic_menu_camera"
-                android:id="@+id/imageView4"
+                android:id="@+id/thumbnail"
                 android:layout_height="118dp"
                 android:layout_width="100dp" />
 
