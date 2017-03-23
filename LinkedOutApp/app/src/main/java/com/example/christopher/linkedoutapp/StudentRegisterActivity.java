@@ -6,14 +6,15 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import static android.R.attr.width;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
@@ -144,8 +147,42 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
             Bitmap bitmapImage = BitmapFactory.decodeFile(path);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(bitmapImage);
+            image.setImageBitmap(getResizedBitmap(bitmapImage, 400, 400));
         }
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+//        int width = bm.getWidth();
+//        int height = bm.getHeight();
+//        float scaleWidth = ((float) newWidth) / width;
+//        float scaleHeight = ((float) newHeight) / height;
+
+//        // CREATE A MATRIX FOR THE MANIPULATION
+//        Matrix matrix = new Matrix();
+//        // RESIZE THE BIT MAP
+//        matrix.postScale(scaleWidth, scaleHeight);
+//
+//        // "RECREATE" THE NEW BITMAP
+//        Bitmap resizedBitmap = Bitmap.createBitmap(
+//                bm, 0, 0, width, height, matrix, false);
+//        bm.recycle();
+//        return resizedBitmap;
+
+        float aspectRatio = bm.getWidth() /
+                (float) bm.getHeight();
+        int width = 480;
+        int height = Math.round(width / aspectRatio);
+
+        bm = Bitmap.createScaledBitmap(
+                bm, width, height, false);
+        return RotateBitmap(bm, 90);
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
     public String getPath(Uri uri){
