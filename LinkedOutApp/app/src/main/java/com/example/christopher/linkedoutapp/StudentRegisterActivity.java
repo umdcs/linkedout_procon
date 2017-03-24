@@ -31,37 +31,16 @@ import static android.R.attr.width;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
-    Spinner spinner;
+    //To be checked against request code in onActivityResult
     private static final int SELECT_IMAGE = 1;
+
+    //Permission code checked in onRequestPermissionsResult
+    private int STORAGE_PERMISSION_CODE = 44;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
-
-        /*
-        //implement question spinner
-        spinner = (Spinner) findViewById(R.id.stateSpinner);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.questions_list, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        */
-        /*
-        Spinner spinner = (Spinner) findViewById(R.id.stateSpinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.state_list, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        */
     }
 
     public void changeViewToEmployer(View view) {
@@ -72,30 +51,55 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public final static int PICK_PHOTO_CODE = 1;
 
     public void onClickGallery(View view) {
-
         if(isReadStorageAllowed()){
-            //If permission is already having then showing the toast
+            //If permission has already been granted show toast message.
             Toast.makeText(StudentRegisterActivity.this,"Accessing Photo Gallery",Toast.LENGTH_LONG).show();
         }
         else {
-            //If the app has not the permission then asking for the permission
+            //If you don't have permission, ask for it.
             requestStoragePermission();
         }
-
         //Create new intent for selection on photo
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
-            // Bring up gallery to select a photo
+            //Open the photo gallery
             startActivityForResult(intent, PICK_PHOTO_CODE);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode==RESULT_OK && requestCode==SELECT_IMAGE){
+            Uri selectedImage = data.getData();
+            String path = getPath(selectedImage);
+            int rotateAngle = getCameraPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+
+            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
+            ImageView image = (ImageView) findViewById(R.id.thumbnail);
+            image.setImageBitmap(getResizedBitmap(bitmapImage, rotateAngle));
+        }
+    }
+
+    //Get path to image file.
+    public String getPath(Uri uri){
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
+        return cursor.getString(columnIndex);
+    }
+
+    //Check for read storage permission.
     private boolean isReadStorageAllowed() {
         //Get the permission status
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        //If permission is granted returning true
+        //If permission is granted return true
         if (result == PackageManager.PERMISSION_GRANTED)
             return true;
 
@@ -103,15 +107,13 @@ public class StudentRegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    //Permission code checked in onRequestPermissionsResult
-    private int STORAGE_PERMISSION_CODE = 44;
-
     //Requesting permission
     private void requestStoragePermission(){
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
             //If the user has denied the permission previously
-            //Notify need for permissions
+            //Notify the user they have denied the permission previously
+            Toast.makeText(StudentRegisterActivity.this,"You denied this permission previously.",Toast.LENGTH_LONG).show();
         }
 
         //Request permission
@@ -137,23 +139,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         }
     }
 
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode==RESULT_OK && requestCode==SELECT_IMAGE){
-            Uri selectedImage = data.getData();
-            String path = getPath(selectedImage);
-            int rotateAngle = getCameraPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-
-            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
-//            RotateBitmap(bitmapImage, rotateAngle);
-            ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(getResizedBitmap(bitmapImage, rotateAngle));
-        }
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int rotateAngle) {
@@ -195,23 +185,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         System.out.println("angle: " + rotate);
         return rotate;
-    }
-
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
-
-    public String getPath(Uri uri){
-        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-
-        return cursor.getString(columnIndex);
     }
 
 }
