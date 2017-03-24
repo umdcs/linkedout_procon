@@ -75,7 +75,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         if(resultCode==RESULT_OK && requestCode==SELECT_IMAGE){
             Uri selectedImage = data.getData();
             String path = getPath(selectedImage);
-            int rotateAngle = getCameraPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+            int rotateAngle = getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
 
             Bitmap bitmapImage = BitmapFactory.decodeFile(path);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
@@ -158,7 +158,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         return RotateBitmap(bm, rotateAngle);
     }
 
-    public int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
+    public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
         int rotate = 0;
             context.getContentResolver().notifyChange(imageUri, null);
             File imageFile = new File(imagePath);
