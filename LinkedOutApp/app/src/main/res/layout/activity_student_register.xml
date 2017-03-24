@@ -71,6 +71,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/transparent"
+            android:onClick="onClickGallery"/>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -78,9 +84,12 @@
 
             <ImageView
                 app:srcCompat="@drawable/ic_menu_camera"
-                android:id="@+id/imageView4"
+                android:id="@+id/thumbnail"
                 android:layout_height="118dp"
-                android:layout_width="100dp" />
+                android:layout_width="100dp"
+                android:adjustViewBounds="true"
+                />
+
 
             <LinearLayout
                 android:orientation="vertical"
@@ -208,15 +217,15 @@
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
              android:id="@+id/gradDateText"
-             android:layout_weight="0.05" />
+             android:layout_weight="0.02" />
 
-        <Spinner
-            android:layout_width="150dp"
-            android:id="@+id/FallSpringSpinner"
-            android:layout_height="wrap_content"
-            android:entries="@array/term_select"
-            android:layout_weight="0.04" />
-git
+            <Spinner
+                android:layout_width="150dp"
+                android:id="@+id/FallSpringSpinner"
+                android:layout_height="wrap_content"
+                android:entries="@array/term_select"
+                android:layout_weight="0.02" />
+
          <EditText
              android:layout_width="75dp"
              android:layout_height="wrap_content"
@@ -230,7 +239,8 @@ git
              android:textColor="@color/colorText"
              android:textColorHint="@color/colorAccentLight"
              android:layout_marginBottom="10dp"
-             android:layout_marginRight="10dp" />
+             android:layout_marginRight="10dp"
+             android:layout_weight="0.02" />
 
     </LinearLayout>
 
@@ -286,7 +296,8 @@ git
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <EditText
             android:layout_width="match_parent"
@@ -301,7 +312,6 @@ git
             android:hint="Username"
             android:background="@color/colorAccentDark"
             android:textColorHint="@color/colorAccentLight"
-            android:layout_weight="1"
             android:padding="5sp"
             android:layout_margin="5dp"
             style="@style/EditTextField"
@@ -322,12 +332,12 @@ git
             android:hint="Password"
             android:background="@color/colorAccentDark"
             android:textColorHint="@color/colorAccentLight"
-            android:layout_weight="1"
             android:padding="5sp"
             android:layout_margin="5dp"
             style="@style/EditTextField"
             android:textAppearance="@style/TextField"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/colorText"
+            android:layout_weight="1.40" />
 
     </LinearLayout>
 
