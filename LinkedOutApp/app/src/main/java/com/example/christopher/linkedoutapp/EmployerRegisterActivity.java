@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class RegisterActivity extends AppCompatActivity {
+public class EmployerRegisterActivity extends AppCompatActivity {
 
     private ModelViewPresenterComponents.RegisterActivityView photoPresenter;
 
@@ -17,8 +17,18 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
-    public void onClickRegister() {
+
+
+
+
+    public void changeViewToStudent(View view) {
+        Intent intent = new Intent(this, StudentRegisterActivity.class);
+        startActivity(intent);
 
     }
+
+    /*public void onClickRegister() {
+
+    }            */
 
 }
