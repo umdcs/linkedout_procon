@@ -12,28 +12,19 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.view.View;
-import android.widget.TextView;
-
-import android.util.DisplayMetrics;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import static android.R.attr.width;
 
 
 public class StudentRegisterActivity extends AppCompatActivity {
