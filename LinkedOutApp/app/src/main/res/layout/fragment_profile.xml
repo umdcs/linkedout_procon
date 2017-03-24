@@ -22,6 +22,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+
+            android:layout_height="161dp">
+
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -42,12 +45,38 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView3"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/displayStudentName"
+                    android:textAppearance="@style/H1"
                     android:layout_weight="1"
-                    android:text="Charles McGregor"
-                    android:textAppearance="@style/H1" />
+                    android:text="Student Name" />
+
+                <TextView
+                    android:text="Student Major"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayMajor"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/H2" />
+
+                <TextView
+                    android:text="Term, Year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayGraduation"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textAppearance="@style/H2" />
+
+                <TextView
+                    android:text="City, State"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/displayLocation"
+                    android:padding="5dp" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -63,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Saint Paul, MN"
+
                     android:textAppearance="@style/H2" />
             </LinearLayout>
         </LinearLayout>
@@ -79,7 +109,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp" />
 
-    <TextView
+    <!--<TextView
         android:text="Tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,7 +187,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp" />
+        android:layout_marginRight="40dp" />-->
 
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"

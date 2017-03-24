@@ -27,8 +27,8 @@ interface Student_Interface {
     void setGradTerm(String s);
     String getGradTerm();
 
-    void setGradYear(int n);
-    int getGradYear();
+    void setGradYear(String n);
+    String getGradYear();
 
     void setMajor(String s);
     String getMajor();

@@ -23,6 +23,11 @@ public class EmployerRegisterActivity extends AppCompatActivity {
     }
 
 
+    /*public void onClickRegister() {
+
+    }            */
+
+
     public final static int PICK_PHOTO_CODE = 1046;
 
     public void onClickGallery(View view) {
@@ -33,6 +38,7 @@ public class EmployerRegisterActivity extends AppCompatActivity {
             startActivityForResult(intent, PICK_PHOTO_CODE);
         }
     }
+
 
 
 }

@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertTrue;
 public class student_profile_test {
     Student_Profile dummyProfile = new Student_Profile("dummy@d.umn.edu", "loginDummy", "Dummy",
                                                         "John Doe", "Duluth", "MN", "Spring",
-                                                        2018, "Computer Science");
+                                                        "2018", "Computer Science");
     @Test
     public void testProfile() throws Exception {
         assertTrue(dummyProfile.verifyCredentials("Dummy", "loginDummy"));

@@ -18,7 +18,16 @@ public interface ModelViewPresenterComponents {
 
     }
 
-    interface UserPhotoModel{
+
+    interface RegisterActivityView {
+
+        void onClickSignUp();
+
+        void onClickRegister();
+    }
+
+    interface UserPhotoModel {
+
 
     }
 
@@ -26,12 +35,11 @@ public interface ModelViewPresenterComponents {
 
     }
 
-    interface RegisterActivityView {
-        void onClickRegister();
-    }
 
-    interface RegisterPresenterContract{
+    interface RegisterPresenterContract {
         void clickRegister();
     }
-
 }
+
+
+

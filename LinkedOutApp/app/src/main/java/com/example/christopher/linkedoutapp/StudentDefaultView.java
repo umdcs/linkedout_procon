@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class StudentDefaultView extends AppCompatActivity
@@ -48,7 +49,6 @@ public class StudentDefaultView extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
 
     }
 
@@ -113,5 +113,5 @@ public class StudentDefaultView extends AppCompatActivity
         Intent intent = new Intent(this, ArrayQuiz.class);
         startActivity(intent);
     }
-    
+
 }

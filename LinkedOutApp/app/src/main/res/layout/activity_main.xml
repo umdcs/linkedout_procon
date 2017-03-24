@@ -45,7 +45,7 @@
                 android:id="@+id/button2"
                 android:background="@color/colorAccentHighlight"
                 android:textColor="#FFFFFF"
-                android:onClick="onClickRegister"
+                android:onClick="onClickSignUp"
                 android:layout_alignBaseline="@+id/button"
                 android:layout_alignBottom="@+id/button"
                 android:layout_alignRight="@+id/logo"

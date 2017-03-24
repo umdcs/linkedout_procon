@@ -8,7 +8,7 @@ public class Student_Profile implements Student_Interface {
 
 
     public Student_Profile(String e, String p, String u, String n, String c,
-                    String s, String t, int y, String m) {
+                    String s, String t, String y, String m) {
         email = e;
         password = p;
         username = u;
@@ -70,10 +70,10 @@ public class Student_Profile implements Student_Interface {
         return gradTerm;
     }
 
-    public void setGradYear(int n) {
+    public void setGradYear(String n) {
         gradYear = n;
     }
-    public int getGradYear() {
+    public String getGradYear() {
         return gradYear;
     }
 
@@ -92,5 +92,5 @@ public class Student_Profile implements Student_Interface {
     }
 
     private String email, password, name, username, city, state, gradTerm, major;
-    private int gradYear;
+    private String gradYear;
 }

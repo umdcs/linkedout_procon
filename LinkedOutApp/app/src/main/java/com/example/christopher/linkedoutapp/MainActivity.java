@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClickRegister(View view){
+    public void onClickSignUp(View view){
         Intent intent = new Intent(this, StudentRegisterActivity.class);
         startActivity(intent);
     }
