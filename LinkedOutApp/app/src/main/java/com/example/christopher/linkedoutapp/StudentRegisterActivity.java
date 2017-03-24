@@ -1,15 +1,18 @@
 package com.example.christopher.linkedoutapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +23,7 @@ import android.widget.Spinner;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -71,7 +75,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         if(isReadStorageAllowed()){
             //If permission is already having then showing the toast
-            Toast.makeText(StudentRegisterActivity.this,"You already have the permission",Toast.LENGTH_LONG).show();
+            Toast.makeText(StudentRegisterActivity.this,"Accessing Photo Gallery",Toast.LENGTH_LONG).show();
         }
         else {
             //If the app has not the permission then asking for the permission
@@ -88,30 +92,29 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
 
     private boolean isReadStorageAllowed() {
-        //Getting the permission status
+        //Get the permission status
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
         //If permission is granted returning true
         if (result == PackageManager.PERMISSION_GRANTED)
             return true;
 
-        //If permission is not granted returning false
+        //If permission is not granted return false
         return false;
     }
 
-    //Permision code that will be checked in the method onRequestPermissionsResult
-    private int STORAGE_PERMISSION_CODE = 23;
+    //Permission code checked in onRequestPermissionsResult
+    private int STORAGE_PERMISSION_CODE = 44;
 
     //Requesting permission
     private void requestStoragePermission(){
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
-            //If the user has denied the permission previously your code will come to this block
-            //Here you can explain why you need this permission
-            //Explain here why you need this permission
+            //If the user has denied the permission previously
+            //Notify need for permissions
         }
 
-        //And finally ask for the permission
+        //Request permission
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
     }
 
@@ -119,17 +122,17 @@ public class StudentRegisterActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        //Checking the request code of our request
+        //Checking the request code
         if(requestCode == STORAGE_PERMISSION_CODE){
 
-            //If permission is granted
+            //Permission granted
             if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
                 //Displaying a toast
-                Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You have granted access to the photo gallery.",Toast.LENGTH_LONG).show();
             }else{
                 //Displaying another toast if permission is not granted
-                Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You have denied access to your photo gallery.",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -144,30 +147,16 @@ public class StudentRegisterActivity extends AppCompatActivity {
         if(resultCode==RESULT_OK && requestCode==SELECT_IMAGE){
             Uri selectedImage = data.getData();
             String path = getPath(selectedImage);
+            int rotateAngle = getCameraPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
 
             Bitmap bitmapImage = BitmapFactory.decodeFile(path);
+//            RotateBitmap(bitmapImage, rotateAngle);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(getResizedBitmap(bitmapImage, 400, 400));
+            image.setImageBitmap(getResizedBitmap(bitmapImage, rotateAngle));
         }
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-//        int width = bm.getWidth();
-//        int height = bm.getHeight();
-//        float scaleWidth = ((float) newWidth) / width;
-//        float scaleHeight = ((float) newHeight) / height;
-
-//        // CREATE A MATRIX FOR THE MANIPULATION
-//        Matrix matrix = new Matrix();
-//        // RESIZE THE BIT MAP
-//        matrix.postScale(scaleWidth, scaleHeight);
-//
-//        // "RECREATE" THE NEW BITMAP
-//        Bitmap resizedBitmap = Bitmap.createBitmap(
-//                bm, 0, 0, width, height, matrix, false);
-//        bm.recycle();
-//        return resizedBitmap;
-
+    public Bitmap getResizedBitmap(Bitmap bm, int rotateAngle) {
         float aspectRatio = bm.getWidth() /
                 (float) bm.getHeight();
         int width = 480;
@@ -175,7 +164,37 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         bm = Bitmap.createScaledBitmap(
                 bm, width, height, false);
-        return RotateBitmap(bm, 90);
+//        return bm;
+        return RotateBitmap(bm, rotateAngle);
+    }
+
+    public int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
+        int rotate = 0;
+            context.getContentResolver().notifyChange(imageUri, null);
+            File imageFile = new File(imagePath);
+
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imageFile.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+
+        System.out.println("angle: " + rotate);
+        return rotate;
     }
 
     public static Bitmap RotateBitmap(Bitmap source, float angle)
