@@ -131,10 +131,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
             //Permission granted
             if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
-                //Displaying a toast
+                //Displaying a toast if permission is granted.
                 Toast.makeText(this,"You have granted access to the photo gallery.",Toast.LENGTH_LONG).show();
             }else{
-                //Displaying another toast if permission is not granted
+                //Displaying toast if permission is not granted.
                 Toast.makeText(this,"You have denied access to your photo gallery.",Toast.LENGTH_LONG).show();
             }
         }
@@ -155,7 +155,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         bm = Bitmap.createScaledBitmap(
                 bm, width, height, false);
-//        return bm;
         return RotateBitmap(bm, rotateAngle);
     }
 
