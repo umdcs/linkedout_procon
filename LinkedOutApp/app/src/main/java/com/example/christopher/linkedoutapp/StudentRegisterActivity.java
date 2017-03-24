@@ -31,6 +31,9 @@ import static android.R.attr.width;
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
+    //Photo code used when strting the intent to open the gallery.
+    public final static int PICK_PHOTO_CODE = 1;
+
     //To be checked against request code in onActivityResult
     private static final int SELECT_IMAGE = 1;
 
@@ -47,8 +50,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EmployerRegisterActivity.class);
         startActivity(intent);
     }
-
-    public final static int PICK_PHOTO_CODE = 1;
 
     public void onClickGallery(View view) {
         if(isReadStorageAllowed()){
