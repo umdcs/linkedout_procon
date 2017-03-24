@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class EmployerRegisterActivity extends AppCompatActivity {
 
-    private ModelViewPresenterComponents.RegisterActivityView photoPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +33,6 @@ public class EmployerRegisterActivity extends AppCompatActivity {
             startActivityForResult(intent, PICK_PHOTO_CODE);
         }
     }
+
 
 }
