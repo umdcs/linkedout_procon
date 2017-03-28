@@ -13,36 +13,35 @@
     <!-- TODO: Update blank fragment layout -->
 
     <FrameLayout
-        android:id="@+id/ProfileInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/ProfileInfo"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentStart="true">
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="161dp">
 
             <ImageView
-                android:id="@+id/imageView2"
                 android:layout_width="94dp"
                 android:layout_height="100dp"
-                android:layout_weight="0.00"
-                app:srcCompat="@drawable/ic_menu_camera" />
+                app:srcCompat="@drawable/ic_menu_camera"
+                android:id="@+id/imageView2"
+                android:layout_weight="0.00" />
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
                 android:layout_weight="0.04"
-                android:orientation="vertical">
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="10dp">
 
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/displayStudentName"
@@ -73,7 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/displayLocation"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:textAppearance="@style/H2" />
             </LinearLayout>
         </LinearLayout>
 
