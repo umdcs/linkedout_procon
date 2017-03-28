@@ -38,6 +38,8 @@ import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
 
+import static android.app.PendingIntent.getActivity;
+
 public class RESTful_API {
     /**
      * HTTPAsyncTask for managing HTTP messages in a separate thread
@@ -215,10 +217,10 @@ public class RESTful_API {
      *
      * @param view
      */
-    public void registerStudentPOST(View view) {
+ /*   public void registerStudentPOST(View view) {
 
-        SharedPreferences prefs = getSharedPreferences(
-                "com.example.app", 0);
+      //  SharedPreferences prefs = getPreferences();
+               // "com.example.app", 0);
 
         JSONObject jsonParam;
         try {
@@ -240,7 +242,7 @@ public class RESTful_API {
 //        use this one when at school
         new HTTPAsyncTask().execute("http://131.212.216.254:8080/postMPG", "POST", jsonParam.toString());
 
-    }
+    } */
 
     /**
      * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
