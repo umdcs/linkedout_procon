@@ -42,7 +42,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 44;
 
     public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+    SharedPreferences prefs;
+
+    RESTful_API nodeServer = new RESTful_API();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +80,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
         String gradterm = gradTermSpinner.getSelectedItem().toString();
 
-        //rest functions?
-
-        fillInData();
-
         //switches to the student profile page
         //startActivity(intent);
-
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", username);
@@ -96,7 +93,16 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.apply(); // apply is instant (asynchronous) vs commit which is not!
+        //editor.apply();
+        /* apply is instant (asynchronous) vs commit which is not!
+         * However, older phones may not support apply, so use while(!editor.commit() );
+           to wait until the write to external storage has been completed!   */
+        while(!editor.commit());
+        fillInData();
+
+        //rest functions?
+
+//        nodeServer.registerStudentPOST();
     }
 
     // Updated to use sharedprefs

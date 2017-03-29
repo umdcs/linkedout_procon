@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +41,7 @@ import java.util.List;
 
 import static android.app.PendingIntent.getActivity;
 
-public class RESTful_API {
+public class RESTful_API extends AppCompatActivity {
     /**
      * HTTPAsyncTask for managing HTTP messages in a separate thread
      *
@@ -193,6 +194,17 @@ public class RESTful_API {
         }
     }
 
+    /* 'Global' prefs object to provide access to data members in each uri
+     *  must instantiate in each uri with the following code:
+     *  prefs = getSharedPreferences(STUDENT_PREFS, 0);
+     *  and can use editor = prefs.edit(); to modify values
+     *  and prefs.getString("tag value", "error string"); to view.
+     */
+    public final static String STUDENT_PREFS = "Student Preferences";
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    /***** BEGIN URI DEFINITIONS *****/
     /**
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
@@ -200,7 +212,7 @@ public class RESTful_API {
      * @param view
      */
     public void restGET(View view) {
-//        use this one at school
+        prefs = getSharedPreferences(STUDENT_PREFS, 0);
         new HTTPAsyncTask().execute("http://131.212.216.254:8080/getAllMPG", "GET");
 
 //        this one is for home
@@ -212,37 +224,34 @@ public class RESTful_API {
     }
 
     /**
-     * Acts as the onClick callback for the REST POST Button. The code will generate a REST POST
+     * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
      * action to the REST Server.
      *
-     * @param view
+     *
      */
- /*   public void registerStudentPOST(View view) {
+    public void registerStudentPOST() {
+        prefs = getSharedPreferences(STUDENT_PREFS, 0);
 
-      //  SharedPreferences prefs = getPreferences();
-               // "com.example.app", 0);
-
-        JSONObject jsonParam;
+        JSONObject jsonParam = new JSONObject();
         try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("username",  );
-            jsonParam.put("password", );
-            jsonParam.put("email", );
-            jsonParam.put("name", );
-            jsonParam.put("city", );
-            jsonParam.put("state", );
-            jsonParam.put("gradTerm", );
-            jsonParam.put("gradYear", );
-            jsonParam.put("major", );
+            // Put values into the jsonParam object
+            jsonParam.put("username", prefs.getString("username", ""));
+            jsonParam.put("password", prefs.getString("password", ""));
+            jsonParam.put("email", prefs.getString("email", ""));
+            jsonParam.put("name", prefs.getString("fullName", ""));
+            jsonParam.put("city", prefs.getString("city", ""));
+            jsonParam.put("state", prefs.getString("state", ""));
+            jsonParam.put("gradTerm", prefs.getString("gradTerm", ""));
+            jsonParam.put("gradYear", prefs.getString("gradYear", ""));
+            jsonParam.put("major", prefs.getString("major", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-//        use this one when at school
-        new HTTPAsyncTask().execute("http://131.212.216.254:8080/postMPG", "POST", jsonParam.toString());
 
-    } */
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
+
+    }
 
     /**
      * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
