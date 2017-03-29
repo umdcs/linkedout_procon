@@ -106,7 +106,6 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/studentName"
                     android:layout_weight="1"
@@ -116,12 +115,13 @@
                     android:textAppearance="@style/H1"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorAccentLight"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textCapSentences"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:ems="10"
                     android:layout_below="@+id/User_Name"
                     android:layout_alignParentLeft="true"
@@ -141,7 +141,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences"
                     android:ems="10"
                     android:id="@+id/registerStudentMajor"
                     android:layout_weight="1"
@@ -181,7 +181,7 @@
         <EditText
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:ems="10"
             android:id="@+id/registerStudentCity"
             android:background="@color/colorAccentDark"
@@ -234,7 +234,7 @@
          <EditText
              android:layout_width="75dp"
              android:layout_height="wrap_content"
-             android:inputType="textPersonName"
+             android:inputType="text"
              android:ems="10"
              android:id="@+id/registerStudentGradYear"
              android:background="@color/colorAccentDark"
