@@ -60,7 +60,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
 
         //Sets intent to the student profile
-        //Intent intent = new Intent(this, StudentDefaultView.class);
+        Intent intent = new Intent(this, StudentDefaultView.class);
 
 
         //Creates strings from entered text in student profile
@@ -80,11 +80,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         //rest functions?
 
-        fillInData();
-
         //switches to the student profile page
-        //startActivity(intent);
-
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", username);
@@ -96,7 +92,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.apply(); // apply is instant (asynchronous) vs commit which is not!
+        while(!editor.commit());
+
+        startActivity(intent);
+
+        //fillInData();
     }
 
     // Updated to use sharedprefs
@@ -123,7 +123,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     public void onClickGallery(View view) {
         if(isReadStorageAllowed()){
-            //If permission has already been granted show toast message.
+            //If permission has already been granted show toast   message.
             Toast.makeText(StudentRegisterActivity.this,"Accessing Photo Gallery",Toast.LENGTH_LONG).show();
         }
         else {
