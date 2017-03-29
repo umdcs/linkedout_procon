@@ -80,8 +80,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         //rest functions?
 
-        //switches to the student profile page
-
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", username);
         editor.putString("password", password);
@@ -94,32 +92,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("major", major);
         while(!editor.commit());
 
+        //switches to the student profile page
         startActivity(intent);
-
-        //fillInData();
     }
-
-    // Updated to use sharedprefs
-    private void fillInData() {
-
-        setContentView(R.layout.fragment_profile);
-
-        TextView nameText = (TextView) findViewById(R.id.displayStudentName);
-        nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
-
-        TextView majorText = (TextView) findViewById(R.id.displayMajor);
-        majorText.setText(prefs.getString("major", "ERROR") + " Major");
-
-        TextView graduationText = (TextView) findViewById(R.id.displayGraduation);
-        graduationText.setText("Graduating " +
-                                prefs.getString("gradTerm", "ERROR") + " " +
-                                prefs.getString("gradYear", "ERROR"));
-
-        TextView locationText = (TextView) findViewById(R.id.displayLocation);
-        locationText.setText(prefs.getString("city", "ERROR") + ", " +
-                             prefs.getString("state", "ERROR"));
-    }
-
 
     public void onClickGallery(View view) {
         if(isReadStorageAllowed()){

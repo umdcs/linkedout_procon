@@ -65,13 +65,13 @@ public class Profile extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        prefs = getContext().getSharedPreferences(STUDENT_PREFS, 0);
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -132,7 +132,4 @@ public class Profile extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void setPrefs(SharedPreferences prefs1) {
-        prefs = prefs1;
-    }
 }
