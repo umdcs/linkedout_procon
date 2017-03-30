@@ -236,5 +236,14 @@
 
     </LinearLayout> -->
 
+    <Button
+        android:text="Add Skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAddSkill"
+        android:layout_weight="0"
+        android:onClick="changeViewToAddSkill" />
+
+
 </LinearLayout>
 </ScrollView>
