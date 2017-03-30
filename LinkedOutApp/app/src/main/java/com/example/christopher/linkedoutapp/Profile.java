@@ -1,6 +1,7 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,6 +131,11 @@ public class Profile extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void changeViewToAddSkill(View view) {
+        Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
+        startActivity(intent);
     }
 
 }
