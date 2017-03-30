@@ -24,7 +24,8 @@
             android:id="@+id/typeTextView"
             android:layout_weight="0"
             android:textAppearance="@style/H1"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                     android:textAppearance="@style/H1"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorAccentLight"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="10dp"
                     android:inputType="textCapSentences"/>
 
                 <EditText
@@ -52,7 +53,7 @@
                     android:id="@+id/newSkillHow"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:hint="How did you gain this skill? (in a course, job, etc.)"
+                    android:hint="Course/job in which skill was gained"
                     android:background="@color/colorAccentDark"
                     android:textColorHint="@color/colorAccentLight"
                     android:layout_weight="1"
