@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,7 @@ public class Profile extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
+        //Fill the profile display data (name, location, major, graduation date)
         TextView nameText = (TextView) view.findViewById(R.id.displayStudentName);
         nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
 
@@ -91,6 +93,17 @@ public class Profile extends Fragment {
         TextView locationText = (TextView) view.findViewById(R.id.displayLocation);
         locationText.setText(prefs.getString("city", "ERROR") + ", " +
                 prefs.getString("state", "ERROR"));
+
+        //Add onClick action to AddSkill button
+        Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
+        addSkillAction.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -134,9 +147,9 @@ public class Profile extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void changeViewToAddSkill(View view) {
+    /*public void changeViewToAddSkill(View view) {
         Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
         startActivity(intent);
-    }
+    }*/
 
 }

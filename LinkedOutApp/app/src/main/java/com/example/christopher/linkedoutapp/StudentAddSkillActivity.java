@@ -27,40 +27,23 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         //Sets intent to the student profile
         Intent intent = new Intent(this, StudentDefaultView.class);
 
+        //Creates strings from entered text in new skill
+        String skillName = ((EditText) findViewById(R.id.newSkillName)).getText().toString();
+        String skillHow = ((EditText) findViewById(R.id.newSkillHow)).getText().toString();
+        String skillDescription = ((EditText) findViewById(R.id.newSkillDescription)).getText().toString();
 
-        //Creates strings from entered text in student profile
-        String name = ((EditText) findViewById(R.id.studentName)).getText().toString();
-        String username = ((EditText) findViewById(R.id.studentUsername)).getText().toString();
-        String email = ((EditText) findViewById(R.id.studentEmail)).getText().toString();
-        String password = ((EditText) findViewById(R.id.studentPassword)).getText().toString();
-        String city = ((EditText) findViewById(R.id.registerStudentCity)).getText().toString();
-        String gradyear = ((EditText) findViewById(R.id.registerStudentGradYear)).getText().toString();
-        String major = ((EditText) findViewById(R.id.registerStudentMajor)).getText().toString();
-
-        //Grab the selected spinner info
-        Spinner stateSpinner = (Spinner) findViewById(R.id.stateSpinner);
-        String state = stateSpinner.getSelectedItem().toString();
-        Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
-        String gradterm = gradTermSpinner.getSelectedItem().toString();
 
         //rest functions?
 
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("username", username);
-        editor.putString("password", password);
-        editor.putString("email", email);
-        editor.putString("fullName", name);
-        editor.putString("city", city);
-        editor.putString("state", state);
-        editor.putString("gradTerm", gradterm);
-        editor.putString("gradYear", gradyear);
-        editor.putString("major", major);
+        editor.putString("skillname", skillName);
+        editor.putString("skillhow", skillHow);
+        editor.putString("skilldescription", skillDescription);
         while(!editor.commit());
 
         //switches to the student profile page
         startActivity(intent);
     }
-
 
 
 }
