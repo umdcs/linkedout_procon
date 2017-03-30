@@ -209,28 +209,32 @@ public class RESTful_API extends AppCompatActivity {
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
      *
-     * @param view
+     * @param username
+     * @param password
+     *
+     * @returns JSONObject with all user data if username and passwords are correct
      */
-    public void restGET(View view) {
-        prefs = getSharedPreferences(STUDENT_PREFS, 0);
-        new HTTPAsyncTask().execute("http://131.212.216.254:8080/getAllMPG", "GET");
+    public void loginGET(String username, String password) {
+        JSONObject jsonParam = new JSONObject();
 
-//        this one is for home
-//        new HTTPAsyncTask().execute("http://192.168.0.3:8080/getAllMPG", "GET");
+        try {
+            jsonParam.put("username", username);
+            jsonParam.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-//        use this one if emulating on the development machine
-//        new HTTPAsyncTask().execute("http://10.0.2.2:8080/getAllMPG", "GET");
-
+        new HTTPAsyncTask().execute("http://131.212.216.254:8080/login", "GET", jsonParam.toString() );
     }
 
     /**
      * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
      * action to the REST Server.
      *
-     *
+     * @param prefs
      */
-    public void registerStudentPOST() {
-        prefs = getSharedPreferences(STUDENT_PREFS, 0);
+    public void registerStudentPOST(SharedPreferences prefs) {
+        //prefs = getSharedPreferences(STUDENT_PREFS, 0);
 
         JSONObject jsonParam = new JSONObject();
         try {
@@ -238,7 +242,7 @@ public class RESTful_API extends AppCompatActivity {
             jsonParam.put("username", prefs.getString("username", ""));
             jsonParam.put("password", prefs.getString("password", ""));
             jsonParam.put("email", prefs.getString("email", ""));
-            jsonParam.put("name", prefs.getString("fullName", ""));
+            jsonParam.put("fullName", prefs.getString("fullName", ""));
             jsonParam.put("city", prefs.getString("city", ""));
             jsonParam.put("state", prefs.getString("state", ""));
             jsonParam.put("gradTerm", prefs.getString("gradTerm", ""));

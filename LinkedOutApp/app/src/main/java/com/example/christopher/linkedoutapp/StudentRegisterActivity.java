@@ -43,14 +43,14 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs;
-
-    RESTful_API nodeServer = new RESTful_API();
+    RESTful_API nodeServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
+        nodeServer = new RESTful_API(); // relocated here vs just above...
     }
 
     public void changeViewToEmployer(View view) {
@@ -101,8 +101,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         fillInData();
 
         //rest functions?
-
-//        nodeServer.registerStudentPOST();
+        nodeServer.registerStudentPOST(prefs);
     }
 
     // Updated to use sharedprefs
