@@ -78,6 +78,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
         String gradterm = gradTermSpinner.getSelectedItem().toString();
 
+        //Get the profile pic, and turn into string.
+
+
         //rest functions?
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -122,6 +125,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String path = getPath(selectedImage);
             int rotateAngle = getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+
+
 
             Bitmap bitmapImage = BitmapFactory.decodeFile(path);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
@@ -201,6 +206,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
         bm = Bitmap.createScaledBitmap(
                 bm, width, height, false);
         return RotateBitmap(bm, rotateAngle);
+    }
+
+    public Bitmap getBitMap() {
+
     }
 
     public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
