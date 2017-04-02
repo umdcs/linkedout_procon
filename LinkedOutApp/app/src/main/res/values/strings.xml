@@ -77,6 +77,16 @@
         <item>Summer</item>
     </string-array>
 
+    <string name="username"></string>
+    <string name="password"></string>
+    <string name="fullname"></string>
+    <string name="email"></string>
+    <string name="userCity"></string>
+    <string name="userState"></string>
+    <string name="gradTerm"></string>
+    <string name="gradYear"></string>
+    <string name="major"></string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

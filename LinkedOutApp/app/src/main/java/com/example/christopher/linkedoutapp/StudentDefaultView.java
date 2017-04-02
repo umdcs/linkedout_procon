@@ -31,7 +31,7 @@ public class StudentDefaultView extends AppCompatActivity
         setContentView(R.layout.activity_student_default_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Fragment fragment = null;
-        Class fragmentClass = News.class;
+        Class fragmentClass = Profile.class;
         FragmentManager fragmentManager = getSupportFragmentManager();
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -75,7 +75,7 @@ public class StudentDefaultView extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        Class fragmentClass = News.class;
+        Class fragmentClass = Profile.class;
 
         if (id == R.id.news) {
            fragmentClass = News.class;
