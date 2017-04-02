@@ -145,22 +145,18 @@ public class Profile extends Fragment {
 
         TextView displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
 
-     //Set skills text from Shared Preferences
-        if (skillNameText.getText() != "") {   //If there is a skill, do the following
-
             //Set the header "Skills"
             displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
             displaySkillText.setText("Skills");
 
             //Add skill name
-            skillNameText.setText(prefs.getString("skillname", "ERROR"));
+            skillNameText.setText(prefs.getString("skillname", ""));
 
             //Add how skill was aquired
-            skillHowText.setText(prefs.getString("skillhow", "ERROR"));
+            skillHowText.setText(prefs.getString("skillhow", ""));
 
             //Add skill description
-            skillDescriptionText.setText(prefs.getString("skilldescription", "ERROR"));
-        }
+            skillDescriptionText.setText(prefs.getString("skilldescription", ""));
 
      //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
@@ -196,28 +192,7 @@ public class Profile extends Fragment {
             }
         });
 
-
     }
-
-    public void toggle_allskills(View v){
-
-        skillNameText.setVisibility( skillNameText.isShown()
-                ? View.GONE
-                : View.VISIBLE );
-
-    }
-
-    public void toggle_oneskill(View v){
-
-        skillHowText.setVisibility( skillHowText.isShown()
-                ? View.GONE
-                : View.VISIBLE );
-
-        skillDescriptionText.setVisibility( skillDescriptionText.isShown()
-                ? View.GONE
-                : View.VISIBLE );
-    }
-
 
     /**
      * This interface must be implemented by activities that contain this
@@ -233,10 +208,5 @@ public class Profile extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    /*public void changeViewToAddSkill(View view) {
-        Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
-        startActivity(intent);
-    }*/
 
 }

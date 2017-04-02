@@ -11,7 +11,6 @@ import android.widget.Spinner;
 
 public class StudentAddSkillActivity extends AppCompatActivity {
 
-
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
 
