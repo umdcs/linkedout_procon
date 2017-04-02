@@ -35,6 +35,12 @@ public class Profile extends Fragment {
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
 
+    //Individual skill textView
+    private TextView skillNameText;
+
+    //Skills: How and description
+    private TextView skillHowText;
+    private TextView skillDescriptionText;
 
     private OnFragmentInteractionListener mListener;
 
@@ -78,32 +84,16 @@ public class Profile extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-        //Fill the profile display data (name, location, major, graduation date)
-        TextView nameText = (TextView) view.findViewById(R.id.displayStudentName);
-        nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
 
-        TextView majorText = (TextView) view.findViewById(R.id.displayMajor);
-        majorText.setText(prefs.getString("major", "ERROR") + " Major");
+        skillNameText = (TextView) view.findViewById(R.id.displaySkillName);
+        skillHowText = (TextView) view.findViewById(R.id.displaySkillHow);
+        skillDescriptionText = (TextView) view.findViewById(R.id.displaySkillDescription);
 
-        TextView graduationText = (TextView) view.findViewById(R.id.displayGraduation);
-        graduationText.setText("Graduating " +
-                prefs.getString("gradTerm", "ERROR") + " " +
-                prefs.getString("gradYear", "ERROR"));
+        skillNameText.setVisibility(View.GONE);
+        skillHowText.setVisibility(View.GONE);
+        skillDescriptionText.setVisibility(View.GONE);
 
-        TextView locationText = (TextView) view.findViewById(R.id.displayLocation);
-        locationText.setText(prefs.getString("city", "ERROR") + ", " +
-                prefs.getString("state", "ERROR"));
-
-        //Add onClick action to AddSkill button
-        Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
-        addSkillAction.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
-                startActivity(intent);
-            }
-        });
+        fillInData(view);
 
         return view;
     }
@@ -129,8 +119,105 @@ public class Profile extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+
+
+
         mListener = null;
     }
+
+    private void fillInData(View view) {
+
+     //Fill the profile display data (name, location, major, graduation date)
+        TextView nameText = (TextView) view.findViewById(R.id.displayStudentName);
+        nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
+
+        TextView majorText = (TextView) view.findViewById(R.id.displayMajor);
+        majorText.setText(prefs.getString("major", "ERROR") + " Major");
+
+        TextView graduationText = (TextView) view.findViewById(R.id.displayGraduation);
+        graduationText.setText("Graduating " +
+                prefs.getString("gradTerm", "ERROR") + " " +
+                prefs.getString("gradYear", "ERROR"));
+
+        TextView locationText = (TextView) view.findViewById(R.id.displayLocation);
+        locationText.setText(prefs.getString("city", "ERROR") + ", " +
+                prefs.getString("state", "ERROR"));
+
+        TextView displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
+
+     //Set skills text from Shared Preferences
+        if (skillNameText.getText() != "") {   //If there is a skill, do the following
+
+            //Set the header "Skills"
+            displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
+            displaySkillText.setText("Skills");
+
+            //Add skill name
+            skillNameText.setText(prefs.getString("skillname", "ERROR"));
+
+            //Add how skill was aquired
+            skillHowText.setText(prefs.getString("skillhow", "ERROR"));
+
+            //Add skill description
+            skillDescriptionText.setText(prefs.getString("skilldescription", "ERROR"));
+        }
+
+     //Add onClick action to AddSkill button
+        Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
+        addSkillAction.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        displaySkillText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skillNameText.setVisibility(skillNameText.isShown()
+                        ? View.GONE
+                        : View.VISIBLE);
+            }
+        });
+
+        skillNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skillHowText.setVisibility( skillHowText.isShown()
+                        ? View.GONE
+                        : View.VISIBLE );
+
+                skillDescriptionText.setVisibility( skillDescriptionText.isShown()
+                        ? View.GONE
+                        : View.VISIBLE );
+            }
+        });
+
+
+    }
+
+    public void toggle_allskills(View v){
+
+        skillNameText.setVisibility( skillNameText.isShown()
+                ? View.GONE
+                : View.VISIBLE );
+
+    }
+
+    public void toggle_oneskill(View v){
+
+        skillHowText.setVisibility( skillHowText.isShown()
+                ? View.GONE
+                : View.VISIBLE );
+
+        skillDescriptionText.setVisibility( skillDescriptionText.isShown()
+                ? View.GONE
+                : View.VISIBLE );
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
