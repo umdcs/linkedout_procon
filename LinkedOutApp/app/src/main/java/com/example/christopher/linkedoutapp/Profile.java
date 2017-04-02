@@ -2,12 +2,15 @@ package com.example.christopher.linkedoutapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -29,6 +32,8 @@ public class Profile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Profile_Pic pic = new Profile_Pic();
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
@@ -89,6 +94,15 @@ public class Profile extends Fragment {
         TextView locationText = (TextView) view.findViewById(R.id.displayLocation);
         locationText.setText(prefs.getString("city", "ERROR") + ", " +
                 prefs.getString("state", "ERROR"));
+
+        ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        String path = prefs.getString("profilePic", "ERROR");
+        pic.setPath(path);
+        int rotateAngle = pic.getOrientationFromPath(path);
+        Bitmap bitmapImage = BitmapFactory.decodeFile(path);
+        bitmapImage = pic.getResizedBitmap(bitmapImage);
+        bitmapImage = pic.rotateBitmap(bitmapImage, rotateAngle);
+        profilePic.setImageBitmap(bitmapImage);
 
         return view;
     }

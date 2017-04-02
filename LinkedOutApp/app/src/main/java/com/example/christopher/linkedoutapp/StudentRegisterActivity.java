@@ -73,6 +73,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
+        editor.putString("profilePic", pic.getPath());
         while (!editor.commit()) ;
 
         //switches to the student profile page
@@ -103,12 +104,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == pic.SELECT_IMAGE) {
             Uri selectedImage = data.getData();
             String path = pic.getPath(selectedImage, this);
+            pic.setPath(path);
             int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-
-
-            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
+            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(pic.getResizedBitmap(bitmapImage, rotateAngle));
+            image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
         }
     }
 }

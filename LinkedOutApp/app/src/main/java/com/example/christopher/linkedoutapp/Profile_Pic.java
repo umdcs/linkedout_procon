@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -26,9 +27,17 @@ public class Profile_Pic {
 
     public Profile_Pic(){
         pic = null;
+        path = null;
+        orientationAngle = 0;
     }
 
-    public final Bitmap pic;
+    private int orientationAngle;
+
+    private String path;
+
+    private Bitmap pic;
+
+    private Uri imageData;
 
     //Photo code used when strting the intent to open the gallery.
     public final static int PICK_PHOTO_CODE = 1;
@@ -76,33 +85,48 @@ public class Profile_Pic {
         ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
     }
 
-    //This method will be called when the user will tap on allow or deny
-    //@Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        //Checking the request code
-        if(requestCode == STORAGE_PERMISSION_CODE){
-
-            //Permission granted
-            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                //Displaying a toast if permission is granted.
-                //Toast.makeText(this,"You have granted access to the photo gallery.",Toast.LENGTH_LONG).show();
-            }else{
-                //Displaying toast if permission is not granted.
-                //Toast.makeText(this,"You have denied access to your photo gallery.",Toast.LENGTH_LONG).show();
-            }
-        }
+   public String getPath(){
+       return path;
    }
 
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
+   public void setPath(String path){
+       this.path = path;
+   }
+
+   public int getOrientationFromPath(String imagePath){
+       ExifInterface exif = null;
+       int rotate = 0;
+       try {
+           exif = new ExifInterface(imagePath);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+       int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+       switch (orientation) {
+           case ExifInterface.ORIENTATION_ROTATE_270:
+               rotate = 270;
+               break;
+           case ExifInterface.ORIENTATION_ROTATE_180:
+               rotate = 180;
+               break;
+           case ExifInterface.ORIENTATION_ROTATE_90:
+               rotate = 90;
+               break;
+       }
+
+       return rotate;
+   }
+
+    public static Bitmap rotateBitmap(Bitmap source, float angle)
     {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int rotateAngle) {
+    public Bitmap getResizedBitmap(Bitmap bm) {
         float aspectRatio = bm.getWidth() /
                 (float) bm.getHeight();
         int width = 480;
@@ -110,7 +134,7 @@ public class Profile_Pic {
 
         bm = Bitmap.createScaledBitmap(
                 bm, width, height, false);
-        return RotateBitmap(bm, rotateAngle);
+        return bm;
     }
 
     public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
@@ -137,10 +161,7 @@ public class Profile_Pic {
                 rotate = 90;
                 break;
         }
-
-        System.out.println("angle: " + rotate);
         return rotate;
-
     }
 
 }
