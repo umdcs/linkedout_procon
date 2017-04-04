@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,12 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 
 public class StudentRegisterActivity extends AppCompatActivity {
@@ -79,27 +72,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.putString("profilePic", pic.getPath());
+        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         while (!editor.commit()) ;
 
-        try {
-            File root = Environment.getExternalStorageDirectory();
-            File myFile = new File(root +"/textfile.txt");
-            myFile.createNewFile();
-
-            FileOutputStream fOut = new FileOutputStream(myFile);
-            OutputStreamWriter myOutWriter =
-                    new OutputStreamWriter(fOut);
-            myOutWriter.append(pic.getEncodedBitmap(pic.getBitmap()));
-
-            myOutWriter.close();
-            fOut.close();
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
-
-        }
-
-        //System.out.println(pic.getEncodedBitmap(pic.getBitmap()));
 
         //switches to the student profile page
         startActivity(intent);

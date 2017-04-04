@@ -93,6 +93,7 @@ public class ProfilePic {
        this.path = path;
    }
 
+   /**Previously used, will likely be removed.**/
    public int getOrientationFromPath(String imagePath){
        ExifInterface exif = null;
        int rotate = 0;

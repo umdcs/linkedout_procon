@@ -3,7 +3,6 @@ package com.example.christopher.linkedoutapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -96,13 +95,10 @@ public class Profile extends Fragment {
                 prefs.getString("state", "ERROR"));
 
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
-        String path = prefs.getString("profilePic", "ERROR");
-        pic.setPath(path);
-        int rotateAngle = pic.getOrientationFromPath(path);
-        Bitmap bitmapImage = BitmapFactory.decodeFile(path);
-        bitmapImage = pic.getResizedBitmap(bitmapImage);
-        bitmapImage = pic.rotateBitmap(bitmapImage, rotateAngle);
-        profilePic.setImageBitmap(bitmapImage);
+        String imgString = prefs.getString("profilePic", "ERROR");
+        Bitmap bm = pic.getDecodedBitmap(imgString);
+        bm = pic.getResizedBitmap(bm);
+        profilePic.setImageBitmap(bm);
 
         return view;
     }
