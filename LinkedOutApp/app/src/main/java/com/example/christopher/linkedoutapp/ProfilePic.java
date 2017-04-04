@@ -30,10 +30,7 @@ public class ProfilePic {
     public ProfilePic(){
         pic = null;
         path = null;
-        orientationAngle = 0;
     }
-
-    private int orientationAngle;
 
     private String path;
 
