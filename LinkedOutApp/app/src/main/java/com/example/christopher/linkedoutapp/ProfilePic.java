@@ -90,33 +90,6 @@ public class ProfilePic {
        this.path = path;
    }
 
-   /**Previously used, will likely be removed.**/
-   public int getOrientationFromPath(String imagePath){
-       ExifInterface exif = null;
-       int rotate = 0;
-       try {
-           exif = new ExifInterface(imagePath);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-
-       int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-       switch (orientation) {
-           case ExifInterface.ORIENTATION_ROTATE_270:
-               rotate = 270;
-               break;
-           case ExifInterface.ORIENTATION_ROTATE_180:
-               rotate = 180;
-               break;
-           case ExifInterface.ORIENTATION_ROTATE_90:
-               rotate = 90;
-               break;
-       }
-
-       return rotate;
-   }
-
    public Bitmap getBitmap(){
        return pic;
    }
