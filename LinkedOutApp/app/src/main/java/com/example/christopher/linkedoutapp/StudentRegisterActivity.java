@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 
 public class StudentRegisterActivity extends AppCompatActivity {
@@ -22,7 +28,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
 
-    Profile_Pic pic = new Profile_Pic();
+    ProfilePic pic = new ProfilePic();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,25 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("profilePic", pic.getPath());
         while (!editor.commit()) ;
 
+        try {
+            File root = Environment.getExternalStorageDirectory();
+            File myFile = new File(root +"/textfile.txt");
+            myFile.createNewFile();
+
+            FileOutputStream fOut = new FileOutputStream(myFile);
+            OutputStreamWriter myOutWriter =
+                    new OutputStreamWriter(fOut);
+            myOutWriter.append(pic.getEncodedBitmap(pic.getBitmap()));
+
+            myOutWriter.close();
+            fOut.close();
+        } catch (Exception e) {
+            Toast.makeText(getBaseContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
+
+        }
+
+        //System.out.println(pic.getEncodedBitmap(pic.getBitmap()));
+
         //switches to the student profile page
         startActivity(intent);
     }
@@ -107,6 +132,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             pic.setPath(path);
             int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
             Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            pic.setBitmap(bitmapImage);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
             image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
         }

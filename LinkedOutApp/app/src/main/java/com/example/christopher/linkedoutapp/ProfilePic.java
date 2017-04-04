@@ -14,8 +14,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,9 +25,9 @@ import java.io.IOException;
  * Created by imcdo on 3/30/2017.
  */
 
-public class Profile_Pic {
+public class ProfilePic {
 
-    public Profile_Pic(){
+    public ProfilePic(){
         pic = null;
         path = null;
         orientationAngle = 0;
@@ -36,8 +38,6 @@ public class Profile_Pic {
     private String path;
 
     private Bitmap pic;
-
-    private Uri imageData;
 
     //Photo code used when strting the intent to open the gallery.
     public final static int PICK_PHOTO_CODE = 1;
@@ -119,6 +119,14 @@ public class Profile_Pic {
        return rotate;
    }
 
+   public Bitmap getBitmap(){
+       return pic;
+   }
+
+   public void setBitmap(Bitmap bm){
+       pic = bm;
+   }
+
     public static Bitmap rotateBitmap(Bitmap source, float angle)
     {
         Matrix matrix = new Matrix();
@@ -135,6 +143,22 @@ public class Profile_Pic {
         bm = Bitmap.createScaledBitmap(
                 bm, width, height, false);
         return bm;
+    }
+
+    public String getEncodedBitmap(Bitmap bitmap) {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+        byte[] byteFormat = stream.toByteArray();
+        // get the base 64 string
+        String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+        return imgString;
+    }
+
+    public Bitmap getDecodedBitmap(String imgString){
+        byte[] decodedString = Base64.decode(imgString.getBytes(), Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedBitmap;
     }
 
     public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
