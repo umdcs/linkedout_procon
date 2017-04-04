@@ -119,9 +119,6 @@ public class Profile extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
-
-
         mListener = null;
     }
 
@@ -158,7 +155,7 @@ public class Profile extends Fragment {
             //Add skill description
             skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
 
-     //Add onClick action to AddSkill button
+        //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
         addSkillAction.setOnClickListener(new View.OnClickListener() {
 
@@ -169,7 +166,7 @@ public class Profile extends Fragment {
             }
         });
 
-
+        //Toggle display of skills names
         displaySkillText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +176,7 @@ public class Profile extends Fragment {
             }
         });
 
+        //Toggle display of skills' descriptions
         skillNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
