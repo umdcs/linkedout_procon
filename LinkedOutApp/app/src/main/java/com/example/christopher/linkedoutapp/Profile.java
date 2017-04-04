@@ -153,10 +153,10 @@ public class Profile extends Fragment {
             skillNameText.setText(prefs.getString("skillname", ""));
 
             //Add how skill was aquired
-            skillHowText.setText(prefs.getString("skillhow", ""));
+            skillHowText.setText("Skill obtained from: " + "\n" + prefs.getString("skillhow", ""));
 
             //Add skill description
-            skillDescriptionText.setText(prefs.getString("skilldescription", ""));
+            skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
 
      //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);

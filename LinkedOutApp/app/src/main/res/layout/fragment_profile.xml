@@ -170,6 +170,8 @@
             android:background="@color/colorAccentDark"
             android:layout_weight="1"
             android:text=""
+            android:textStyle="bold"
+            android:padding="5dp"
             android:clickable="true" />
 
         <TextView
@@ -179,7 +181,7 @@
             android:id="@+id/displaySkillHow"
             android:layout_weight="1"
             android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
+            android:paddingLeft="25dp"
             android:textAppearance="@style/H2" />
 
         <TextView
@@ -189,7 +191,7 @@
             android:id="@+id/displaySkillDescription"
             android:layout_weight="1"
             android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
+            android:paddingLeft="25dp"
             android:textAppearance="@style/H2" />
 
     </LinearLayout>
