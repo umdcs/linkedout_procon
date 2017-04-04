@@ -50,7 +50,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
-        nodeServer = new RESTful_API(); // relocated here vs just above...
+        nodeServer = new RESTful_API();
     }
 
     public void changeViewToEmployer(View view) {

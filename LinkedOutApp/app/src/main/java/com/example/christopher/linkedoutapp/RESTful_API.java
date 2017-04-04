@@ -40,6 +40,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static android.app.PendingIntent.getActivity;
+import static org.json.JSONObject.NULL;
 
 public class RESTful_API extends AppCompatActivity {
     /**
@@ -51,6 +52,8 @@ public class RESTful_API extends AppCompatActivity {
      * managing the response.  Upon completion of doInBackground, the task
      * calls the onPostExecute function.
      */
+    JSONObject returnData;
+
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -184,10 +187,11 @@ public class RESTful_API extends AppCompatActivity {
 
                 //Trying to instantiate the JSONObject with just result
                 //leads to an exception being thrown... This works
-                jsonData.put(result, 0);
+                jsonData.put("response: ", result);
 
                 Log.d("onPostExec Valid JSON:", jsonData.toString());
-
+                returnData = jsonData;
+                Log.d("loginGET: ", "returnData: " +jsonData.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -204,27 +208,31 @@ public class RESTful_API extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
+
     /***** BEGIN URI DEFINITIONS *****/
     /**
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
      *
-     * @param username
+     * @param email
      * @param password
      *
      * @returns JSONObject with all user data if username and passwords are correct
      */
-    public void loginGET(String username, String password) {
+    public void /*JSONObject*/ loginGET(String email, String password) {
         JSONObject jsonParam = new JSONObject();
 
         try {
-            jsonParam.put("username", username);
+            jsonParam.put("email", email);
             jsonParam.put("password", password);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        new HTTPAsyncTask().execute("http://131.212.216.254:8080/login", "GET", jsonParam.toString() );
+        Log.d("loginGET JSON: ", jsonParam.toString());
+        //new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/api/exportData","POST", jsonParam.toString() );
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/login", "GET", jsonParam.toString());
+        Log.d("loginGET JSON: ", "recieved");
+        //return returnData;
     }
 
     /**
