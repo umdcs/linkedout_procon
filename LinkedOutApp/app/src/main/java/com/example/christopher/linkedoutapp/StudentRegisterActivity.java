@@ -70,7 +70,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+        //editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         while (!editor.commit()) ;
 
         // Update server

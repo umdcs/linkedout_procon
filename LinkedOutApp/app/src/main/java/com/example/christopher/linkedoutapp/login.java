@@ -81,7 +81,7 @@ public class login extends AppCompatActivity {
         editor.putString("gradYear", data.optString("gradYear"));
         editor.putString("major", data.optString("major"));
         //editor.putString("profilePic", data.optString("photo"));
-        editor.putString("proflePic", ""); // to make sure the app doesn't crash for now...
+        //editor.putString("proflePic", ""); // to make sure the app doesn't crash for now...
         while(!editor.commit());
 
         Intent intent = new Intent(this, StudentDefaultView.class);

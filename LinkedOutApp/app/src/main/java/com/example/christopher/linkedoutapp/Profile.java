@@ -36,7 +36,7 @@ public class Profile extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ProfilePic pic = new ProfilePic(null);
+    ProfilePic pic;
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
@@ -103,8 +103,8 @@ public class Profile extends Fragment {
 
 
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        String imgString = prefs.getString("profilePic", "ERROR");
         if(!prefs.getString("profilePic","").equals("")) {
-            String imgString = prefs.getString("profilePic", "ERROR");
             Bitmap bm = pic.getDecodedBitmap(imgString);
             bm = pic.getResizedBitmap(bm);
             profilePic.setImageBitmap(bm);
@@ -175,10 +175,11 @@ public class Profile extends Fragment {
         //Add profile picture
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
+        /*
         Bitmap bm = pic.getDecodedBitmap(imgString);
         bm = pic.getResizedBitmap(bm);
         profilePic.setImageBitmap(bm);
-
+    */
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
         addSkillAction.setOnClickListener(new View.OnClickListener() {
