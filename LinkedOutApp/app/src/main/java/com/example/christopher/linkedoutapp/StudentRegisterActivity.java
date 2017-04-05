@@ -21,7 +21,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
 
-    ProfilePic pic = new ProfilePic();
+    ProfilePic pic = new ProfilePic(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

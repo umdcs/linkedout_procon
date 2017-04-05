@@ -27,8 +27,8 @@ import java.io.IOException;
 
 public class ProfilePic {
 
-    public ProfilePic(){
-        pic = null;
+    public ProfilePic(Bitmap bitmap){
+        pic = bitmap;
         path = null;
     }
 

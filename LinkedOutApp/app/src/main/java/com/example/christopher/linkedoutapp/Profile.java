@@ -32,7 +32,7 @@ public class Profile extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ProfilePic pic = new ProfilePic();
+    ProfilePic pic = new ProfilePic(null);
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
