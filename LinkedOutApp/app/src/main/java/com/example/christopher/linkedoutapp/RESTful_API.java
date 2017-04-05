@@ -38,6 +38,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static android.app.PendingIntent.getActivity;
 import static org.json.JSONObject.NULL;
@@ -52,7 +53,9 @@ public class RESTful_API extends AppCompatActivity {
      * managing the response.  Upon completion of doInBackground, the task
      * calls the onPostExecute function.
      */
-    JSONObject returnData;
+    private boolean login = false;
+    private login loginClass;
+    private SharedPreferences shpref;
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -167,72 +170,56 @@ public class RESTful_API extends AppCompatActivity {
             /* If you receive this statement, you know there is an error */
             return "Should not get to this if the data has been sent/received correctly!";
         }
-    // END ASYNC TASK
+        // END ASYNC TASK
 
 
         /**
-         *
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
 
             /* Take the result (a String) returned from the doInBackground function and
              * convert it to a JSONObject to test that it was a valid JSON data format.
-             *
-             * Then, simply set the text in the view to be the JSON Object as a
-             * simple means to show the output.
              */
             try {
-                JSONObject jsonData = new JSONObject(); //result );
-
-                //Trying to instantiate the JSONObject with just result
-                //leads to an exception being thrown... This works
-                jsonData.put("response: ", result);
-
+                JSONObject jsonData = new JSONObject(result);
                 Log.d("onPostExec Valid JSON:", jsonData.toString());
-                returnData = jsonData;
-                Log.d("loginGET: ", "returnData: " +jsonData.toString());
+
+                // used to save JSON response from loginGET to the login activity
+                if (login) {
+                    Log.d("loginGET", "returnData: " + jsonData.toString());
+                    loginClass.setData(jsonData);
+                    loginClass.updatePrefsAndStart();
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    /* 'Global' prefs object to provide access to data members in each uri
-     *  must instantiate in each uri with the following code:
-     *  prefs = getSharedPreferences(STUDENT_PREFS, 0);
-     *  and can use editor = prefs.edit(); to modify values
-     *  and prefs.getString("tag value", "error string"); to view.
-     */
-    public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs;
-    SharedPreferences.Editor editor;
 
 
     /***** BEGIN URI DEFINITIONS *****/
     /**
-     * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
+     * Acts as the onClick callback for the login Student Button. The code will generate a REST GET
      * action to the REST Server.
      *
      * @param email
      * @param password
      *
-     * @returns JSONObject with all user data if username and passwords are correct
+     * @returns void - But it does set the JSONObject data in loginClass to the response from server
      */
-    public void /*JSONObject*/ loginGET(String email, String password) {
-        JSONObject jsonParam = new JSONObject();
+    public void loginGET(String email, String password, login l) {
+        login = true; // bool to let onPostExe know to update loginClass...
+        loginClass = l; // set loginClass so that it may save the response...
 
-        try {
-            jsonParam.put("email", email);
-            jsonParam.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("loginGET JSON: ", jsonParam.toString());
-        //new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/api/exportData","POST", jsonParam.toString() );
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/login", "GET", jsonParam.toString());
-        Log.d("loginGET JSON: ", "recieved");
-        //return returnData;
+
+        StringBuilder sb = new StringBuilder("http://ukko.d.umn.edu:8080/login/");
+        sb.append(email + "/");
+        sb.append(password);
+
+        new HTTPAsyncTask().execute(sb.toString(), "GET");
     }
 
     /**
@@ -242,7 +229,6 @@ public class RESTful_API extends AppCompatActivity {
      * @param prefs
      */
     public void registerStudentPOST(SharedPreferences prefs) {
-        //prefs = getSharedPreferences(STUDENT_PREFS, 0);
 
         JSONObject jsonParam = new JSONObject();
         try {
@@ -265,35 +251,36 @@ public class RESTful_API extends AppCompatActivity {
 
     }
 
-    /**
+    /***** IGNORE THIS FOR NOW ****
      * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
      * action to the REST Server.
      *
      * @param view
      */
-    public void restPUT(View view) {
+/*    public void restPUT(View view) {
 
         JSONObject jsonParam = null;
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("name", "Pete");
-/*            jsonParam.put("description", "Real");
+            jsonParam.put("description", "Real");
             jsonParam.put("enable", "true");
-            jsonParam.put("val1", "arg"); */
+            jsonParam.put("val1", "arg");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Log.d("DEBUG [PUT]:", jsonParam.toString());
         new HTTPAsyncTask().execute("http://192.168.0.3:8080/userData", "PUT", jsonParam.toString());
-    }
+    } */
 
-    /**
+    /***** IGNORE FOR NOW *****
      * Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
      * action to the REST Server.
      *
      * @param view
      */
+    /*
     public void restDELETE(View view) {
 
         JSONObject jsonParam = null;
@@ -306,5 +293,5 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
         new HTTPAsyncTask().execute("http://192.168.0.3:8080/userData", "DELETE", jsonParam.toString());
-    }
+    } */
 }

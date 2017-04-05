@@ -62,7 +62,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
 
         //Sets intent to the student profile
-        //Intent intent = new Intent(this, StudentDefaultView.class);
+        Intent intent = new Intent(this, StudentDefaultView.class);
 
 
         //Creates strings from entered text in student profile
@@ -98,33 +98,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
          * However, older phones may not support apply, so use while(!editor.commit() );
            to wait until the write to external storage has been completed!   */
         while(!editor.commit());
-        fillInData();
 
         //rest functions?
         nodeServer.registerStudentPOST(prefs);
+        startActivity(intent);
     }
-
-    // Updated to use sharedprefs
-    private void fillInData() {
-
-        setContentView(R.layout.fragment_profile);
-
-        TextView nameText = (TextView) findViewById(R.id.displayStudentName);
-        nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
-
-        TextView majorText = (TextView) findViewById(R.id.displayMajor);
-        majorText.setText(prefs.getString("major", "ERROR") + " Major");
-
-        TextView graduationText = (TextView) findViewById(R.id.displayGraduation);
-        graduationText.setText("Graduating " +
-                                prefs.getString("gradTerm", "ERROR") + " " +
-                                prefs.getString("gradYear", "ERROR"));
-
-        TextView locationText = (TextView) findViewById(R.id.displayLocation);
-        locationText.setText(prefs.getString("city", "ERROR") + ", " +
-                             prefs.getString("state", "ERROR"));
-    }
-
 
     public void onClickGallery(View view) {
         if(isReadStorageAllowed()){
