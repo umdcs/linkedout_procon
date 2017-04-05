@@ -34,7 +34,7 @@
                 android:layout_width="94dp"
                 android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_menu_camera"
-                android:id="@+id/imageView2"
+                android:id="@+id/profilePic"
                 android:layout_weight="0.00" />
 
             <LinearLayout

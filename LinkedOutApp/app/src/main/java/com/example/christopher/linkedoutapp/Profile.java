@@ -3,14 +3,15 @@ package com.example.christopher.linkedoutapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -31,6 +32,8 @@ public class Profile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ProfilePic pic = new ProfilePic(null);
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
@@ -154,6 +157,13 @@ public class Profile extends Fragment {
 
             //Add skill description
             skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
+
+        //Add profile picture
+        ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        String imgString = prefs.getString("profilePic", "ERROR");
+        Bitmap bm = pic.getDecodedBitmap(imgString);
+        bm = pic.getResizedBitmap(bm);
+        profilePic.setImageBitmap(bm);
 
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
