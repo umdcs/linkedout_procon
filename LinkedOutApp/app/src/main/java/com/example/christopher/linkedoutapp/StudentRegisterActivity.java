@@ -3,6 +3,7 @@ package com.example.christopher.linkedoutapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,10 +13,12 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,21 +30,25 @@ import java.io.File;
 import java.io.IOException;
 
 
+
 public class StudentRegisterActivity extends AppCompatActivity {
 
     //Photo code used when strting the intent to open the gallery.
     public final static int PICK_PHOTO_CODE = 1;
-
     //To be checked against request code in onActivityResult
     private static final int SELECT_IMAGE = 1;
 
     //Permission code checked in onRequestPermissionsResult
     private int STORAGE_PERMISSION_CODE = 44;
 
+    public final static String STUDENT_PREFS = "Student Preferences";
+    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
+        prefs = getSharedPreferences(STUDENT_PREFS, 0);
     }
 
     public void changeViewToEmployer(View view) {
@@ -53,7 +60,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
 
         //Sets intent to the student profile
-        //Intent intent = new Intent(this, StudentDefaultView.class);
+        Intent intent = new Intent(this, StudentDefaultView.class);
 
 
         //Creates strings from entered text in student profile
@@ -73,36 +80,25 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         //rest functions?
 
-        Student_Profile profile = new Student_Profile(email, password, username, name,
-                                                        city, state, gradterm, gradyear, major);
-
-
-        fillInData(profile);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username", username);
+        editor.putString("password", password);
+        editor.putString("email", email);
+        editor.putString("fullName", name);
+        editor.putString("city", city);
+        editor.putString("state", state);
+        editor.putString("gradTerm", gradterm);
+        editor.putString("gradYear", gradyear);
+        editor.putString("major", major);
+        while(!editor.commit());
 
         //switches to the student profile page
-        //startActivity(intent);
+        startActivity(intent);
     }
-
-    private void fillInData(Student_Profile profile) {
-
-        setContentView(R.layout.fragment_profile);
-        TextView nameText = (TextView) findViewById(R.id.displayStudentName);
-        nameText.setText(profile.getName());
-
-        TextView majorText = (TextView) findViewById(R.id.displayMajor);
-        majorText.setText(profile.getMajor() + " Major");
-
-        TextView graduationText = (TextView) findViewById(R.id.displayGraduation);
-        graduationText.setText("Graduating " + profile.getGradTerm() + " " + profile.getGradYear());
-
-        TextView locationText = (TextView) findViewById(R.id.displayLocation);
-        locationText.setText(profile.getCity() + ", " + profile.getState());
-    }
-
 
     public void onClickGallery(View view) {
         if(isReadStorageAllowed()){
-            //If permission has already been granted show toast message.
+            //If permission has already been granted show toast   message.
             Toast.makeText(StudentRegisterActivity.this,"Accessing Photo Gallery",Toast.LENGTH_LONG).show();
         }
         else {
