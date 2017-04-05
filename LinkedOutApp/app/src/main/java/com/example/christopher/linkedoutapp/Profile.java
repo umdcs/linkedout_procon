@@ -7,13 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -100,6 +101,7 @@ public class Profile extends Fragment {
 
         fillInData(view);
 
+
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         if(!prefs.getString("profilePic","").equals("")) {
             String imgString = prefs.getString("profilePic", "ERROR");
@@ -109,6 +111,7 @@ public class Profile extends Fragment {
         }
         // Fix this!!
         //else profilePic.setImageDrawable(--SOME DEFAULT VALUE--));
+
         return view;
     }
 
@@ -168,6 +171,13 @@ public class Profile extends Fragment {
 
             //Add skill description
             skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
+
+        //Add profile picture
+        ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        String imgString = prefs.getString("profilePic", "ERROR");
+        Bitmap bm = pic.getDecodedBitmap(imgString);
+        bm = pic.getResizedBitmap(bm);
+        profilePic.setImageBitmap(bm);
 
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
