@@ -59,12 +59,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
         String gradterm = gradTermSpinner.getSelectedItem().toString();
 
-
-        //Get the profile pic, and turn into string.
-
-
-        //rest functions?
-
+        // Update the local prefs
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", username);
         editor.putString("password", password);
@@ -78,6 +73,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         while (!editor.commit()) ;
 
+        // Update server
+        nodeServer.registerStudentPOST(prefs);
 
         //switches to the student profile page
 

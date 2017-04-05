@@ -242,6 +242,7 @@ public class RESTful_API extends AppCompatActivity {
             jsonParam.put("gradTerm", prefs.getString("gradTerm", ""));
             jsonParam.put("gradYear", prefs.getString("gradYear", ""));
             jsonParam.put("major", prefs.getString("major", ""));
+            jsonParam.put("photo", prefs.getString("profilePic", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }

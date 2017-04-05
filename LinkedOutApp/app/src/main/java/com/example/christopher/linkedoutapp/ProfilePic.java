@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import java.io.IOException;
  * Created by imcdo on 3/30/2017.
  */
 
-public class ProfilePic {
+public class ProfilePic extends AppCompatActivity{
 
     public ProfilePic(Bitmap bitmap){
         pic = bitmap;
@@ -119,7 +120,11 @@ public class ProfilePic {
     public String getEncodedBitmap(Bitmap bitmap) {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+        try {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+        } catch (NullPointerException npe) {
+
+        }
         byte[] byteFormat = stream.toByteArray();
         // get the base 64 string
         String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
