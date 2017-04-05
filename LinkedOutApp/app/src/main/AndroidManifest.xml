@@ -32,7 +32,8 @@
             android:theme="@style/MidnightTheme" />
         <activity android:name=".EmployerRegisterActivity" />
         <activity android:name=".StudentRegisterActivity" />
-        <activity android:name=".fragmentTest" />
+        <activity android:name=".StudentAddSkillActivity" />
+        <!--<activity android:name=". fragmentTest" />-->
         <activity android:name=".EmployerDefaultView" />
         <activity android:name=".EmployerCreateJob"></activity>
     </application>
