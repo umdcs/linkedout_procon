@@ -44,7 +44,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/jobName"
+                android:id="@+id/loginEmailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
@@ -60,7 +60,7 @@
                 android:textColor="@color/colorText" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/studentPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/jobName"

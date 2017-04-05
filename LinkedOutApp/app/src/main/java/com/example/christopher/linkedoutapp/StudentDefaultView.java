@@ -1,5 +1,6 @@
 package com.example.christopher.linkedoutapp;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 
 
@@ -24,14 +25,19 @@ import android.widget.TextView;
 public class StudentDefaultView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, News.OnFragmentInteractionListener, Profile.OnFragmentInteractionListener, QuizStatus.OnFragmentInteractionListener, JobsInYourArea.OnFragmentInteractionListener {
 
+    public final static String STUDENT_PREFS = "Student Preferences";
+    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_default_view);
+        prefs = getSharedPreferences(STUDENT_PREFS, 0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Fragment fragment = null;
-        Class fragmentClass = News.class;
+        Class fragmentClass = Profile.class;
         FragmentManager fragmentManager = getSupportFragmentManager();
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -75,7 +81,7 @@ public class StudentDefaultView extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        Class fragmentClass = News.class;
+        Class fragmentClass = Profile.class;
 
         if (id == R.id.news) {
            fragmentClass = News.class;
@@ -86,8 +92,12 @@ public class StudentDefaultView extends AppCompatActivity
         } else if (id == R.id.Jobs) {
             fragmentClass = JobsInYourArea.class;
         }
+        else if (id == R.id.Logout) {
+            logout();
+        }
+
         else{
-            fragmentClass = News.class;
+            fragmentClass = Profile.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -111,6 +121,17 @@ public class StudentDefaultView extends AppCompatActivity
 
     public void onClickAQuiz(View view){
         Intent intent = new Intent(this, ArrayQuiz.class);
+        startActivity(intent);
+    }
+
+    private void logout() {
+        Intent intent = new Intent(this, MainActivity.class);
+
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.clear();
+        editor.commit();
+
         startActivity(intent);
     }
 

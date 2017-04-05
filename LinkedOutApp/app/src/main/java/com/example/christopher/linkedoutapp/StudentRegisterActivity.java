@@ -1,47 +1,35 @@
 package com.example.christopher.linkedoutapp;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.IOException;
 
 
 public class StudentRegisterActivity extends AppCompatActivity {
 
-    //Photo code used when strting the intent to open the gallery.
-    public final static int PICK_PHOTO_CODE = 1;
 
-    //To be checked against request code in onActivityResult
-    private static final int SELECT_IMAGE = 1;
+    public final static String STUDENT_PREFS = "Student Preferences";
+    SharedPreferences prefs;
+    RESTful_API nodeServer;
 
-    //Permission code checked in onRequestPermissionsResult
-    private int STORAGE_PERMISSION_CODE = 44;
+    ProfilePic pic = new ProfilePic(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
+        prefs = getSharedPreferences(STUDENT_PREFS, 0);
+        nodeServer = new RESTful_API();
     }
 
     public void changeViewToEmployer(View view) {
@@ -53,7 +41,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     public void onClickRegister(View view) {
 
         //Sets intent to the student profile
-        //Intent intent = new Intent(this, StudentDefaultView.class);
+        Intent intent = new Intent(this, StudentDefaultView.class);
 
 
         //Creates strings from entered text in student profile
@@ -71,49 +59,41 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinner);
         String gradterm = gradTermSpinner.getSelectedItem().toString();
 
-        //rest functions?
+        // Update the local prefs
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username", username);
+        editor.putString("password", password);
+        editor.putString("email", email);
+        editor.putString("fullName", name);
+        editor.putString("city", city);
+        editor.putString("state", state);
+        editor.putString("gradTerm", gradterm);
+        editor.putString("gradYear", gradyear);
+        editor.putString("major", major);
+        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+        while (!editor.commit()) ;
 
-        Student_Profile profile = new Student_Profile(email, password, username, name,
-                                                        city, state, gradterm, gradyear, major);
-
-
-        fillInData(profile);
+        // Update server
+        nodeServer.registerStudentPOST(prefs);
 
         //switches to the student profile page
-        //startActivity(intent);
+
+        startActivity(intent);
     }
-
-    private void fillInData(Student_Profile profile) {
-
-        setContentView(R.layout.fragment_profile);
-        TextView nameText = (TextView) findViewById(R.id.displayStudentName);
-        nameText.setText(profile.getName());
-
-        TextView majorText = (TextView) findViewById(R.id.displayMajor);
-        majorText.setText(profile.getMajor() + " Major");
-
-        TextView graduationText = (TextView) findViewById(R.id.displayGraduation);
-        graduationText.setText("Graduating " + profile.getGradTerm() + " " + profile.getGradYear());
-
-        TextView locationText = (TextView) findViewById(R.id.displayLocation);
-        locationText.setText(profile.getCity() + ", " + profile.getState());
-    }
-
 
     public void onClickGallery(View view) {
-        if(isReadStorageAllowed()){
+        if (pic.isReadStorageAllowed(StudentRegisterActivity.this)) {
             //If permission has already been granted show toast message.
-            Toast.makeText(StudentRegisterActivity.this,"Accessing Photo Gallery",Toast.LENGTH_LONG).show();
-        }
-        else {
+            Toast.makeText(StudentRegisterActivity.this, "Accessing Photo Gallery", Toast.LENGTH_LONG).show();
+        } else {
             //If you don't have permission, ask for it.
-            requestStoragePermission();
+            pic.requestStoragePermission(StudentRegisterActivity.this);
         }
         //Create new intent for selection on photo
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
             //Open the photo gallery
-            startActivityForResult(intent, PICK_PHOTO_CODE);
+            startActivityForResult(intent, pic.PICK_PHOTO_CODE);
         }
     }
 
@@ -122,119 +102,17 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode==RESULT_OK && requestCode==SELECT_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == pic.SELECT_IMAGE) {
             Uri selectedImage = data.getData();
-            String path = getPath(selectedImage);
-            int rotateAngle = getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-
-            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
+            String path = pic.getPath(selectedImage, this);
+            pic.setPath(path);
+            int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            pic.setBitmap(bitmapImage);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(getResizedBitmap(bitmapImage, rotateAngle));
+            image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
         }
     }
-
-    //Get path to image file.
-    public String getPath(Uri uri){
-        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-
-        return cursor.getString(columnIndex);
-    }
-
-    //Check for read storage permission.
-    private boolean isReadStorageAllowed() {
-        //Get the permission status
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        //If permission is granted return true
-        if (result == PackageManager.PERMISSION_GRANTED)
-            return true;
-
-        //If permission is not granted return false
-        return false;
-    }
-
-    //Requesting permission
-    private void requestStoragePermission(){
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
-            //If the user has denied the permission previously
-            //Notify the user they have denied the permission previously
-            Toast.makeText(StudentRegisterActivity.this,"You denied this permission previously.",Toast.LENGTH_LONG).show();
-        }
-
-        //Request permission
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
-    }
-
-    //This method will be called when the user will tap on allow or deny
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        //Checking the request code
-        if(requestCode == STORAGE_PERMISSION_CODE){
-
-            //Permission granted
-            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                //Displaying a toast if permission is granted.
-                Toast.makeText(this,"You have granted access to the photo gallery.",Toast.LENGTH_LONG).show();
-            }else{
-                //Displaying toast if permission is not granted.
-                Toast.makeText(this,"You have denied access to your photo gallery.",Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
-
-    public Bitmap getResizedBitmap(Bitmap bm, int rotateAngle) {
-        float aspectRatio = bm.getWidth() /
-                (float) bm.getHeight();
-        int width = 480;
-        int height = Math.round(width / aspectRatio);
-
-        bm = Bitmap.createScaledBitmap(
-                bm, width, height, false);
-        return RotateBitmap(bm, rotateAngle);
-    }
-
-    public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
-        int rotate = 0;
-            context.getContentResolver().notifyChange(imageUri, null);
-            File imageFile = new File(imagePath);
-
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(imageFile.getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    rotate = 270;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    rotate = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    rotate = 90;
-                    break;
-            }
-
-        System.out.println("angle: " + rotate);
-        return rotate;
-
-    }
-
 }
+
+
