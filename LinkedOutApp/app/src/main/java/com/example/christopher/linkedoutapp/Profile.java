@@ -1,12 +1,17 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 
 
 /**
@@ -26,6 +31,12 @@ public class Profile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ProfilePic pic = new ProfilePic(null);
+
+    public final static String STUDENT_PREFS = "Student Preferences";
+    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +75,32 @@ public class Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        prefs = getContext().getSharedPreferences(STUDENT_PREFS, 0);
+
+        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+
+        TextView nameText = (TextView) view.findViewById(R.id.displayStudentName);
+        nameText.setText(prefs.getString("fullName", "ERROR") ); // ("name of key value", "default value if key is not found")
+
+        TextView majorText = (TextView) view.findViewById(R.id.displayMajor);
+        majorText.setText(prefs.getString("major", "ERROR") + " Major");
+
+        TextView graduationText = (TextView) view.findViewById(R.id.displayGraduation);
+        graduationText.setText("Graduating " +
+                prefs.getString("gradTerm", "ERROR") + " " +
+                prefs.getString("gradYear", "ERROR"));
+
+        TextView locationText = (TextView) view.findViewById(R.id.displayLocation);
+        locationText.setText(prefs.getString("city", "ERROR") + ", " +
+                prefs.getString("state", "ERROR"));
+
+        ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        String imgString = prefs.getString("profilePic", "ERROR");
+        Bitmap bm = pic.getDecodedBitmap(imgString);
+        bm = pic.getResizedBitmap(bm);
+        profilePic.setImageBitmap(bm);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,4 +141,5 @@ public class Profile extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
