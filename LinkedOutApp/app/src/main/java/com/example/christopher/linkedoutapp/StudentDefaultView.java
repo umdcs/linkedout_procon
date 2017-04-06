@@ -26,7 +26,7 @@ public class StudentDefaultView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, News.OnFragmentInteractionListener, Profile.OnFragmentInteractionListener, QuizStatus.OnFragmentInteractionListener, JobsInYourArea.OnFragmentInteractionListener {
 
     public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+    SharedPreferences prefs;
 
 
     @Override
