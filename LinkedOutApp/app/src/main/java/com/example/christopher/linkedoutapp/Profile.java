@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +81,8 @@ public class Profile extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+            pic = new ProfilePic();
+            }
     }
 
 
@@ -102,13 +106,13 @@ public class Profile extends Fragment {
         fillInData(view);
 
 
-        ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
+        /*ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
-        if(!prefs.getString("profilePic","").equals("")) {
+        //if(!prefs.getString("profilePic","").equals("")) {
             Bitmap bm = pic.getDecodedBitmap(imgString);
             bm = pic.getResizedBitmap(bm);
             profilePic.setImageBitmap(bm);
-        }
+        //} */
         // Fix this!!
         //else profilePic.setImageDrawable(--SOME DEFAULT VALUE--));
 
@@ -175,11 +179,12 @@ public class Profile extends Fragment {
         //Add profile picture
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
-        /*
-        Bitmap bm = pic.getDecodedBitmap(imgString);
-        bm = pic.getResizedBitmap(bm);
+        Log.d("DEBUG", imgString);
+
+        Bitmap bm = getDecodedBitmap(imgString);
+        bm = getResizedBitmap(bm);
         profilePic.setImageBitmap(bm);
-    */
+        //profilePic = new ProfilePic(bm);
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
         addSkillAction.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +222,22 @@ public class Profile extends Fragment {
 
     }
 
+    public Bitmap getDecodedBitmap(String imgString){
+        byte[] decodedString = Base64.decode(imgString.getBytes(), Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedBitmap;
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm) {
+        float aspectRatio = bm.getWidth() /
+                (float) bm.getHeight();
+        int width = 480;
+        int height = Math.round(width / aspectRatio);
+
+        bm = Bitmap.createScaledBitmap(
+                bm, width, height, false);
+        return bm;
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

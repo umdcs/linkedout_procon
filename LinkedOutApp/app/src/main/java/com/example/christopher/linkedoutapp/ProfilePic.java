@@ -27,7 +27,7 @@ import java.io.IOException;
  */
 
 public class ProfilePic extends AppCompatActivity{
-
+    public ProfilePic() {};
     public ProfilePic(Bitmap bitmap){
         pic = bitmap;
         path = null;
