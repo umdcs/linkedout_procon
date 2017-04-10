@@ -215,7 +215,11 @@ public class RESTful_API extends AppCompatActivity {
         loginClass = l; // set loginClass so that it may save the response...
 
 
+
+//        StringBuilder sb = new StringBuilder("http://ukko.d.umn.edu:8080/login/");
         StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8456/login/");
+
+
         sb.append(email + "/");
         sb.append(password);
 
@@ -224,7 +228,7 @@ public class RESTful_API extends AppCompatActivity {
 
     /**
      * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
-     * action to the REST Server.
+     *6s action to the REST Server.
      *
      * @param prefs
      */
@@ -248,6 +252,10 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
 
+<<<<<<< HEAD
+=======
+//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
+>>>>>>> sprint2
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/registerStudent", "POST", jsonParam.toString());
 
     }

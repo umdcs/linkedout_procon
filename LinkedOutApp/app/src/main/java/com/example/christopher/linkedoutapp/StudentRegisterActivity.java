@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     SharedPreferences prefs;
     RESTful_API nodeServer;
 
-    ProfilePic pic = new ProfilePic(null);
+    ProfilePic pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_register);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
         nodeServer = new RESTful_API();
+        pic = new ProfilePic(null);
     }
 
     public void changeViewToEmployer(View view) {
@@ -77,7 +79,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
         nodeServer.registerStudentPOST(prefs);
 
         //switches to the student profile page
-
         startActivity(intent);
     }
 
