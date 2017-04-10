@@ -48,9 +48,7 @@ public class login extends AppCompatActivity {
     * */
     public void setData(JSONObject d) {
         data = d;
-        Log.d("setData", data.toString());
         String s = data.optString("username");
-        Log.d("optString(username)", s );
     }
 
 
@@ -80,8 +78,8 @@ public class login extends AppCompatActivity {
         editor.putString("gradTerm", data.optString("gradTerm"));
         editor.putString("gradYear", data.optString("gradYear"));
         editor.putString("major", data.optString("major"));
-        editor.putString("proflePic", data.optString("photo"));
-        Log.d("DEBUG", data.optString("photo"));
+        editor.putString("profilePic", data.optString("photo"));
+
         while(!editor.commit());
 
         Intent intent = new Intent(this, StudentDefaultView.class);

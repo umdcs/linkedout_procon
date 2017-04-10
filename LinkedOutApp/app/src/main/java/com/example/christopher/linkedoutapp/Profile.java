@@ -81,7 +81,6 @@ public class Profile extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            pic = new ProfilePic();
             }
     }
 
@@ -177,14 +176,12 @@ public class Profile extends Fragment {
             skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
 
         //Add profile picture
+        pic = new ProfilePic(null);
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
-        Log.d("DEBUG", imgString);
-
-        Bitmap bm = getDecodedBitmap(imgString);
-        bm = getResizedBitmap(bm);
+        Bitmap bm = pic.getDecodedBitmap(imgString);
         profilePic.setImageBitmap(bm);
-        //profilePic = new ProfilePic(bm);
+
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
         addSkillAction.setOnClickListener(new View.OnClickListener() {
@@ -222,22 +219,6 @@ public class Profile extends Fragment {
 
     }
 
-    public Bitmap getDecodedBitmap(String imgString){
-        byte[] decodedString = Base64.decode(imgString.getBytes(), Base64.DEFAULT);
-        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedBitmap;
-    }
-
-    public Bitmap getResizedBitmap(Bitmap bm) {
-        float aspectRatio = bm.getWidth() /
-                (float) bm.getHeight();
-        int width = 480;
-        int height = Math.round(width / aspectRatio);
-
-        bm = Bitmap.createScaledBitmap(
-                bm, width, height, false);
-        return bm;
-    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
