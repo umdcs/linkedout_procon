@@ -25,7 +25,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/connect2melogo"
+            android:src="@drawable/proconlogo"
             android:id="@+id/logo"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
@@ -67,7 +67,6 @@
                 android:layout_weight="1"
                 android:layout_margin="5dp" />
         </LinearLayout>
-
 
         <TextView
             android:text="@string/version"

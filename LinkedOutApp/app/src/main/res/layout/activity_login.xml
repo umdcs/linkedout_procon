@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
-            app:srcCompat="@drawable/connect2melogo" />
+            android:src="@drawable/proconlogo" />
 
         <LinearLayout
             android:orientation="vertical"
