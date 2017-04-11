@@ -68,6 +68,19 @@
                 android:layout_margin="5dp" />
         </LinearLayout>
 
+
+        <TextView
+            android:text="@string/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:id="@+id/versionText"
+            android:padding="10dp"
+            android:textSize="14px" />
+
     </LinearLayout>
 
 </RelativeLayout>
