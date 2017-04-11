@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.google.android.gms.analytics.internal.zzy.v;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -217,7 +219,20 @@ public class Profile extends Fragment {
             }
         });
 
+        //Add onClick action to Settings button
+        Button modSettings = (Button)view.findViewById(R.id.buttonProfileSettings);
+        modSettings.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudentModSettings.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -252,36 +252,38 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
 
-<<<<<<< HEAD
-=======
-//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
->>>>>>> sprint2
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/registerStudent", "POST", jsonParam.toString());
 
     }
 
-    /***** IGNORE THIS FOR NOW ****
-     * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
+    /*
+     * Acts as the onClick callback for the modifySettings Button. The code will generate a REST POST
      * action to the REST Server.
      *
-     * @param view
+     * @param SharedPreferences prefs
+     **** Email must stay the same for now, need a consistent identifier for users! ***
+     *    Update all other values on server by extracting current prefs and posting
      */
-/*    public void restPUT(View view) {
-
-        JSONObject jsonParam = null;
+    public void modifySettings(SharedPreferences prefs) {
+        JSONObject jsonParam = new JSONObject();
         try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("name", "Pete");
-            jsonParam.put("description", "Real");
-            jsonParam.put("enable", "true");
-            jsonParam.put("val1", "arg");
+            // Put values into the jsonParam object
+            jsonParam.put("username", prefs.getString("username", ""));
+            jsonParam.put("password", prefs.getString("password", ""));
+            jsonParam.put("email", prefs.getString("email", ""));
+            jsonParam.put("fullName", prefs.getString("fullName", ""));
+            jsonParam.put("city", prefs.getString("city", ""));
+            jsonParam.put("state", prefs.getString("state", ""));
+            jsonParam.put("gradTerm", prefs.getString("gradTerm", ""));
+            jsonParam.put("gradYear", prefs.getString("gradYear", ""));
+            jsonParam.put("major", prefs.getString("major", ""));
+            jsonParam.put("photo", prefs.getString("profilePic", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG [PUT]:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://192.168.0.3:8080/userData", "PUT", jsonParam.toString());
-    } */
+
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/updatePrefs", "POST", jsonParam.toString());
+    }
 
     /***** IGNORE FOR NOW *****
      * Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
