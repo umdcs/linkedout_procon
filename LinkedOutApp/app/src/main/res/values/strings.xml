@@ -2,7 +2,7 @@
 
 <resources>
     <string name="app_name">LinkedOutApp</string>
-    <string name="version">VERSION 2.2</string>
+    <string name="version">VERSION 2.3</string>
     <string name="login">Login</string>
     <string name="sign">Sign Up</string>
     <string name="title_activity_student_default_view">StudentDefaultView</string>
