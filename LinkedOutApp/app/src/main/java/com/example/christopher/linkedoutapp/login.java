@@ -51,6 +51,10 @@ public class login extends AppCompatActivity {
         String s = data.optString("username");
     }
 
+    public JSONObject getData() {
+        return data;
+    }
+
 
     public void onClickStudent(View view){
         data = new JSONObject();
