@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class loginTest {
 
-    public final static String STUDENT_PREFS = "Student Preferences";
+    private final static String STUDENT_PREFS = "Student Preferences";
     private SharedPreferences prefs;
     private RESTful_API nodeServer;
     private JSONObject data;

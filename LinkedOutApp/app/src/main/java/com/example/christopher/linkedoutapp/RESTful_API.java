@@ -195,7 +195,7 @@ public class RESTful_API extends AppCompatActivity {
 
 
 //        StringBuilder sb = new StringBuilder("http://ukko.d.umn.edu:8080/login/");
-        StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8456/login/");
+        StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8457/login/");
 
         sb.append(email + "/");
         sb.append(password);
@@ -230,12 +230,12 @@ public class RESTful_API extends AppCompatActivity {
         Log.d("DEBUG:", jsonParam.toString());
 
 //        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/registerStudent", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/registerStudent", "POST", jsonParam.toString());
 
     }
 
     /**
-     * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
+     * Acts as the onClick callback for the addSkillPOST Button. The code will generate a REST POST
      *6s action to the REST Server.
      *
      * @param prefs
@@ -255,8 +255,8 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
 
-//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/addSkill", "POST", jsonParam.toString());
+//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/addSkill", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/addSkill", "POST", jsonParam.toString());
 
     }
 
