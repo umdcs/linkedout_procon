@@ -4,16 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 //array imports
-import com.example.christopher.linkedoutapp.QuizModel.QuizModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,17 +27,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class EmployerCreateJob extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Fragment_SA.OnFragmentInteractionListener_SA, Fragment_TF.OnFragmentInteractionListener_TF, Fragment_MC.OnFragmentInteractionListener_MC{
 
-    Spinner spinner;
-    String question,answer,option1,option2,option3, jobName;
+    private Spinner spinner;
+    private String question;
+    private String answer;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String jobName;
     String name;
     String format;
     private String Server = "http://lempo.d.umn.edu:4531/arrayQuizData";
     private String Server2 = "http://10.0.2.2:4321/arrayQuizData";
 
-    ArrayList<String[]> quiz = new ArrayList<String[]>();
+    private ArrayList<String[]> quiz = new ArrayList<>();
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -48,7 +51,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         protected String doInBackground(String... params) {
 
             HttpURLConnection serverConnection = null;
-            InputStream is = null;
+            InputStream is;
 
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
@@ -66,11 +69,11 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
                     // params[2] contains the JSON String to send, make sure we send the
                     // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
+                            Integer.toString(params[2].getBytes().length));
 
                     // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
+                    out.writeBytes(params[2]);
                     out.flush();
                     out.close();
                 }
@@ -81,7 +84,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
                 is = serverConnection.getInputStream();
 
-                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
+                if (Objects.equals(params[1], "GET") || Objects.equals(params[1], "POST") || Objects.equals(params[1], "PUT") || Objects.equals(params[1], "DELETE")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -98,11 +101,10 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
                 }
 
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                assert serverConnection != null;
                 serverConnection.disconnect();
             }
 
@@ -121,9 +123,9 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     }//****************End AsyncTask()****************************************
 
-    public void restPOST() {
+    private void restPOST() {
 
-        JSONArray finalJSONAraay = new JSONArray(); // the outer most layer of array (for whole quiz)
+        JSONArray finalJSONArray = new JSONArray(); // the outer most layer of array (for whole quiz)
         JSONObject finalJSONObject = new JSONObject(); //the outer most layer of object (for all quizzes)
 
         JSONObject jsonObject = new JSONObject();
@@ -131,9 +133,6 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         JSONObject jsonObjectChoice1 = new JSONObject();
         JSONObject jsonObjectChoice2 = new JSONObject();
         JSONObject jsonObjectChoice3 = new JSONObject();
-
-
-        List<JSONObject> jsonObjectList = new ArrayList<>();
 
         try {
 
@@ -155,10 +154,10 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
             jsonObject.put("choiceList", jsonArrayChoices);
 
             //puts json objects into the array to make up a quiz
-            finalJSONAraay.put(jsonObject);
+            finalJSONArray.put(jsonObject);
 
             //puts quiz into final big object
-            finalJSONObject.put("quizzes", finalJSONAraay);
+            finalJSONObject.put("quizzes", finalJSONArray);
 
 
             //finalJSONObject.put(jsonObject);
@@ -294,7 +293,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         restPOST();
     }
 
-    public void onClickCancel(View view){
+    public void onClickCancel(){
         Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
     }

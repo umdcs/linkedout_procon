@@ -10,14 +10,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
 import android.util.Log;
-import android.view.View;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,22 +19,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.NetworkInterface;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import static android.app.PendingIntent.getActivity;
-import static org.json.JSONObject.NULL;
 
 public class RESTful_API extends AppCompatActivity {
     /**
@@ -159,11 +139,10 @@ public class RESTful_API extends AppCompatActivity {
                  */
                 return sb.toString();
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                assert serverConnection != null;
                 serverConnection.disconnect();
             }
 
@@ -252,6 +231,32 @@ public class RESTful_API extends AppCompatActivity {
 
 //        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/registerStudent", "POST", jsonParam.toString());
+
+    }
+
+    /**
+     * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
+     *6s action to the REST Server.
+     *
+     * @param prefs
+     */
+    public void addSkillPOST(SharedPreferences prefs) {
+
+        JSONObject jsonParam = new JSONObject();
+        try {
+            // Put values into the jsonParam object
+            jsonParam.put("email", prefs.getString("email", ""));
+            jsonParam.put("skillname", prefs.getString("skillname", ""));
+            jsonParam.put("skillhow", prefs.getString("skillhow", ""));
+            jsonParam.put("skilldescription", prefs.getString("skilldescription", ""));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG:", jsonParam.toString());
+
+//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/addSkill", "POST", jsonParam.toString());
 
     }
 

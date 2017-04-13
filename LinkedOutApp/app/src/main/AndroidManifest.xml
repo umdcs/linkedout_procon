@@ -33,9 +33,11 @@
         <activity android:name=".EmployerRegisterActivity" />
         <activity android:name=".StudentRegisterActivity" />
         <activity android:name=".StudentAddSkillActivity" />
+        <activity android:name=".ProfilePic" />
+        <activity android:name=".RESTful_API" />
         <!--<activity android:name=". fragmentTest" />-->
         <activity android:name=".EmployerDefaultView" />
-        <activity android:name=".EmployerCreateJob"></activity>
+        <activity android:name=".EmployerCreateJob" />
     </application>
 
 </manifest>

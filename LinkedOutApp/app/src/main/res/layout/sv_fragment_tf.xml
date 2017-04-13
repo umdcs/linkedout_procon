@@ -8,27 +8,23 @@
         android:text="Question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
         android:layout_weight="0.06" />
 
     <RadioButton
         android:text="True"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton"
         android:layout_weight="0.06" />
 
     <RadioButton
         android:text="False"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton2"
         android:layout_weight="0.06" />
 
     <Button
         android:text="Save Answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button5"
         android:layout_weight="0.06" />
 </LinearLayout>

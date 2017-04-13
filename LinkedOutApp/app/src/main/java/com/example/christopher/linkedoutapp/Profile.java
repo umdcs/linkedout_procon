@@ -4,18 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Button;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,10 +33,10 @@ public class Profile extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    ProfilePic pic;
+    private ProfilePic pic;
 
-    public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+    private final static String STUDENT_PREFS = "Student Preferences";
+    private SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
 
     //Individual skill textView
     private TextView skillNameText;
@@ -169,7 +163,7 @@ public class Profile extends Fragment {
             //Add skill name
             skillNameText.setText(prefs.getString("skillname", ""));
 
-            //Add how skill was aquired
+            //Add how skill was acquired
             skillHowText.setText("Skill obtained from: " + "\n" + prefs.getString("skillhow", ""));
 
             //Add skill description

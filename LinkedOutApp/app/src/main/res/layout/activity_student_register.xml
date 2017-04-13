@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -26,7 +25,6 @@
             android:text="Type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/typeTextView"
             android:layout_weight="0"
             android:textAppearance="@style/H1"
             android:layout_marginRight="10dp" />
@@ -62,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="5dp"
         android:background="@color/colorAccentMid"
-        android:id="@+id/divider"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
@@ -71,7 +68,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ProfileInfo"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -93,12 +89,12 @@
                 android:layout_height="118dp"
                 android:layout_width="100dp"
                 android:adjustViewBounds="true"
-                />
+                tools:ignore="ContentDescription" />
 
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
                 android:layout_marginLeft="10dp">
@@ -161,7 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="5dp"
         android:background="@color/colorAccentMid"
-        android:id="@+id/divider2"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
@@ -175,7 +170,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.04">
 
         <EditText
@@ -196,10 +191,9 @@
         <TextView
             android:text="State"
             android:layout_marginBottom="5dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/stateText"
             android:layout_weight="0.05" />
 
         <Spinner
@@ -218,10 +212,9 @@
          <TextView
              android:text="Graduation"
              android:layout_marginBottom="5dp"
-             android:textSize="20dp"
+             android:textSize="20sp"
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
-             android:id="@+id/gradDateText"
              android:layout_weight="0.02" />
 
             <Spinner
@@ -261,7 +254,6 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView17"
             android:layout_weight="0"
             android:textAppearance="@style/H1" />
 
@@ -270,7 +262,6 @@
 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/browseSelect"
             android:layout_weight="1"
             android:textAppearance="@style/H2"
             android:background="@color/colorAccentDark"
@@ -284,15 +275,13 @@
             android:text="..."
             android:layout_marginTop="10dp"
             android:layout_width="43dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button11" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="5dp"
         android:background="@color/colorAccentMid"
-        android:id="@+id/divider3"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="40dp"
@@ -325,7 +314,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:inputType="textPassword"
             android:ems="10"
             android:layout_below="@+id/studentUsername"
@@ -351,7 +340,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:id="@+id/register_button"
         android:onClick="onClickRegister"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

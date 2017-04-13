@@ -1,6 +1,4 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -27,12 +25,12 @@
         <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="News"
         android:textColor="#d9d9d9"/>
 
         <TextView
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat pharetra lectus, non ornare lorem tempus sed. Aenean facilisis rutrum enim. Curabitur placerat suscipit eros quis auctor. Duis auctor convallis ante, eget tempor velit viverra non. Nam sit amet ornare lacus. Aenean nibh lectus, auctor at diam at, efficitur luctus mauris. In ac mauris suscipit, mollis diam eleifend, fringilla lectus. In et lacus sit amet felis efficitur viverra at in nunc."
+            android:text="Here is where the latest ProCon news would go. News from local employers that are looking for potential employees or other ProCon app users could also go here."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -62,12 +60,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="More News"
             android:textColor="#d9d9d9"/>
 
         <TextView
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat pharetra lectus, non ornare lorem tempus sed. Aenean facilisis rutrum enim. Curabitur placerat suscipit eros quis auctor. Duis auctor convallis ante, eget tempor velit viverra non. Nam sit amet ornare lacus. Aenean nibh lectus, auctor at diam at, efficitur luctus mauris. In ac mauris suscipit, mollis diam eleifend, fringilla lectus. In et lacus sit amet felis efficitur viverra at in nunc."
+            android:text="Here is where the latest ProCon news would go. News from local employers that are looking for potential employees or other ProCon app users could also go here."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

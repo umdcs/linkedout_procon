@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ArrayQuiz extends AppCompatActivity {
@@ -64,7 +64,7 @@ public class ArrayQuiz extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             HttpURLConnection serverConnection = null;
-            InputStream is = null;
+            InputStream is;
 
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
@@ -82,11 +82,11 @@ public class ArrayQuiz extends AppCompatActivity {
                     // params[2] contains the JSON String to send, make sure we send the
                     // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
+                            Integer.toString(params[2].getBytes().length));
 
                     // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
+                    out.writeBytes(params[2]);
                     out.flush();
                     out.close();
                 }
@@ -97,7 +97,7 @@ public class ArrayQuiz extends AppCompatActivity {
 
                 is = serverConnection.getInputStream();
 
-                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
+                if (Objects.equals(params[1], "GET") || Objects.equals(params[1], "POST") || Objects.equals(params[1], "PUT") || Objects.equals(params[1], "DELETE")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -114,11 +114,10 @@ public class ArrayQuiz extends AppCompatActivity {
                 }
 
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                assert serverConnection != null;
                 serverConnection.disconnect();
             }
 
@@ -143,8 +142,9 @@ public class ArrayQuiz extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            assert parentObject != null;
             System.out.println("Is this a thing?" + parentObject.toString());
-            //this array holds all the data and holds the arrays that hold anser choices
+            //this array holds all the data and holds the arrays that hold answer choices
             List<QuizModel> quizModelList = new ArrayList<>();
             if(parentArray!=null) {
 
@@ -157,6 +157,7 @@ public class ArrayQuiz extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     try {
+                        assert finalObject != null;
                         quizModel.setName(finalObject.getString("quizzes")); //get name from JSON data in server and put it into the array as QuizModel object for name
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -176,7 +177,7 @@ public class ArrayQuiz extends AppCompatActivity {
                     List<QuizModel.Choices> choicesList = new ArrayList<>();
                     try {
                         for (int j = 0; j < finalObject.getJSONArray("choiceList").length(); j++) {
-                            //creats a new QuizModel.Choices object to store choices
+                            //creates a new QuizModel.Choices object to store choices
                             QuizModel.Choices choices = new QuizModel.Choices();
                             choices.setAnswerChoice(finalObject.getJSONArray("choiceList").getJSONObject(j).getString("choice"));
                             choicesList.add(choices);
@@ -185,13 +186,13 @@ public class ArrayQuiz extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     quizModel.setChoiceList(choicesList); //sets the ChoiceList using this one we have created
-                    quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (addin the final objec to the list
+                    quizModelList.add(quizModel);         //adds the quizModel object using this one we have created one at a time, (adding the final object to the list)
 
 
                 }//end for
             }
 
-            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), R.layout.row, quizModelList);
+            QuizAdapter adapter = new QuizAdapter(getApplicationContext(), quizModelList);
             lvQuizzes.setAdapter(adapter);
 
         }//end onPostExecute
@@ -203,7 +204,7 @@ public class ArrayQuiz extends AppCompatActivity {
      * Acts as the onClick callback for the REST GET Button. The code will generate a REST GET
      * action to the REST Server.
      */
-    public void restGET() {
+    private void restGET() {
         new HTTPAsyncTask().execute(Server, "GET");
     }
 
@@ -240,6 +241,7 @@ public class ArrayQuiz extends AppCompatActivity {
         EditText etAnswer = (EditText)findViewById(R.id.etAnswer);
         String studentAnswer = etAnswer.toString();
         QuizModel correctAnswer = null;
+        assert correctAnswer != null;
         if(studentAnswer.equals(correctAnswer.getAnswer())){
             return "Correct";
         }
@@ -257,18 +259,18 @@ public class ArrayQuiz extends AppCompatActivity {
         private int resource;
         private LayoutInflater inflater;
 
-        public QuizAdapter(Context context, int resource, List<QuizModel> objects) {
-            super(context, resource, objects);
+        public QuizAdapter(Context context, List<QuizModel> objects) {
+            super(context, R.layout.row, objects);
             quizModelList = objects;
-            this.resource = resource;
+            this.resource = R.layout.row;
             inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
         @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
-            ViewHolder holder = null;
+            ViewHolder holder;
             if(convertView == null){
                 holder = new ViewHolder();
                 convertView = inflater.inflate(resource, null);
@@ -283,7 +285,7 @@ public class ArrayQuiz extends AppCompatActivity {
 
             //holder for the quiz question
             holder.tvQuiz.setText(quizModelList.get(position).getQuestion());
-            //for loop for multiple answer choices string buffer adds one to letter to lidst A,B,C for answers
+            //for loop for multiple answer choices string buffer adds one to letter to list A,B,C for answers
             StringBuffer stringBuffer = new StringBuffer();
             char letter = 'A';
             for(QuizModel.Choices choices : quizModelList.get(position).getChoiceList()){

@@ -13,11 +13,17 @@ import android.widget.EditText;
 
 public class Fragment_MC extends Fragment implements View.OnClickListener{
 
-    View rootView;
-    Button button;
-    EditText et1,et2,et3,et4;
-    String e1,e2,e3,e4;
-    OnFragmentInteractionListener_MC mListener;
+    private View rootView;
+    private Button button;
+    private EditText et1;
+    private EditText et2;
+    private EditText et3;
+    private EditText et4;
+    private String e1;
+    private String e2;
+    private String e3;
+    private String e4;
+    private OnFragmentInteractionListener_MC mListener;
 
     @Override
     public void onClick(View v) {

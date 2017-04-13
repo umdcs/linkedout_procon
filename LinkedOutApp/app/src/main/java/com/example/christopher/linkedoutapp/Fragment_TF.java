@@ -17,12 +17,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class Fragment_TF extends Fragment implements View.OnClickListener{
 
-    View rootView;
-    OnFragmentInteractionListener_TF mListener;
-    Button button;
-    EditText et1;
-    String e1,e2;
-    RadioGroup radioGroup;
+    private View rootView;
+    private OnFragmentInteractionListener_TF mListener;
+    private Button button;
+    private EditText et1;
+    private String e1;
+    private String e2;
+    private RadioGroup radioGroup;
 
     @Override
     public void onAttach(Context context) {
@@ -64,7 +65,7 @@ public class Fragment_TF extends Fragment implements View.OnClickListener{
                                           Log.d("Debug: ", "question: "+ e1+ " Answer:"+e2);
 
                                           mListener.onFragmentInteraction_TF(e1,e2);
-                                          Log.d("Debug: ", "questionnnnnnnnnn: "+ e1);
+                                          Log.d("Debug: ", "question: "+ e1);
 
                                       }}
         );

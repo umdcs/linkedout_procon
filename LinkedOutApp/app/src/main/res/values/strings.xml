@@ -5,12 +5,10 @@
     <string name="version">VERSION 2.3</string>
     <string name="login">Login</string>
     <string name="sign">Sign Up</string>
-    <string name="title_activity_student_default_view">StudentDefaultView</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="action_create">Create</string>
     <string-array name="questions_list">
         <item>Select Question Type</item>
         <item>Short Answer</item>
@@ -70,7 +68,6 @@
         <item>WI</item>
         <item>WY</item>
     </string-array>
-    <string name="state">State</string>
     <string-array name="term_select">
         <item>Select Term:</item>
         <item>Fall</item>
@@ -78,17 +75,6 @@
         <item>Summer</item>
     </string-array>
 
-    <string name="username"></string>
-    <string name="password"></string>
-    <string name="fullname"></string>
-    <string name="email"></string>
-    <string name="userCity"></string>
-    <string name="userState"></string>
-    <string name="gradTerm"></string>
-    <string name="gradYear"></string>
-    <string name="major"></string>
-
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 

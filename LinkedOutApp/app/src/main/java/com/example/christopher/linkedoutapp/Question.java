@@ -4,7 +4,7 @@ package com.example.christopher.linkedoutapp;
  * Created by clarenceondieki on 11/2/16.
  */
 
-public class Question extends Object {
+public class Question {
 
     private String Question;
     private String Answer;

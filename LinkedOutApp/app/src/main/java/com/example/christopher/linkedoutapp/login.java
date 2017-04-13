@@ -9,25 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
-
-import static org.json.JSONObject.NULL;
 
 public class login extends AppCompatActivity {
 
-    public final static String STUDENT_PREFS = "Student Preferences";
+    private final static String STUDENT_PREFS = "Student Preferences";
     private SharedPreferences prefs;
     private RESTful_API nodeServer;
     private JSONObject data;
@@ -84,6 +70,8 @@ public class login extends AppCompatActivity {
         editor.putString("major", data.optString("major"));
         editor.putString("profilePic", data.optString("photo"));
 
+        //Need while loop for SharedPreferences to work
+        //noinspection StatementWithEmptyBody
         while(!editor.commit());
 
         Intent intent = new Intent(this, StudentDefaultView.class);

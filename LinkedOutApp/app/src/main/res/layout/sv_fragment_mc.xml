@@ -8,28 +8,24 @@
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
         android:layout_weight="0.05" />
 
     <RadioButton
         android:text="Option 1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton4"
         android:layout_weight="0.05" />
 
     <RadioButton
         android:text="Option 2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton5"
         android:layout_weight="0.05" />
 
     <RadioButton
         android:text="Option 3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioButton6"
         android:layout_weight="0.05" />
 
     <Button

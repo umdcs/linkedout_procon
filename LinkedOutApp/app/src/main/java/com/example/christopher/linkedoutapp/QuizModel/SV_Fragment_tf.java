@@ -18,9 +18,8 @@ public class SV_Fragment_tf extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.sv_fragment_tf, container, false);
         // Inflate the layout for this fragment
-        return rootView;
+        return inflater.inflate(R.layout.sv_fragment_tf, container, false);
     }
 
     public static SV_Fragment_tf newInstance()

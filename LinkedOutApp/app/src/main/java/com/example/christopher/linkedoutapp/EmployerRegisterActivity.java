@@ -1,12 +1,10 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 public class EmployerRegisterActivity extends AppCompatActivity {
 
@@ -17,7 +15,7 @@ public class EmployerRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employer_register);
     }
 
-    public void changeViewToStudent(View view) {
+    public void changeViewToStudent() {
         Intent intent = new Intent(this, StudentRegisterActivity.class);
         startActivity(intent);
     }
@@ -28,7 +26,7 @@ public class EmployerRegisterActivity extends AppCompatActivity {
     }            */
 
 
-    public final static int PICK_PHOTO_CODE = 1046;
+    private final static int PICK_PHOTO_CODE = 1046;
 
     public void onClickGallery(View view) {
         //Create new intent for selection on photo

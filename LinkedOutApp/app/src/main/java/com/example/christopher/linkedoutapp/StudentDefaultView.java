@@ -1,13 +1,11 @@
 package com.example.christopher.linkedoutapp;
 
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 
 
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,14 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 
 public class StudentDefaultView extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, News.OnFragmentInteractionListener, Profile.OnFragmentInteractionListener, QuizStatus.OnFragmentInteractionListener, JobsInYourArea.OnFragmentInteractionListener {
 
-    public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs;
+    private final static String STUDENT_PREFS = "Student Preferences";
+    private SharedPreferences prefs;
+    private Class fragmentClass;
 
 
     @Override
@@ -44,7 +42,6 @@ public class StudentDefaultView extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,7 +78,7 @@ public class StudentDefaultView extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
-        Class fragmentClass = Profile.class;
+        fragmentClass = Profile.class;
 
         if (id == R.id.news) {
            fragmentClass = News.class;
@@ -130,9 +127,14 @@ public class StudentDefaultView extends AppCompatActivity
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.clear();
-        editor.commit();
+
+        //Need while loop for SharedPreferences to work
+        //noinspection StatementWithEmptyBody
+        while(!editor.commit());
 
         startActivity(intent);
     }
+
+    public Class getFragmentClass() { return fragmentClass; }
 
 }

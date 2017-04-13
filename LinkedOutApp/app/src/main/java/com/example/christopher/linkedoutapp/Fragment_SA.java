@@ -4,23 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
 
 
 public class Fragment_SA extends Fragment implements View.OnClickListener{
 
-    View rootView;
-    Button b1;
-    EditText et1,et2;
-    String e1,e2;
-    OnFragmentInteractionListener_SA mListener;
+    private View rootView;
+    private Button b1;
+    private EditText et1;
+    private EditText et2;
+    private String e1;
+    private String e2;
+    private OnFragmentInteractionListener_SA mListener;
 
 
     public interface OnFragmentInteractionListener_SA{

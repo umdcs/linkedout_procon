@@ -11,7 +11,6 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +26,11 @@ import java.io.IOException;
  */
 
 public class ProfilePic extends AppCompatActivity{
+
+    public ProfilePic() {
+        //must have default constructor in order to add to Manifest
+    }
+
     public ProfilePic(Bitmap bitmap){
         pic = bitmap;
         path = null;
@@ -36,20 +40,21 @@ public class ProfilePic extends AppCompatActivity{
 
     private Bitmap pic;
 
-    //Photo code used when strting the intent to open the gallery.
+    //Photo code used when starting the intent to open the gallery.
     public final static int PICK_PHOTO_CODE = 1;
 
     //To be checked against request code in onActivityResult
     public final static int SELECT_IMAGE = 1;
 
     //Permission code checked in onRequestPermissionsResult
-    public final static int STORAGE_PERMISSION_CODE = 44;
+    private final static int STORAGE_PERMISSION_CODE = 44;
 
     //Get path to image file.
     public String getPath(Uri uri, Context context){
         String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
         Cursor cursor = context.getContentResolver().query(uri, filePathColumn, null, null, null);
+        assert cursor != null;
         cursor.moveToFirst();
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 
@@ -126,8 +131,7 @@ public class ProfilePic extends AppCompatActivity{
         }
         byte[] byteFormat = stream.toByteArray();
         // get the base 64 string
-        String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
-        return imgString;
+        return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
 
     public Bitmap getDecodedBitmap(String imgString){
@@ -147,6 +151,7 @@ public class ProfilePic extends AppCompatActivity{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert exif != null;
         int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
         switch (orientation) {

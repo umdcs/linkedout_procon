@@ -12,7 +12,7 @@ public class EmployerDefaultView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employer_default_view);
     }
-    public void createJob(View view){
+    public void createJob(){
         Intent intent = new Intent(this, EmployerCreateJob.class);
         startActivity(intent);
     }

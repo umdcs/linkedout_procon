@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,11 +18,11 @@ import android.widget.Toast;
 public class StudentRegisterActivity extends AppCompatActivity {
 
 
-    public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs;
-    RESTful_API nodeServer;
+    private final static String STUDENT_PREFS = "Student Preferences";
+    private SharedPreferences prefs;
+    private RESTful_API nodeServer;
 
-    ProfilePic pic;
+    private ProfilePic pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     }
 
 
-    public void onClickRegister(View view) {
+    public void onClickRegister() {
 
         //Sets intent to the student profile
         Intent intent = new Intent(this, StudentDefaultView.class);
@@ -73,6 +72,9 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
         editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+
+        //Need while loop for SharedPreferences to work
+        //noinspection StatementWithEmptyBody
         while (!editor.commit()) ;
 
         // Update server
@@ -94,7 +96,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (intent.resolveActivity(getPackageManager()) != null) {
             //Open the photo gallery
-            startActivityForResult(intent, pic.PICK_PHOTO_CODE);
+            startActivityForResult(intent, ProfilePic.PICK_PHOTO_CODE);
         }
     }
 
@@ -103,16 +105,19 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == pic.SELECT_IMAGE) {
+        if (resultCode == RESULT_OK && requestCode == ProfilePic.SELECT_IMAGE) {
             Uri selectedImage = data.getData();
             String path = pic.getPath(selectedImage, this);
             pic.setPath(path);
             int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            Bitmap bitmapImage = ProfilePic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
             pic.setBitmap(bitmapImage);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
             image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
         }
+    }
+
+    public void onClickRegister(View view) {
     }
 }
 

@@ -10,7 +10,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="10dp">
 
 
@@ -43,7 +43,6 @@
                 android:inputType="text"
                 android:hint=" Type Answer here"
                 android:ems="6"
-                android:id="@+id/frag2_A"
                 android:textAlignment="center" />
 
             <EditText
@@ -52,11 +51,10 @@
                 android:layout_marginTop="5dp"
                 android:inputType="text"
                 android:hint="Option 1"
-                android:ems="6"
-                android:id="@+id/option" />
+                android:ems="6" />
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.00"
                     android:layout_marginRight="5dp">
@@ -64,19 +62,16 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/option1Toggle"
                         android:layout_weight="1" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/option2Toggle"
                         android:layout_weight="1" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/option3Toggle"
                         android:layout_weight="1" />
                 </RadioGroup>
 
@@ -117,7 +112,7 @@
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginTop="5dp"
                         android:inputType="text"
                         android:hint="Option3"
