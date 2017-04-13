@@ -55,7 +55,7 @@ public class RESTful_API extends AppCompatActivity {
      */
     private boolean login = false;
     private login loginClass;
-    private SharedPreferences shpref;
+    //private SharedPreferences shpref;
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 

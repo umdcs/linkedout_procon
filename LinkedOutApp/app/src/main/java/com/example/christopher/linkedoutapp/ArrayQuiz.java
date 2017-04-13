@@ -236,16 +236,16 @@ public class ArrayQuiz extends AppCompatActivity {
      *@Return: A correct of incorrect for the answer being correct or incorrect
      *
      */
-    public String isCorrect(){
-        EditText etAnswer = (EditText)findViewById(R.id.etAnswer);
-        String studentAnswer = etAnswer.toString();
-        QuizModel correctAnswer = null;
-        if(studentAnswer.equals(correctAnswer.getAnswer())){
-            return "Correct";
-        }
-        else
-            return "Incorrect";
-    }
+//    public String isCorrect(){
+//        EditText etAnswer = (EditText)findViewById(R.id.etAnswer);
+//        String studentAnswer = etAnswer.toString();
+//        QuizModel correctAnswer = null;
+//        if(studentAnswer.equals(correctAnswer.getAnswer())){
+//            return "Correct";
+//        }
+//        else
+//            return "Incorrect";
+//    }
 
     /**This is the QuizAdapter that is used to set the layout of the xml files
      *
@@ -274,7 +274,7 @@ public class ArrayQuiz extends AppCompatActivity {
                 convertView = inflater.inflate(resource, null);
                 holder.tvQuiz = (TextView)convertView.findViewById(R.id.tvQuiz);
                 holder.tvChoices = (TextView)convertView.findViewById(R.id.tvChoices);
-                holder.etAnswer = (EditText)convertView.findViewById(R.id.etAnswer);
+                //holder.etAnswer = (EditText)convertView.findViewById(R.id.etAnswer);
                 convertView.setTag(holder);
             }
             else{
@@ -300,7 +300,7 @@ public class ArrayQuiz extends AppCompatActivity {
         class ViewHolder{
             private TextView tvQuiz;
             private TextView tvChoices;
-            private EditText etAnswer;
+            //private EditText etAnswer;
         }
     }//end adapter
 }

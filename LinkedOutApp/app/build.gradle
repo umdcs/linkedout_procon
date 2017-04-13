@@ -36,30 +36,14 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.1'
 }
 
-dependencies {
-    // Required -- JUnit 4 framework
-    testCompile 'junit:junit:4.12'
-    // Optional -- Mockito framework
-//    testCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile "org.robolectric:robolectric:3.0"
-
-}
-
-sourceSets {
-    unitTest {
-        java.srcDir file('com.example.christopher.linkedoutapp.profilePicTest') //for example: tests/java
-    }
-}
-
-android {
-    sourceSets {
-        instrumentTest.setRoot('com.example.christopher.linkedoutapp') //for example: tests
-    }
-}
-
-repositories {
-    mavenCentral()
-}
+//dependencies {
+//    // Required -- JUnit 4 framework
+//    testCompile 'junit:junit:4.12'
+//    // Optional -- Mockito framework
+////    testCompile 'org.mockito:mockito-core:1.10.19'
+//    androidTestCompile "org.robolectric:robolectric:3.0"
+//
+//}
 
 //dependencies {
 //    testCompile 'junit:junit:4.11'

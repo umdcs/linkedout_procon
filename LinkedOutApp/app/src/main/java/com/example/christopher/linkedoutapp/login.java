@@ -48,7 +48,6 @@ public class login extends AppCompatActivity {
     * */
     public void setData(JSONObject d) {
         data = d;
-        String s = data.optString("username");
     }
 
 

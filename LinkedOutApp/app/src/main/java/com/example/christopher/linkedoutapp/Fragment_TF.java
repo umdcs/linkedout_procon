@@ -83,6 +83,8 @@ public class Fragment_TF extends Fragment implements View.OnClickListener{
                     case R.id.falseButton:
                         e2 = "false";
                         break;
+                    default:
+                        e2 = "true";
                 }
             }
         });

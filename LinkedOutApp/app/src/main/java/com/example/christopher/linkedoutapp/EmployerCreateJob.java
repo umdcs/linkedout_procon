@@ -42,7 +42,7 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
 
     ArrayList<String[]> quiz = new ArrayList<String[]>();
 
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
+    private static class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -132,8 +132,6 @@ public class EmployerCreateJob extends AppCompatActivity implements AdapterView.
         JSONObject jsonObjectChoice2 = new JSONObject();
         JSONObject jsonObjectChoice3 = new JSONObject();
 
-
-        List<JSONObject> jsonObjectList = new ArrayList<>();
 
         try {
 

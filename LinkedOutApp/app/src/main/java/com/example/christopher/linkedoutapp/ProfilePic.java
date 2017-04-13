@@ -159,6 +159,8 @@ public class ProfilePic extends AppCompatActivity{
             case ExifInterface.ORIENTATION_ROTATE_90:
                 rotate = 90;
                 break;
+            default:
+                rotate = 0;
         }
         return rotate;
     }

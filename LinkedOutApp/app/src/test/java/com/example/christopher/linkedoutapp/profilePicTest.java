@@ -21,12 +21,12 @@ import static junit.framework.Assert.assertFalse;
 //@RunWith(RobolectricTestRunner.class)
 //@RunWith(MockitoJUnitRunner.class)
 public class profilePicTest {
-    String imgString = "This is an image.";
+    //String imgString = "This is an image.";
 //    @Mock
 //    Context mMockContext;
 //    Bitmap icon = BitmapFactory.decodeResource(mMockContext.getResources(),
 //            R.drawable.linkedoutlogo);
-//    byte[] decodedString = mMockContext.Base64.decode(imgString.getBytes(), Base64.DEFAULT);
+//    byte[] decodedString = Base64.decode(imgString.getBytes(), Base64.DEFAULT);
 //    Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 //    ProfilePic testPicObject = new ProfilePic(imageBitmap);
 
@@ -34,13 +34,13 @@ public class profilePicTest {
     //@Mock
     //Context mMockContext;   //Create new mock context.
 
-    @Test
-    public void profilePicEncodingTest(){
-
+//    @Test
+//    public void profilePicEncodingTest(){
+//
 //        assertEquals(testPicObject.getEncodedBitmap(testPicObject.getBitmap()), imgString, 0);
-
-
-    }
+//
+//
+//    }
 
     @Test
     public void profilePicPathTest(){
