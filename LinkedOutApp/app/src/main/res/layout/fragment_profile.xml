@@ -185,13 +185,13 @@
             android:textAppearance="@style/H2" />
 
         <TextView
-            android:text=""
+            android:id="@+id/displaySkillDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/displaySkillDescription"
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:paddingLeft="25dp"
+            android:text=""
             android:textAppearance="@style/H2" />
 
     </LinearLayout>
