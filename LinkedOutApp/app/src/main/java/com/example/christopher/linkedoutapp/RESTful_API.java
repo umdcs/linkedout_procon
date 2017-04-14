@@ -216,7 +216,7 @@ public class RESTful_API extends AppCompatActivity {
 
 
 //        StringBuilder sb = new StringBuilder("http://ukko.d.umn.edu:8080/login/");
-        StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8456/login/");
+        StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8457/login/");
 
         sb.append(email + "/");
         sb.append(password);
@@ -251,7 +251,33 @@ public class RESTful_API extends AppCompatActivity {
         Log.d("DEBUG:", jsonParam.toString());
 
 //        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/registerStudent", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/registerStudent", "POST", jsonParam.toString());
+
+    }
+
+    /**
+     * Acts as the onClick callback for the addSkillPOST Button. The code will generate a REST POST
+     *6s action to the REST Server.
+     *
+     * @param prefs
+     */
+    public void addSkillPOST(SharedPreferences prefs) {
+
+        JSONObject jsonParam = new JSONObject();
+        try {
+            // Put values into the jsonParam object
+            jsonParam.put("email", prefs.getString("email", ""));
+            jsonParam.put("skillname", prefs.getString("skillname", ""));
+            jsonParam.put("skillhow", prefs.getString("skillhow", ""));
+            jsonParam.put("skilldescription", prefs.getString("skilldescription", ""));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG:", jsonParam.toString());
+
+//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/addSkill", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/addSkill", "POST", jsonParam.toString());
 
     }
 

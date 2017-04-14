@@ -13,12 +13,14 @@ public class StudentAddSkillActivity extends AppCompatActivity {
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+    RESTful_API nodeServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_addskill);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
+        nodeServer = new RESTful_API();
     }
 
     public void onClickSubmit(View view) {
@@ -39,6 +41,8 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         editor.putString("skillhow", skillHow);
         editor.putString("skilldescription", skillDescription);
         while(!editor.commit());
+
+        nodeServer.addSkillPOST(prefs);
 
         //switches to the student profile page
         startActivity(intent);
