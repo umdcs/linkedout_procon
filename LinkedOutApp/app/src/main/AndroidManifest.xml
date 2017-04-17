@@ -36,6 +36,7 @@
         <!--<activity android:name=". fragmentTest" />-->
         <activity android:name=".EmployerDefaultView" />
         <activity android:name=".EmployerCreateJob"></activity>
+        <activity android:name=".StudentModSettings" />
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_register"
+        android:id="@+id/fragment_StudentModSettings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,6 +17,17 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.christopher.linkedoutapp.StudentModSettings">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="28dp"
+            android:text="Edit Profile" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="Delete Profile"
+            android:onClick="onClickDelete"/>
 
 
         <View
@@ -41,7 +52,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@android:color/transparent"
-                android:onClick="onClickGallery"/>
+                android:onClick="onClickGalleryMod"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -50,7 +61,7 @@
 
                 <ImageView
                     app:srcCompat="@drawable/ic_menu_camera"
-                    android:id="@+id/thumbnail"
+                    android:id="@+id/thumbnailSettings"
                     android:layout_height="118dp"
                     android:layout_width="100dp"
                     android:adjustViewBounds="true"
@@ -68,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:id="@+id/studentName"
+                        android:id="@+id/studentNameSettings"
                         android:layout_weight="1"
                         android:background="@color/colorAccentDark"
                         android:hint="Name"
@@ -87,7 +98,7 @@
                         android:layout_below="@+id/User_Name"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:id="@+id/studentEmail"
+                        android:id="@+id/studentEmailSettings"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:hint="Email"
@@ -104,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textCapSentences"
                         android:ems="10"
-                        android:id="@+id/registerStudentMajor"
+                        android:id="@+id/studentMajorSettings"
                         android:layout_weight="1"
                         android:background="@color/colorAccentDark"
                         android:hint="Major"
@@ -144,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences"
                     android:ems="10"
-                    android:id="@+id/registerStudentCity"
+                    android:id="@+id/studentCitySettings"
                     android:background="@color/colorAccentDark"
                     android:hint="City"
                     style="@style/EditTextField"
@@ -160,12 +171,12 @@
                     android:textSize="20dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:id="@+id/stateText"
+                    android:id="@+id/stateTextSettings"
                     android:layout_weight="0.05" />
 
                 <Spinner
                     android:layout_width="100dp"
-                    android:id="@+id/stateSpinner"
+                    android:id="@+id/stateSpinnerSettings"
                     android:layout_height="wrap_content"
                     android:entries="@array/state_list"
                     android:layout_weight="0.04" />
@@ -182,12 +193,12 @@
                     android:textSize="20dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:id="@+id/gradDateText"
+                    android:id="@+id/gradDateTextSettings"
                     android:layout_weight="0.02" />
 
                 <Spinner
                     android:layout_width="150dp"
-                    android:id="@+id/FallSpringSpinner"
+                    android:id="@+id/FallSpringSpinnerSettings"
                     android:layout_height="wrap_content"
                     android:entries="@array/term_select"
                     android:layout_weight="0.02" />
@@ -197,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:ems="10"
-                    android:id="@+id/registerStudentGradYear"
+                    android:id="@+id/studentGradYearSettings"
                     android:background="@color/colorAccentDark"
                     android:hint="Year"
                     style="@style/EditTextField"
@@ -272,7 +283,7 @@
                 android:ems="10"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/studentUsername"
+                android:id="@+id/studentUsernameSettings"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:hint="Username"
@@ -292,7 +303,7 @@
                 android:layout_below="@+id/studentUsername"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/studentPassword"
+                android:id="@+id/studentPasswordSettings"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:hint="Password"
@@ -308,12 +319,12 @@
         </LinearLayout>
 
         <Button
-            android:text="Register"
+            android:text="Save Changes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:id="@+id/register_button"
-            android:onClick="onClickRegister"
+            android:onClick="onClickSave"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"

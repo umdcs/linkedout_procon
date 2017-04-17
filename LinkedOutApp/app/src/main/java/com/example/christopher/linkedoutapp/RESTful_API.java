@@ -264,10 +264,11 @@ public class RESTful_API extends AppCompatActivity {
      **** Email must stay the same for now, need a consistent identifier for users! ***
      *    Update all other values on server by extracting current prefs and posting
      */
-    public void modifySettings(SharedPreferences prefs) {
+    public void modifySettings(SharedPreferences prefs, String oldEmail) {
         JSONObject jsonParam = new JSONObject();
         try {
             // Put values into the jsonParam object
+            jsonParam.put("oldEmail", oldEmail);
             jsonParam.put("username", prefs.getString("username", ""));
             jsonParam.put("password", prefs.getString("password", ""));
             jsonParam.put("email", prefs.getString("email", ""));
@@ -285,24 +286,18 @@ public class RESTful_API extends AppCompatActivity {
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8456/updatePrefs", "POST", jsonParam.toString());
     }
 
-    /***** IGNORE FOR NOW *****
-     * Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
+
+     /* Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
      * action to the REST Server.
      *
      * @param view
      */
-    /*
-    public void restDELETE(View view) {
 
-        JSONObject jsonParam = null;
-        try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("name", "Pete");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://192.168.0.3:8080/userData", "DELETE", jsonParam.toString());
-    } */
+    public void deleteProfile(String email) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://akka.d.umn.edu:8456/deleteProfile/");
+        sb.append(email);
+
+        new HTTPAsyncTask().execute(sb.toString(), "GET");
+    }
 }
