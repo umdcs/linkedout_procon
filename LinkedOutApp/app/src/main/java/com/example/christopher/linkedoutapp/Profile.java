@@ -152,38 +152,65 @@ public class Profile extends Fragment {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("Skill 1");
-        listDataHeader.add("Skill 2");
-        listDataHeader.add("Skill 3");
 
         // Adding child data
         List<String> skill1 = new ArrayList<String>();
-        skill1.add("Skill Attained From: A reputable source.");
-        skill1.add("Description: I'm very good at it.");
+        if(prefs.getString("skillName1", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName1", "ERROR"));
+            skill1.add(prefs.getString("skillHow1", "ERROR"));
+            skill1.add(prefs.getString("skillDesc1", "ERROR"));
+        }
 
         List<String> skill2 = new ArrayList<String>();
-        skill2.add("Skill Attained From: A reputable source.");
-        skill2.add("Description: I'm very good at it.");
+        if(prefs.getString("skillName2", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName2", "ERROR"));
+            skill2.add(prefs.getString("skillHow2", "ERROR"));
+            skill2.add(prefs.getString("skillDesc2", "ERROR"));
+        }
 
         List<String> skill3 = new ArrayList<String>();
-        skill3.add("Skill Attained From: A reputable source.");
-        skill3.add("Description: I'm very good at it.");
+        if(prefs.getString("skillName3", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName3", "ERROR"));
+            skill3.add(prefs.getString("skillHow3", "ERROR"));
+            skill3.add(prefs.getString("skillDesc3", "ERROR"));
+        }
 
-        listDataChild.put(listDataHeader.get(0), skill1); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), skill2);
-        listDataChild.put(listDataHeader.get(2), skill3);
+        List<String> skill4 = new ArrayList<String>();
+        if(prefs.getString("skillName4", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName4", "ERROR"));
+            skill4.add(prefs.getString("skillHow4", "ERROR"));
+            skill4.add(prefs.getString("skillDesc4", "ERROR"));
+        }
+
+        List<String> skill5 = new ArrayList<String>();
+        if(prefs.getString("skillName5", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName5", "ERROR"));
+            skill5.add(prefs.getString("skillHow5", "ERROR"));
+            skill5.add(prefs.getString("skillDesc5", "ERROR"));
+        }
+
+        if(prefs.getString("skillName1", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(0), skill1);
+        }
+
+        if(prefs.getString("skillName2", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(1), skill2);
+        }
+
+        if(prefs.getString("skillName3", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(2), skill3);
+        }
+
+        if(prefs.getString("skillName4", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(3), skill4);
+        }
+
+        if(prefs.getString("skillName5", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(4), skill5);
+        }
     }
 
-//    private void addSkill(String name, String how, String desc){
-//        listDataHeader = new ArrayList<String>();
-//        listDataChild = new HashMap<String, List<String>>();
-//        listDataHeader.add(name);
-//        // Adding child data
-//        List<String> skill1 = new ArrayList<String>();
-//        skill1.add(how);
-//        skill1.add(desc);
-//        listDataChild.put(listDataHeader.get(0), skill1); // Header, Child data
-//    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
