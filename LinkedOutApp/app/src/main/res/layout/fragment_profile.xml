@@ -55,6 +55,7 @@
                     android:id="@+id/displayStudentName"
                     android:textAppearance="@style/H1"
                     android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
                     android:text="Student Name" />
 
                 <TextView
