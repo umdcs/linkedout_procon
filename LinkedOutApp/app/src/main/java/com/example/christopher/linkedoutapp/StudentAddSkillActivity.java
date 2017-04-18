@@ -5,8 +5,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class StudentAddSkillActivity extends AppCompatActivity {
@@ -34,11 +41,24 @@ public class StudentAddSkillActivity extends AppCompatActivity {
 
         //rest functions?
 
+        ExpandableListView expList = (ExpandableListView) view.findViewById(R.id.lvExp);
+        ExpandableListAdapter expAdapter = (ExpandableListAdapter) expList.getExpandableListAdapter();
+        (BaseExpandableListAdapter) expAdapter.get
+        ArrayList listDataHeader = new ArrayList<String>();
+        HashMap listDataChild = new HashMap<String, List<String>>();
+        listDataHeader.add(skillName);
+        // Adding child data
+        List<String> skill1 = new ArrayList<String>();
+        skill1.add(skillHow);
+        skill1.add(skillDescription);
+        listDataChild.put(listDataHeader.get(0), skill1); // Header, Child data
+
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("skillname", skillName);
         editor.putString("skillhow", skillHow);
         editor.putString("skilldescription", skillDescription);
         while(!editor.commit());
+        //addSkill("1","2","3");
 
         //switches to the student profile page
         startActivity(intent);

@@ -133,8 +133,9 @@ public class Profile extends Fragment {
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
 
         // preparing list data
+        //prepareListData();
+        //addSkill("Skill Name", "SkillHow", "SkillDesc");
         prepareListData();
-
         listAdapter = new ExpandableListAdapter(view.getContext(), listDataHeader, listDataChild);
 
         // setting list adapter
@@ -172,6 +173,17 @@ public class Profile extends Fragment {
         listDataChild.put(listDataHeader.get(1), skill2);
         listDataChild.put(listDataHeader.get(2), skill3);
     }
+
+//    private void addSkill(String name, String how, String desc){
+//        listDataHeader = new ArrayList<String>();
+//        listDataChild = new HashMap<String, List<String>>();
+//        listDataHeader.add(name);
+//        // Adding child data
+//        List<String> skill1 = new ArrayList<String>();
+//        skill1.add(how);
+//        skill1.add(desc);
+//        listDataChild.put(listDataHeader.get(0), skill1); // Header, Child data
+//    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -235,7 +247,7 @@ public class Profile extends Fragment {
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
         Bitmap bm = pic.getDecodedBitmap(imgString);
-        profilePic.setImageBitmap(bm);
+        profilePic.setImageBitmap(pic.getResizedBitmap(bm));
 
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
