@@ -36,7 +36,7 @@ public class ProfilePic extends AppCompatActivity{
 
     private Bitmap pic;
 
-    //Photo code used when strting the intent to open the gallery.
+    //Photo code used when starting the intent to open the gallery.
     public final static int PICK_PHOTO_CODE = 1;
 
     //To be checked against request code in onActivityResult

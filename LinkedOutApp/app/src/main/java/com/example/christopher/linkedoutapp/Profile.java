@@ -4,23 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import static com.google.android.gms.analytics.internal.zzy.v;
+import com.example.christopher.linkedoutapp.QuizModel.ExpandableListAdapter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -44,14 +41,7 @@ public class Profile extends Fragment {
     ProfilePic pic;
 
     public final static String STUDENT_PREFS = "Student Preferences";
-    SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
-
-    //Individual skill textView
-    private TextView skillNameText;
-
-    //Skills: How and description
-    private TextView skillHowText;
-    private TextView skillDescriptionText;
+    SharedPreferences prefs;
 
     private OnFragmentInteractionListener mListener;
 
@@ -77,6 +67,11 @@ public class Profile extends Fragment {
         return fragment;
     }
 
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,30 +90,85 @@ public class Profile extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-
-        skillNameText = (TextView) view.findViewById(R.id.displaySkillName);
-        skillHowText = (TextView) view.findViewById(R.id.displaySkillHow);
-        skillDescriptionText = (TextView) view.findViewById(R.id.displaySkillDescription);
-
-        skillNameText.setVisibility(View.GONE);
-        skillHowText.setVisibility(View.GONE);
-        skillDescriptionText.setVisibility(View.GONE);
-
         fillInData(view);
 
+        // get the listview
+        expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
 
-        /*ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
-        String imgString = prefs.getString("profilePic", "ERROR");
-        //if(!prefs.getString("profilePic","").equals("")) {
-            Bitmap bm = pic.getDecodedBitmap(imgString);
-            bm = pic.getResizedBitmap(bm);
-            profilePic.setImageBitmap(bm);
-        //} */
-        // Fix this!!
-        //else profilePic.setImageDrawable(--SOME DEFAULT VALUE--));
+        prepareListData();
+        listAdapter = new ExpandableListAdapter(view.getContext(), listDataHeader, listDataChild);
+
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
 
         return view;
     }
+
+    /*
+     * Preparing the list data
+     */
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        List<String> skill1 = new ArrayList<String>();
+        if(prefs.getString("skillName1", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName1", "ERROR"));
+            skill1.add(prefs.getString("skillHow1", "ERROR"));
+            skill1.add(prefs.getString("skillDesc1", "ERROR"));
+        }
+
+        List<String> skill2 = new ArrayList<String>();
+        if(prefs.getString("skillName2", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName2", "ERROR"));
+            skill2.add(prefs.getString("skillHow2", "ERROR"));
+            skill2.add(prefs.getString("skillDesc2", "ERROR"));
+        }
+
+        List<String> skill3 = new ArrayList<String>();
+        if(prefs.getString("skillName3", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName3", "ERROR"));
+            skill3.add(prefs.getString("skillHow3", "ERROR"));
+            skill3.add(prefs.getString("skillDesc3", "ERROR"));
+        }
+
+        List<String> skill4 = new ArrayList<String>();
+        if(prefs.getString("skillName4", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName4", "ERROR"));
+            skill4.add(prefs.getString("skillHow4", "ERROR"));
+            skill4.add(prefs.getString("skillDesc4", "ERROR"));
+        }
+
+        List<String> skill5 = new ArrayList<String>();
+        if(prefs.getString("skillName5", "ERROR") != "") {
+            listDataHeader.add(prefs.getString("skillName5", "ERROR"));
+            skill5.add(prefs.getString("skillHow5", "ERROR"));
+            skill5.add(prefs.getString("skillDesc5", "ERROR"));
+        }
+
+        if(prefs.getString("skillName1", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(0), skill1);
+        }
+
+        if(prefs.getString("skillName2", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(1), skill2);
+        }
+
+        if(prefs.getString("skillName3", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(2), skill3);
+        }
+
+        if(prefs.getString("skillName4", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(3), skill4);
+        }
+
+        if(prefs.getString("skillName5", "ERROR") != "") {
+            listDataChild.put(listDataHeader.get(4), skill5);
+        }
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -162,27 +212,12 @@ public class Profile extends Fragment {
         locationText.setText(prefs.getString("city", "ERROR") + ", " +
                 prefs.getString("state", "ERROR"));
 
-        TextView displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
-
-            //Set the header "Skills"
-            displaySkillText = (TextView) view.findViewById(R.id.displaySkillText);
-            displaySkillText.setText("Skills");
-
-            //Add skill name
-            skillNameText.setText(prefs.getString("skillname", ""));
-
-            //Add how skill was aquired
-            skillHowText.setText("Skill obtained from: " + "\n" + prefs.getString("skillhow", ""));
-
-            //Add skill description
-            skillDescriptionText.setText("Description: " + "\n" + prefs.getString("skilldescription", ""));
-
         //Add profile picture
         pic = new ProfilePic(null);
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
         Bitmap bm = pic.getDecodedBitmap(imgString);
-        profilePic.setImageBitmap(bm);
+        profilePic.setImageBitmap(pic.getResizedBitmap(bm));
 
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
@@ -192,30 +227,6 @@ public class Profile extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), StudentAddSkillActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        //Toggle display of skills names
-        displaySkillText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                skillNameText.setVisibility(skillNameText.isShown()
-                        ? View.GONE
-                        : View.VISIBLE);
-            }
-        });
-
-        //Toggle display of skills' descriptions
-        skillNameText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                skillHowText.setVisibility( skillHowText.isShown()
-                        ? View.GONE
-                        : View.VISIBLE );
-
-                skillDescriptionText.setVisibility( skillDescriptionText.isShown()
-                        ? View.GONE
-                        : View.VISIBLE );
             }
         });
 
