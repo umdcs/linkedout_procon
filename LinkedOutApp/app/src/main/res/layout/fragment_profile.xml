@@ -29,14 +29,16 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="161dp">
+            android:layout_height="161dp"
+            android:focusableInTouchMode="true">
 
             <ImageView
                 android:layout_width="94dp"
                 android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_menu_camera"
                 android:id="@+id/profilePic"
-                android:layout_weight="0.00" />
+                android:layout_weight="0.00"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:orientation="vertical"
