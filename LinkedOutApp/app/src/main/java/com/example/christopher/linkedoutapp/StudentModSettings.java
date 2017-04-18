@@ -76,7 +76,9 @@ public class StudentModSettings extends AppCompatActivity {
         editor.putString("gradTerm", gradTermSpinner.getSelectedItem().toString() );
         editor.putString("gradYear", gradYear.getText().toString() );
         editor.putString("major", major.getText().toString() );
-        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+        if(pic.getBitmap()!=null) {
+            editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+        }
         while (!editor.commit()) ;
 
         nodeServer.modifySettings(prefs, oldEmail);
