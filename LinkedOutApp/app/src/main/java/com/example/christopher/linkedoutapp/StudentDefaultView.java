@@ -28,7 +28,6 @@ public class StudentDefaultView extends AppCompatActivity
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

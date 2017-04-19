@@ -13,7 +13,8 @@
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="75dp">
+    android:layout_marginTop="75dp"
+    android:focusableInTouchMode="true">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -28,14 +29,16 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="161dp">
+            android:layout_height="161dp"
+            android:focusableInTouchMode="true">
 
             <ImageView
                 android:layout_width="94dp"
                 android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_menu_camera"
                 android:id="@+id/profilePic"
-                android:layout_weight="0.00" />
+                android:layout_weight="0.00"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -52,6 +55,7 @@
                     android:id="@+id/displayStudentName"
                     android:textAppearance="@style/H1"
                     android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
                     android:text="Student Name" />
 
                 <TextView
@@ -128,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonProfileSettings"
+
             android:layout_weight="0"/>
 
     </LinearLayout>
@@ -154,45 +159,17 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/displaySkillText"
-            android:textAppearance="@style/H1"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:text=""
-            android:clickable="true" />
+            android:layout_height="30dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="My Skills:"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <TextView
+        <ExpandableListView
+            android:id="@+id/lvExp"
+            android:layout_height="800dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/displaySkillName"
-            android:textAppearance="@style/H2"
-            android:background="@color/colorAccentDark"
-            android:layout_weight="1"
-            android:text=""
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:clickable="true" />
-
-        <TextView
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/displaySkillHow"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingLeft="25dp"
-            android:textAppearance="@style/H2" />
-
-        <TextView
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/displaySkillDescription"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingLeft="25dp"
-            android:textAppearance="@style/H2" />
+            android:paddingTop="10dp"/>
 
     </LinearLayout>
 
