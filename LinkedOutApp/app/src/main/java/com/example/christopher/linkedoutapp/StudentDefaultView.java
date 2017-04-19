@@ -125,12 +125,6 @@ public class StudentDefaultView extends AppCompatActivity
 
     private void logout() {
         Intent intent = new Intent(this, MainActivity.class);
-
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.clear();
-        editor.commit();
-
         startActivity(intent);
     }
 
