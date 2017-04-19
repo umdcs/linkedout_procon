@@ -116,14 +116,13 @@ public class ProfilePic extends AppCompatActivity{
         return bm;
     }
 
+    //Returns base64 string representation of a bitmap
     public String getEncodedBitmap(Bitmap bitmap) {
-
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
-        } catch (NullPointerException npe) {
-
         }
+        catch (NullPointerException npe) {}
         byte[] byteFormat = stream.toByteArray();
         // get the base 64 string
         String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);

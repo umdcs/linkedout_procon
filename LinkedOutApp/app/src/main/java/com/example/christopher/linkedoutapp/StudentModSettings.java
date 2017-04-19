@@ -123,7 +123,7 @@ public class StudentModSettings extends AppCompatActivity {
         ImageView profilePic = (ImageView) findViewById(R.id.thumbnailSettings);
         String imgString = prefs.getString("profilePic", "");
         Bitmap bm = pic.getDecodedBitmap(imgString);
-        profilePic.setImageBitmap(bm);
+        profilePic.setImageBitmap(pic.getResizedBitmap(bm));
     }
 
     public void onClickGalleryMod(View view) {
