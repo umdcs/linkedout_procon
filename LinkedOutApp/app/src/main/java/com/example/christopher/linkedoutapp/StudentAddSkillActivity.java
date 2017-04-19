@@ -64,7 +64,6 @@ public class StudentAddSkillActivity extends AppCompatActivity {
             editor.putString("skillDesc" + skillCount, "Description: " + skillDescription);
 
 
-            System.out.println(skillDescription);
             while (!editor.commit()) ;
             //addSkill("1","2","3");
         }
