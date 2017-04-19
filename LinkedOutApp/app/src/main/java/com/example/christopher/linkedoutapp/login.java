@@ -71,6 +71,8 @@ public class login extends AppCompatActivity {
      * that the student activity can begin.
      */
     public void updatePrefsAndStart() {
+        int skillCount = 0;
+
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", data.optString("username"));
         editor.putString("password", data.optString("password"));
@@ -82,6 +84,33 @@ public class login extends AppCompatActivity {
         editor.putString("gradYear", data.optString("gradYear"));
         editor.putString("major", data.optString("major"));
         editor.putString("profilePic", data.optString("photo"));
+
+        editor.putString("skillName1", data.optString("skill1"));
+        editor.putString("skillHow1", data.optString("obtained1"));
+        editor.putString("skillDesc1", data.optString("description1"));
+        if(prefs.getString("skillName1", "") != "") skillCount = 1;
+
+        editor.putString("skillName2", data.optString("skill2"));
+        editor.putString("skillHow2", data.optString("obtained2"));
+        editor.putString("skillDesc2", data.optString("description2"));
+        if(prefs.getString("skillName2", "") != "") skillCount = 2;
+
+        editor.putString("skillName3", data.optString("skill3"));
+        editor.putString("skillHow3", data.optString("obtained3"));
+        editor.putString("skillDesc3", data.optString("description3"));
+        if(prefs.getString("skillName3", "") != "") skillCount = 3;
+
+        editor.putString("skillName4", data.optString("skill4"));
+        editor.putString("skillHow4", data.optString("obtained4"));
+        editor.putString("skillDesc4", data.optString("description4"));
+        if(prefs.getString("skillName4", "") != "") skillCount = 4;
+
+        editor.putString("skillName5", data.optString("skill5"));
+        editor.putString("skillHow5", data.optString("obtained5"));
+        editor.putString("skillDesc5", data.optString("description5"));
+        if(prefs.getString("skillName5", "") != "") skillCount = 5;
+
+        editor.putInt("skillCount", skillCount);
 
         while(!editor.commit());
 
