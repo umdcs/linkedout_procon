@@ -40,20 +40,6 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         String skillDescription = ((EditText) findViewById(R.id.newSkillDescription)).getText().toString();
 
 
-        //rest functions?
-
-//        ExpandableListView expList = (ExpandableListView) view.findViewById(R.id.lvExp);
-//        ExpandableListAdapter expAdapter = (ExpandableListAdapter) expList.getExpandableListAdapter();
-//        //(BaseExpandableListAdapter) expAdapter.get
-//        ArrayList listDataHeader = new ArrayList<String>();
-//        HashMap listDataChild = new HashMap<String, List<String>>();
-//        listDataHeader.add(skillName);
-//        // Adding child data
-//        List<String> skill1 = new ArrayList<String>();
-//        skill1.add(skillHow);
-//        skill1.add(skillDescription);
-//        listDataChild.put(listDataHeader.get(0), skill1); // Header, Child data
-
         int skillCount = prefs.getInt("skillCount", 0);
         if(skillCount < 5) {
             skillCount++;
@@ -63,14 +49,11 @@ public class StudentAddSkillActivity extends AppCompatActivity {
             editor.putString("skillHow" + skillCount, "Skill attained from: " + skillHow);
             editor.putString("skillDesc" + skillCount, "Description: " + skillDescription);
 
-
             while (!editor.commit()) ;
-            //addSkill("1","2","3");
         }
         else{
             Toast.makeText(this,"You already have the maximum number of skills.",Toast.LENGTH_LONG).show();
         }
-
         //switches to the student profile page
         startActivity(intent);
     }
