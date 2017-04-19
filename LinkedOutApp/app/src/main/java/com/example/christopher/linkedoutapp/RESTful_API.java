@@ -188,8 +188,13 @@ public class RESTful_API extends AppCompatActivity {
                 // used to save JSON response from loginGET to the login activity
                 if (login) {
                     Log.d("loginGET", "returnData: " + jsonData.toString());
-                    loginClass.setData(jsonData);
-                    loginClass.updatePrefsAndStart();
+                    String errorMsg = jsonData.optString("ERROR");
+                    if(errorMsg == ""){
+                        loginClass.setData(jsonData);
+                        loginClass.updatePrefsAndStart();
+                    } else {
+                        loginClass.signalError(errorMsg);
+                    }
                 }
 
             } catch (JSONException e) {
