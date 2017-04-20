@@ -122,8 +122,12 @@ public class StudentModSettings extends AppCompatActivity {
         pic = new ProfilePic(null);
         ImageView profilePic = (ImageView) findViewById(R.id.thumbnailSettings);
         String imgString = prefs.getString("profilePic", "");
-        Bitmap bm = pic.getDecodedBitmap(imgString);
-        profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+        if(imgString == "")
+            profilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
+        else {
+            Bitmap bm = pic.getDecodedBitmap(imgString);
+            profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+        }
     }
 
     public void onClickGalleryMod(View view) {
