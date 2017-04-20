@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -65,6 +66,10 @@ public class login extends AppCompatActivity {
     public void onClickEmployer(View view){
         Intent intent = new Intent(this, EmployerDefaultView.class);
         startActivity(intent);
+    }
+
+    public void signalError(String error) {
+        Toast.makeText(login.this, error, Toast.LENGTH_LONG).show();
     }
 
     /* This method is called from the restAPI to update the local sharedPrefs so
