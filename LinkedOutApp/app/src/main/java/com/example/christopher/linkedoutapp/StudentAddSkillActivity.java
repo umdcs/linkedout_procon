@@ -56,12 +56,9 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         else{
             Toast.makeText(this,"You already have the maximum number of skills.",Toast.LENGTH_LONG).show();
         }
-<<<<<<< HEAD
-=======
 
         nodeServer.addSkillPOST(prefs);
 
->>>>>>> skillsNode
         //switches to the student profile page
         startActivity(intent);
     }
