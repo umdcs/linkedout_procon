@@ -221,7 +221,7 @@ public class Profile extends Fragment {
         }
         else {
             Bitmap bm = pic.getDecodedBitmap(imgString);
-            profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+            profilePic.setImageBitmap(pic.getResizedBitmap());
         }
 
         //Add onClick action to AddSkill button

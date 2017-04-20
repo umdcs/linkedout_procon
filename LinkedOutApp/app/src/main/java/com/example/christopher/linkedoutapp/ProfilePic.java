@@ -98,29 +98,28 @@ public class ProfilePic extends AppCompatActivity{
        pic = bm;
    }
 
-    public static Bitmap rotateBitmap(Bitmap source, float angle)
+    public Bitmap rotateBitmap(float angle)
     {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+        return Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, true);
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm) {
-        float aspectRatio = bm.getWidth() /
-                (float) bm.getHeight();
+    public Bitmap getResizedBitmap() {
+        float aspectRatio = pic.getWidth() /
+                (float) pic.getHeight();
         int width = 480;
         int height = Math.round(width / aspectRatio);
-
-        bm = Bitmap.createScaledBitmap(
-                bm, width, height, false);
-        return bm;
+        Bitmap tempBm = Bitmap.createScaledBitmap(
+                pic, width, height, false);
+        return tempBm;
     }
 
     //Returns base64 string representation of a bitmap
-    public String getEncodedBitmap(Bitmap bitmap) {
+    public String getEncodedBitmap() {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
+            pic.compress(Bitmap.CompressFormat.JPEG, 40, stream);
         }
         catch (NullPointerException npe) {}
         byte[] byteFormat = stream.toByteArray();

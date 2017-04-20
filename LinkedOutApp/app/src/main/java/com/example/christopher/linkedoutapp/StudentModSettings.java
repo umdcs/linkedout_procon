@@ -38,7 +38,8 @@ public class StudentModSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_modsettings);
         pic = new ProfilePic(null);
-
+        Bitmap bm = pic.getDecodedBitmap(prefs.getString("profilePic", "ERROR"));
+        pic.setBitmap(bm);
         nodeServer = new RESTful_API();
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
         fillInData(prefs);
@@ -77,7 +78,7 @@ public class StudentModSettings extends AppCompatActivity {
         editor.putString("gradYear", gradYear.getText().toString() );
         editor.putString("major", major.getText().toString() );
         if(pic.getBitmap()!=null) {
-            editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+            editor.putString("profilePic", pic.getEncodedBitmap());
         }
         while (!editor.commit()) ;
 
@@ -126,7 +127,7 @@ public class StudentModSettings extends AppCompatActivity {
             profilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
         else {
             Bitmap bm = pic.getDecodedBitmap(imgString);
-            profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+            profilePic.setImageBitmap(pic.getResizedBitmap());
         }
     }
 
@@ -156,10 +157,10 @@ public class StudentModSettings extends AppCompatActivity {
             String path = pic.getPath(selectedImage, this);
             pic.setPath(path);
             int rotateAngle = pic.getPhotoOrientation(StudentModSettings.this, selectedImage, path);
-            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            Bitmap bitmapImage = pic.rotateBitmap(rotateAngle);
             pic.setBitmap(bitmapImage);
             ImageView image = (ImageView) findViewById(R.id.thumbnailSettings);
-            image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
+            image.setImageBitmap(pic.getResizedBitmap());
         }
     }
 

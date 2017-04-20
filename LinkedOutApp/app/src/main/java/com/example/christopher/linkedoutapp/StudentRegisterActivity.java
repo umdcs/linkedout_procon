@@ -91,7 +91,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         if(pic.getBitmap() == null)
             editor.putString("profilePic", "");
         else
-        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
+        editor.putString("profilePic", pic.getEncodedBitmap());
         while (!editor.commit()) ;
 
         // Update server
@@ -127,10 +127,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
             String path = pic.getPath(selectedImage, this);
             pic.setPath(path);
             int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            Bitmap bitmapImage = pic.rotateBitmap(rotateAngle);
             pic.setBitmap(bitmapImage);
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
+            image.setImageBitmap(pic.getResizedBitmap());
         }
     }
 }
