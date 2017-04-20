@@ -72,7 +72,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         editor.putString("skillName1", "");
         editor.putString("skillName2", "");
         editor.putString("skillName3", "");
@@ -89,6 +88,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("skillDesc4", "");
         editor.putString("skillDesc5", "");
         editor.putInt("skillCount", 0);
+        if(pic.getBitmap() == null)
+            editor.putString("profilePic", "");
+        else
+        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         while (!editor.commit()) ;
 
         // Update server

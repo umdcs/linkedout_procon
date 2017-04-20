@@ -216,8 +216,13 @@ public class Profile extends Fragment {
         pic = new ProfilePic(null);
         ImageView profilePic = (ImageView) view.findViewById(R.id.profilePic);
         String imgString = prefs.getString("profilePic", "ERROR");
-        Bitmap bm = pic.getDecodedBitmap(imgString);
-        profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+        if(prefs.getString("profilePic", "ERROR") == ""){
+            profilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
+        }
+        else {
+            Bitmap bm = pic.getDecodedBitmap(imgString);
+            profilePic.setImageBitmap(pic.getResizedBitmap(bm));
+        }
 
         //Add onClick action to AddSkill button
         Button addSkillAction = (Button)view.findViewById(R.id.buttonAddSkill);
