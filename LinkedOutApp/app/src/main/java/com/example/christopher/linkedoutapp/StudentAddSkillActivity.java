@@ -21,12 +21,14 @@ public class StudentAddSkillActivity extends AppCompatActivity {
 
     public final static String STUDENT_PREFS = "Student Preferences";
     SharedPreferences prefs; // = getSharedPreferences(STUDENT_PREFS, 0); //Context.MODE_PRIVATE);
+    RESTful_API nodeServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_addskill);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
+        nodeServer = new RESTful_API();
     }
 
     public void onClickSubmit(View view) {
@@ -46,7 +48,7 @@ public class StudentAddSkillActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt("skillCount", skillCount);
             editor.putString("skillName" + skillCount, skillName);
-            editor.putString("skillHow" + skillCount, "Skill attained from: " + skillHow);
+            editor.putString("skillHow" + skillCount, "Skill obtained from: " + skillHow);
             editor.putString("skillDesc" + skillCount, "Description: " + skillDescription);
 
             while (!editor.commit()) ;
@@ -54,6 +56,12 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         else{
             Toast.makeText(this,"You already have the maximum number of skills.",Toast.LENGTH_LONG).show();
         }
+<<<<<<< HEAD
+=======
+
+        nodeServer.addSkillPOST(prefs);
+
+>>>>>>> skillsNode
         //switches to the student profile page
         startActivity(intent);
     }
