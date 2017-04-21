@@ -119,8 +119,8 @@ public class StudentDefaultView extends AppCompatActivity
     }
 
     public void onClickAQuiz(View view){
-        Intent intent = new Intent(this, ArrayQuiz.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, ArrayQuiz.class);
+//        startActivity(intent);
     }
 
     private void logout() {
