@@ -126,9 +126,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String path = pic.getPath(selectedImage, this);
             pic.setPath(path);
-            int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-            Bitmap bitmapImage = pic.rotateBitmap(rotateAngle);
+            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
             pic.setBitmap(bitmapImage);
+            int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+            pic.setBitmap(pic.rotateBitmap(rotateAngle));
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
             image.setImageBitmap(pic.getResizedBitmap());
         }

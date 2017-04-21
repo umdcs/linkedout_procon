@@ -221,6 +221,7 @@ public class Profile extends Fragment {
         }
         else {
             Bitmap bm = pic.getDecodedBitmap(imgString);
+            pic.setBitmap(bm);
             profilePic.setImageBitmap(pic.getResizedBitmap());
         }
 
