@@ -125,7 +125,8 @@ public class StudentModSettings extends AppCompatActivity {
         if(imgString == "")
             profilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
         else {
-            profilePic.setImageBitmap(pic.getDecodedBitmap(imgString));
+            pic.setBitmap(pic.getDecodedBitmap(imgString));
+            profilePic.setImageBitmap(pic.getResizedBitmap());
         }
     }
 
