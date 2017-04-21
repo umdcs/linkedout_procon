@@ -44,6 +44,7 @@ public class StudentModSettings extends AppCompatActivity {
         fillInData(prefs);
     }
 
+    //A user can delete their profile.
     public void onClickDelete(View view) {
         nodeServer.deleteProfile(prefs.getString("email","") );
         Intent resumeMain = new Intent(StudentModSettings.this, MainActivity.class);
@@ -51,10 +52,12 @@ public class StudentModSettings extends AppCompatActivity {
         startActivity(resumeMain);
     }
 
+    //Save all of the changes made to the user profile.
     public void onClickSave(View view) {
         // Need the old email as a reference
         String oldEmail = prefs.getString("email","");
 
+        //EditText fields connected to the fields in the student profile.
         EditText fullName = (EditText) findViewById(R.id.studentNameSettings);
         EditText email = (EditText) findViewById(R.id.studentEmailSettings);
         EditText major = (EditText) findViewById(R.id.studentMajorSettings);
@@ -63,9 +66,11 @@ public class StudentModSettings extends AppCompatActivity {
         EditText un = (EditText) findViewById(R.id.studentUsernameSettings);
         EditText pw = (EditText) findViewById(R.id.studentPasswordSettings);
 
+        //Spinners connected to the state, and graduation term spinners.
         Spinner stateSpinner = (Spinner) findViewById(R.id.stateSpinnerSettings);
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinnerSettings);
 
+        //Use the shared preferences to populate all fields.
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", un.getText().toString() );
         editor.putString("password", pw.getText().toString() );
@@ -94,6 +99,7 @@ public class StudentModSettings extends AppCompatActivity {
     }
 
     private void fillInData(SharedPreferences prefs) {
+        //Edittext's connected to the fields in the student profile.
         EditText fullName = (EditText) findViewById(R.id.studentNameSettings);
         EditText email = (EditText) findViewById(R.id.studentEmailSettings);
         EditText major = (EditText) findViewById(R.id.studentMajorSettings);
@@ -102,6 +108,7 @@ public class StudentModSettings extends AppCompatActivity {
         EditText un = (EditText) findViewById(R.id.studentUsernameSettings);
         EditText pw = (EditText) findViewById(R.id.studentPasswordSettings);
 
+        //Spinners for displaying states, and terms of graduation.
         Spinner stateSpinner = (Spinner) findViewById(R.id.stateSpinnerSettings);
         Spinner gradTermSpinner = (Spinner) findViewById(R.id.FallSpringSpinnerSettings);
         ArrayAdapter stateAdapter = (ArrayAdapter) stateSpinner.getAdapter();
@@ -109,6 +116,7 @@ public class StudentModSettings extends AppCompatActivity {
         int statePos = stateAdapter.getPosition(prefs.getString("state","") );
         int gradPos = gradTermAdapter.getPosition(prefs.getString("gradTerm","") );
 
+        //Getting data from the shared preferences to populate the student profile fields.
         fullName.setText(prefs.getString("fullName", ""));
         email.setText(prefs.getString("email",""));
         major.setText(prefs.getString("major",""));
@@ -119,11 +127,15 @@ public class StudentModSettings extends AppCompatActivity {
         stateSpinner.setSelection(statePos);
         gradTermSpinner.setSelection(gradPos);
 
+        //Create new profile pic object.
         pic = new ProfilePic(null);
         ImageView profilePic = (ImageView) findViewById(R.id.thumbnailSettings);
         String imgString = prefs.getString("profilePic", "");
+        //If the image string is blank, set the profile pic in the layout to the default
+        //camera drawable image.
         if(imgString == "")
             profilePic.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
+        //Otherwise, decode the image string, and use that bitmap for the profile pic.
         else {
             pic.setBitmap(pic.getDecodedBitmap(imgString));
             profilePic.setImageBitmap(pic.getResizedBitmap());
@@ -131,6 +143,7 @@ public class StudentModSettings extends AppCompatActivity {
     }
 
     public void onClickGalleryMod(View view) {
+        //Check if the user has granted read storage permissions.
         if (pic.isReadStorageAllowed(StudentModSettings.this)) {
             //If permission has already been granted show toast message.
             Toast.makeText(StudentModSettings.this, "Accessing Photo Gallery", Toast.LENGTH_LONG).show();
@@ -146,6 +159,11 @@ public class StudentModSettings extends AppCompatActivity {
         }
     }
 
+    //This happens when a user selects a photo from their gallery, and is called automatically.
+    //If the result code and request code are as expected (rare to have an issue here), the
+    //data that is returned is used to get the path to the image, and the path is used to be
+    //decoded into a bitmap.
+    //The bitmap is then set as the profile pic thumbnail.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

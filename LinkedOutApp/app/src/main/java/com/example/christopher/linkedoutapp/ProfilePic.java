@@ -32,8 +32,10 @@ public class ProfilePic extends AppCompatActivity{
         path = null;
     }
 
+    //Variable to store path of image on device.
     private String path;
 
+    //Variable to store the bitmap that represents the profile picture.
     private Bitmap pic;
 
     //Photo code used when starting the intent to open the gallery.
@@ -72,32 +74,37 @@ public class ProfilePic extends AppCompatActivity{
     //Requesting permission
     public void requestStoragePermission(Activity activity){
 
+        //If the user has denied the permission previously
+        //Notify the user they have denied the permission previously
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.READ_EXTERNAL_STORAGE)){
-            //If the user has denied the permission previously
-            //Notify the user they have denied the permission previously
             Toast.makeText(activity,"You denied this permission previously.",Toast.LENGTH_LONG).show();
         }
 
-        //Request permission
+        //Then request permission.
         ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},STORAGE_PERMISSION_CODE);
     }
 
+    //Get the path of this image on the local device.
    public String getPath(){
        return path;
    }
 
+   //Set the path of the image on the local device.
    public void setPath(String path){
        this.path = path;
    }
 
+   //Return the bitmap representation of this image.
    public Bitmap getBitmap(){
        return pic;
    }
 
+   //Set the bitmap of the profile pic object.
    public void setBitmap(Bitmap bm){
        pic = bm;
    }
 
+   //Rotate the bitmap contained in this profile pic object by a specified angle, then return it.
     public Bitmap rotateBitmap(float angle)
     {
         Matrix matrix = new Matrix();
@@ -105,6 +112,10 @@ public class ProfilePic extends AppCompatActivity{
         return Bitmap.createBitmap(pic, 0, 0, pic.getWidth(), pic.getHeight(), matrix, true);
     }
 
+    //Resize the bitmap so that it can fit in an imageview.
+    //Devices running newer API's will do this automatically, and this function is not necessary.
+    //But devices using API's 23 and lower will require you to use this function before loading
+    //the bitmap into an imageview.
     public Bitmap getResizedBitmap() {
         float aspectRatio = pic.getWidth() /
                 (float) pic.getHeight();
@@ -115,7 +126,7 @@ public class ProfilePic extends AppCompatActivity{
         return tempBm;
     }
 
-    //Returns base64 string representation of a bitmap
+    //Returns base64 string representation of the bitmap contained in the profile pic object.
     public String getEncodedBitmap() {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
@@ -128,12 +139,15 @@ public class ProfilePic extends AppCompatActivity{
         return imgString;
     }
 
+    //Decodes a base64 string, and returns its bitmap representation.
     public Bitmap getDecodedBitmap(String imgString){
         byte[] decodedString = Base64.decode(imgString.getBytes(), Base64.DEFAULT);
         Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedBitmap;
     }
 
+    //Gets the original orientation of a photo.
+    //This is used with rotateBitmap() to maintain proper orientation in your layout.
     public int getPhotoOrientation(Context context, Uri imageUri, String imagePath){
         int rotate = 0;
         context.getContentResolver().notifyChange(imageUri, null);

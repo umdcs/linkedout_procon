@@ -117,6 +117,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         }
     }
 
+    //This happens when a user selects a photo from their gallery, and is called automatically.
+    //If the result code and request code are as expected (rare to have an issue here), the
+    //data that is returned is used to get the path to the image, and the path is used to be
+    //decoded into a bitmap.
+    //The bitmap is then set as the profile pic thumbnail.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

@@ -41,8 +41,12 @@ public class StudentAddSkillActivity extends AppCompatActivity {
         String skillHow = ((EditText) findViewById(R.id.newSkillHow)).getText().toString();
         String skillDescription = ((EditText) findViewById(R.id.newSkillDescription)).getText().toString();
 
-
+        //Get the skill count for this user. Used because the maximum skills allowed is currently 5.
         int skillCount = prefs.getInt("skillCount", 0);
+
+        //If they have not yet reached the maximum skill count:
+        //Increment the skill count, and add the skill data to their respective spots in the
+        //shared preferences.
         if(skillCount < 5) {
             skillCount++;
             SharedPreferences.Editor editor = prefs.edit();
@@ -53,6 +57,8 @@ public class StudentAddSkillActivity extends AppCompatActivity {
 
             while (!editor.commit()) ;
         }
+
+        //If they already have 5 skills entered, notify them.
         else{
             Toast.makeText(this,"You already have the maximum number of skills.",Toast.LENGTH_LONG).show();
         }
