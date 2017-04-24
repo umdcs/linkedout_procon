@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">LinkedOutApp</string>
+    <string name="app_name">ProCon</string>
     <string name="version">VERSION 2.3</string>
     <string name="login">Login</string>
     <string name="sign">Sign Up</string>
