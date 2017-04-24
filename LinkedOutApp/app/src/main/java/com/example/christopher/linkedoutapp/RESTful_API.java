@@ -54,8 +54,10 @@ public class RESTful_API extends AppCompatActivity {
      * calls the onPostExecute function.
      */
     private boolean login = false;
+    private boolean register = false;
+
     private login loginClass;
-    private SharedPreferences shpref;
+    private StudentRegisterActivity registerClass;
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -197,9 +199,23 @@ public class RESTful_API extends AppCompatActivity {
                     }
                 }
 
+                // used to save JSON response (only care about error msg) from the register uri
+                /* Currently the server is not sending a response!!! FIX
+                if(register) {
+                    String errorMsg = jsonData.optString("ERROR");
+                    if(errorMsg == "ERROR") {
+                        registerClass.signalError(errorMsg);
+                    }
+                    else registerClass.startProfile();
+                } */
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            // Return these to default values
+            login = false;
+            register = false;
         }
     }
 
@@ -219,8 +235,6 @@ public class RESTful_API extends AppCompatActivity {
         login = true; // bool to let onPostExe know to update loginClass...
         loginClass = l; // set loginClass so that it may save the response...
 
-
-//        StringBuilder sb = new StringBuilder("http://ukko.d.umn.edu:8080/login/");
         StringBuilder sb = new StringBuilder("http://akka.d.umn.edu:8457/login/");
 
         sb.append(email + "/");
@@ -231,11 +245,15 @@ public class RESTful_API extends AppCompatActivity {
 
     /**
      * Acts as the onClick callback for the registerStudentPOST Button. The code will generate a REST POST
-     *6s action to the REST Server.
+     * action to the REST Server.
      *
-     * @param prefs
+     * @param prefs - student prefs to upload to server
+     * @param reg - need access to the calling class in case an error is returned from server
      */
-    public void registerStudentPOST(SharedPreferences prefs) {
+    public void registerStudentPOST(SharedPreferences prefs, StudentRegisterActivity reg) {
+
+        registerClass = reg;
+        register = true;
 
         JSONObject jsonParam = new JSONObject();
         try {
@@ -255,16 +273,15 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
 
-//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/registerStudent", "POST", jsonParam.toString());
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/registerStudent", "POST", jsonParam.toString());
 
     }
 
     /**
      * Acts as the onClick callback for the addSkillPOST Button. The code will generate a REST POST
-     *6s action to the REST Server.
+     * action to the REST Server.
      *
-     * @param prefs
+     * @param prefs - skills are stored in the prefs, need access
      */
     public void addSkillPOST(SharedPreferences prefs) {
 
@@ -294,18 +311,17 @@ public class RESTful_API extends AppCompatActivity {
         }
         Log.d("DEBUG:", jsonParam.toString());
 
-//        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:8080/addSkill", "POST", jsonParam.toString());
         new HTTPAsyncTask().execute("http://akka.d.umn.edu:8457/addSkill", "POST", jsonParam.toString());
 
     }
 
-    /*
+    /**
      * Acts as the onClick callback for the modifySettings Button. The code will generate a REST POST
      * action to the REST Server.
      *
-     * @param SharedPreferences prefs
-     **** Email must stay the same for now, need a consistent identifier for users! ***
-     *    Update all other values on server by extracting current prefs and posting
+     * @param prefs
+     *
+     * @param oldEmail - used to find the profile index.
      */
     public void modifySettings(SharedPreferences prefs, String oldEmail) {
         JSONObject jsonParam = new JSONObject();
@@ -330,10 +346,10 @@ public class RESTful_API extends AppCompatActivity {
     }
 
 
-     /* Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
+     /** Acts as the onClick callback for the REST DELETE Button. The code will generate a REST DELETE
      * action to the REST Server.
      *
-     * @param view
+     * @param email - used to find the profile index to delete all entries for
      */
 
     public void deleteProfile(String email) {

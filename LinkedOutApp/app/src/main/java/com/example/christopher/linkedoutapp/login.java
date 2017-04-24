@@ -39,7 +39,6 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         prefs = getSharedPreferences(STUDENT_PREFS, 0);
         nodeServer = new RESTful_API();
-        Log.d("in function ", "onCreate");
     }
 
     /* This method is called in the restAPI, to ensure the async response has finished
@@ -68,6 +67,7 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // This function is called if the server sends back an ERROR message
     public void signalError(String error) {
         Toast.makeText(login.this, error, Toast.LENGTH_LONG).show();
     }

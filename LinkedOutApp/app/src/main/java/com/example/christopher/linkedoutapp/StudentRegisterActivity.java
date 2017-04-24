@@ -42,10 +42,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
     public void onClickRegister(View view) {
 
-        //Sets intent to the student profile
-        Intent intent = new Intent(this, StudentDefaultView.class);
-
-
         //Creates strings from entered text in student profile
         String name = ((EditText) findViewById(R.id.studentName)).getText().toString();
         String username = ((EditText) findViewById(R.id.studentUsername)).getText().toString();
@@ -94,12 +90,32 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("profilePic", pic.getEncodedBitmap());
         while (!editor.commit()) ;
 
-        // Update server
-        nodeServer.registerStudentPOST(prefs);
+        /* Update server. NOTE: Since the server is having issues sending a response
+           it will not notify if the email is in use (ie. info not stored...)
+           The app will still make a new *local* profile to display, but you will
+           not be able to login with this info (as it was never stored...)
+        */
+        nodeServer.registerStudentPOST(prefs, this);
 
+        //Sets intent to the student profile
+        Intent intent = new Intent(this, StudentDefaultView.class);
         //switches to the student profile page
         startActivity(intent);
     }
+
+/*  The server is refusing to send a response, this needs to be fixed...
+    // Should only start the new profile if no error from server.
+    public void startProfile() {
+        //Sets intent to the student profile
+        Intent intent = new Intent(this, StudentDefaultView.class);
+        //switches to the student profile page
+        startActivity(intent);
+    }
+
+    // This function is called if the server sends back an ERROR message
+    public void signalError(String error) {
+        Toast.makeText(StudentRegisterActivity.this, error, Toast.LENGTH_LONG).show();
+    } */
 
     public void onClickGallery(View view) {
         if (pic.isReadStorageAllowed(StudentRegisterActivity.this)) {
