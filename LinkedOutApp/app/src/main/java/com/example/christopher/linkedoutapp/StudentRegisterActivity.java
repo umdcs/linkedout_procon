@@ -72,7 +72,6 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("gradTerm", gradterm);
         editor.putString("gradYear", gradyear);
         editor.putString("major", major);
-        editor.putString("profilePic", pic.getEncodedBitmap(pic.getBitmap()));
         editor.putString("skillName1", "");
         editor.putString("skillName2", "");
         editor.putString("skillName3", "");
@@ -89,6 +88,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
         editor.putString("skillDesc4", "");
         editor.putString("skillDesc5", "");
         editor.putInt("skillCount", 0);
+        if(pic.getBitmap() == null)
+            editor.putString("profilePic", "");
+        else
+        editor.putString("profilePic", pic.getEncodedBitmap());
         while (!editor.commit()) ;
 
         // Update server
@@ -114,6 +117,11 @@ public class StudentRegisterActivity extends AppCompatActivity {
         }
     }
 
+    //This happens when a user selects a photo from their gallery, and is called automatically.
+    //If the result code and request code are as expected (rare to have an issue here), the
+    //data that is returned is used to get the path to the image, and the path is used to be
+    //decoded into a bitmap.
+    //The bitmap is then set as the profile pic thumbnail.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -123,11 +131,12 @@ public class StudentRegisterActivity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String path = pic.getPath(selectedImage, this);
             pic.setPath(path);
-            int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
-            Bitmap bitmapImage = pic.rotateBitmap(BitmapFactory.decodeFile(path), rotateAngle);
+            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
             pic.setBitmap(bitmapImage);
+            int rotateAngle = pic.getPhotoOrientation(StudentRegisterActivity.this, selectedImage, path);
+            pic.setBitmap(pic.rotateBitmap(rotateAngle));
             ImageView image = (ImageView) findViewById(R.id.thumbnail);
-            image.setImageBitmap(pic.getResizedBitmap(bitmapImage));
+            image.setImageBitmap(pic.getResizedBitmap());
         }
     }
 }
